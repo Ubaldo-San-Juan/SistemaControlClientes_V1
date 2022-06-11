@@ -7,6 +7,7 @@ package ventanas;
 
 import chart.ModelChart;
 import controladores.ControladorClientes;
+import controladores.Fecha;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -96,10 +97,16 @@ public class UsuariosRegistrados extends javax.swing.JFrame {
     }
 
     public void llenarJtable() {
+        agregarFechaALabel();
         ControladorClientes controladorC = new ControladorClientes();
         tabla_clientes.setModel(controladorC.llenarJTable());
     }
 
+    
+    public void agregarFechaALabel(){
+        txt_fecha.setText(new Fecha().obtenerFecha());
+    }
+    
     public JPanel getFondo() {
         return fondo;
     }
@@ -121,6 +128,7 @@ public class UsuariosRegistrados extends javax.swing.JFrame {
         graficaBarras = new chart.Chart();
         txt_horas_conectadas = new javax.swing.JLabel();
         titulo_sistema = new javax.swing.JLabel();
+        txt_fecha = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -161,6 +169,10 @@ public class UsuariosRegistrados extends javax.swing.JFrame {
         titulo_sistema.setFont(new java.awt.Font("Microsoft New Tai Lue", 1, 36)); // NOI18N
         titulo_sistema.setText("Sistema de control clientes");
         fondo.add(titulo_sistema, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 20, -1, 67));
+
+        txt_fecha.setFont(new java.awt.Font("DejaVu Sans Light", 1, 14)); // NOI18N
+        txt_fecha.setForeground(new java.awt.Color(153, 153, 153));
+        fondo.add(txt_fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 200, 20));
 
         getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 750));
 
@@ -209,6 +221,7 @@ public class UsuariosRegistrados extends javax.swing.JFrame {
     private javax.swing.JTable tabla_clientes;
     private javax.swing.JLabel titulo_sistema;
     private javax.swing.JLabel txt_estadisticas;
+    private javax.swing.JLabel txt_fecha;
     private javax.swing.JLabel txt_horas_conectadas;
     private javax.swing.JLabel txt_usuarios_registrados;
     // End of variables declaration//GEN-END:variables

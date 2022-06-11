@@ -187,9 +187,6 @@ public class Principal extends javax.swing.JFrame {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btn_usuarios_registradosMouseExited(evt);
             }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btn_usuarios_registradosMousePressed(evt);
-            }
         });
         panel_menu.add(btn_usuarios_registrados, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 240, 60));
 
@@ -210,9 +207,6 @@ public class Principal extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btn_lista_clientesMouseExited(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btn_lista_clientesMousePressed(evt);
             }
         });
         panel_menu.add(btn_lista_clientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 240, 60));
@@ -253,14 +247,14 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_panel_fondoMouseClicked
 
     private void btn_usuarios_registradosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_usuarios_registradosMouseClicked
-
-        if (new ListaDeClientes().getBandera()) {
-            JOptionPane.showMessageDialog(null, "Hay una sesion encendida");
-        } else {
             this.fondo_btn_lista_clientes.setSelected(false);
             this.fondo_btn_usuarios_registrados.setSelected(true);
             this.fondo_btn_configuracion.setSelected(false);
-        }
+//        if (new ListaDeClientes().getBandera()) {
+//            JOptionPane.showMessageDialog(null, "Hay una sesion encendida");
+//        } else {
+//            
+//        }
 
         if (fondo_btn_usuarios_registrados.isSelected()) {
             //Encendemos el boton usuarios registrados
@@ -300,13 +294,13 @@ public class Principal extends javax.swing.JFrame {
             fondo_btn_configuracion.setIcon(new ImageIcon(getClass().getResource("/botones/BotonMenu_desabilitado.png")));
             btn_configuracion.setForeground(new Color(255, 255, 255));
 
-            if (new ListaDeClientes().getBandera()) {
-                System.out.println("Hay una sesion en uso");
-            } else {
-                //Llamamos el panel lista de clientes
-
+//            if (new ListaDeClientes().getBandera()) {
+//                System.out.println("Hay una sesion en uso");
+//            } else {
+//                //Llamamos el panel lista de clientes
+//
+//            }
                 showPanel(panel01.getFondo());
-            }
 
         }
         //Corregir boton on
@@ -314,14 +308,14 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_lista_clientesMouseClicked
 
     private void btn_configuracionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_configuracionMouseClicked
-
-        if (new ListaDeClientes().getBandera()) {
-            JOptionPane.showMessageDialog(null, "Hay una sesion encendida");
-        } else {
             this.fondo_btn_lista_clientes.setSelected(false);
             this.fondo_btn_usuarios_registrados.setSelected(false);
             this.fondo_btn_configuracion.setSelected(true);
-        }
+
+//        if (new ListaDeClientes().getBandera()) {
+//            JOptionPane.showMessageDialog(null, "Hay una sesion encendida");
+//        } else {
+//        }
 
         if (fondo_btn_configuracion.isSelected()) {
             System.out.println("Principal Usuario de la sesion: " + usuarioDeLaSesion);
@@ -367,16 +361,6 @@ public class Principal extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btn_configuracionMouseExited
-
-    private void btn_usuarios_registradosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_usuarios_registradosMousePressed
-
-
-    }//GEN-LAST:event_btn_usuarios_registradosMousePressed
-
-    private void btn_lista_clientesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_lista_clientesMousePressed
-
-
-    }//GEN-LAST:event_btn_lista_clientesMousePressed
 
     private void btn_configuracionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_configuracionMousePressed
 
