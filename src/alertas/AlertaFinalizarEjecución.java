@@ -104,7 +104,7 @@ public class AlertaFinalizarEjecución extends javax.swing.JFrame {
     JLabel txt_tiempo, txt_iniciar_pausar;
     JToggleButton btn_iniciar_pausar;
     JComboBox box_horas, box_minutos;
-    
+    JLabel txt_tiempo_agregado, txt_tiempo_total;
     private void btn_siMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_siMouseClicked
    
         ListaDeClientes cobro1 = new ListaDeClientes();
@@ -117,18 +117,22 @@ public class AlertaFinalizarEjecución extends javax.swing.JFrame {
         txt_iniciar_pausar.setText("Iniciar");
         box_horas.getModel().setSelectedItem("Horas");
         box_minutos.getModel().setSelectedItem("Minutos");
+        txt_tiempo_agregado.setText("");
+        txt_tiempo_total.setText("");
         this.dispose();
         
     }//GEN-LAST:event_btn_siMouseClicked
 
-    public void otorgarTextoAEtiqueta(JLabel txt_tiempo, JToggleButton btn_iniciar_pausar, JLabel txt_iniciar_pausar, JComboBox box_horas, JComboBox box_minutos){
+    public void otorgarTextoAEtiqueta(JLabel txt_tiempo, JToggleButton btn_iniciar_pausar, JLabel txt_iniciar_pausar, JComboBox box_horas, JComboBox box_minutos, JLabel txt_tiempo_agregado, JLabel txt_tiempo_total){
         this.txt_tiempo = txt_tiempo;
         this.btn_iniciar_pausar = btn_iniciar_pausar;
         this.txt_iniciar_pausar = txt_iniciar_pausar;
         this.box_horas = box_horas;
         this.box_minutos = box_minutos;
+        this.txt_tiempo_agregado = txt_tiempo_agregado;
+        this.txt_tiempo_total = txt_tiempo_total;
     }
-    
+
     
     private void btn_noMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_noMouseClicked
         System.out.println("Aún no se requiere finalizar");

@@ -29,20 +29,60 @@ public class UsuariosRegistrados extends javax.swing.JFrame {
      */
     public UsuariosRegistrados() {
         initComponents();
-        personalizarTablaClientes();
         llenarJtable();
         llenarGraficaBarras();
 
     }
 
     public void llenarGraficaBarras() {
-        int valorColor1, valorColor2, valorColor3;
-        valorColor1 = (int) (Math.random()*200+1);
-        valorColor2 = (int) (Math.random()*200+1);
-        valorColor3 = (int) (Math.random()*200+1);
+        int valorColor1 = 0, valorColor2 = 0, valorColor3 = 0;
+        int numAleatorio1;
+        
+        numAleatorio1 = (int) (Math.random()*10+1);
+
+        if(numAleatorio1 == 1){
+            valorColor1 = 124;
+            valorColor2 = 174;
+            valorColor3 = 230;
+        }else if(numAleatorio1 == 2){
+            valorColor1 = 50;
+            valorColor2 = 98;
+            valorColor3 = 153;            
+        }else if(numAleatorio1 == 3){
+            valorColor1 = 153;
+            valorColor2 = 111;
+            valorColor3 = 15;            
+        }else if(numAleatorio1 == 4){
+            valorColor1 = 235;
+            valorColor2 = 219;
+            valorColor3 = 90;            
+        }else if(numAleatorio1 == 6){
+            valorColor1 = 153;
+            valorColor2 = 98;
+            valorColor3 = 24;            
+        }else if(numAleatorio1 == 7){
+            valorColor1 = 235;
+            valorColor2 = 161;
+            valorColor3 = 162;            
+        }else if(numAleatorio1 == 8){
+            valorColor1 = 18;
+            valorColor2 = 179;
+            valorColor3 = 128;            
+        }else if(numAleatorio1 == 9){
+            valorColor1 = 117;
+            valorColor2 = 126;
+            valorColor3 = 204;            
+        }else if(numAleatorio1 == 10){
+            valorColor1 = 204;
+            valorColor2 = 80;
+            valorColor3 = 85;            
+        }
+        
         System.out.println("Valor color 1: " + valorColor1);
         System.out.println("Valor color 2: " + valorColor2);
         System.out.println("Valor color 3: " + valorColor3);
+        
+        
         graficaBarras.addLegend("Eddy", new Color(valorColor1, valorColor2, valorColor3));
 
         graficaBarras.addData(new ModelChart("Lunes", new double[]{3, 5, 2}));
@@ -53,15 +93,6 @@ public class UsuariosRegistrados extends javax.swing.JFrame {
         graficaBarras.addData(new ModelChart("Sábado", new double[]{4, 6, 5}));
         graficaBarras.addData(new ModelChart("Domingo", new double[]{3, 3, 6}));
 
-    }
-    
-    
-  
-
-    public void personalizarTablaClientes() {
-        tabla_clientes.setUI(new BasicTableUI() {
-
-        });
     }
 
     public void llenarJtable() {

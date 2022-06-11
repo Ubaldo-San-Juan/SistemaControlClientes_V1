@@ -1,6 +1,7 @@
 package ventanas;
 
 import alertas.AlertaFinalizarEjecución;
+import com.formdev.flatlaf.FlatIntelliJLaf;
 import controladores.ControladorClientes;
 import java.awt.Color;
 import java.awt.Component;
@@ -18,6 +19,7 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.ListCellRenderer;
+import javax.swing.UIManager;
 import javax.swing.plaf.basic.BasicArrowButton;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 import ventanaPrincipal.Principal;
@@ -33,15 +35,12 @@ public class ListaDeClientes extends javax.swing.JFrame {
      */
     public ListaDeClientes() {
         initComponents();
-        //personalizarComboBoxClientesDesabilitado();
-        llenarComboBox();
-        //personalizarComboBoxHorasDesabilitado();
-        //personalizarComboBoxMinutosDesabilitado();
+        //Desabilitamos box_blientes
+        box_clientes_1.setEnabled(false);
         fondo.setPreferredSize(new Dimension(400, 400));
-        box_clientes.setEnabled(false);
-        txt_ingresar_tiempo_1.setEnabled(false);
         box_horas_1.setEnabled(false);
         box_minutos_1.setEnabled(false);
+        txt_ingresar_tiempo_1.setEnabled(false);
         btn_iniciar_pausar_1.setEnabled(false);
         txt_iniciar_pausar_1.setEnabled(false);
         btn_parar_1.setEnabled(false);
@@ -51,356 +50,13 @@ public class ListaDeClientes extends javax.swing.JFrame {
         btn_agregar_tiempo_1.setEnabled(false);
         txt_agregar_tiempo_1.setEnabled(false);
 
+        llenarComboBox();
     }
 
-    public void personalizarComboBoxClientesHabilitado() {
-        //Personalización comboBox clientes
-
-        box_clientes.setForeground(Color.black);
-        box_clientes.setUI(new BasicComboBoxUI() {
-
-            private Color col = new Color(237, 235, 235);
-
-            @Override
-            protected JButton createArrowButton() {
-                BasicArrowButton basicArrowButton = new BasicArrowButton(BasicArrowButton.SOUTH, //Direccion de la flecha
-                        Color.WHITE, //Color de fondo
-                        new Color(130, 7, 7),//sombra
-                        new Color(130, 7, 7),//darkShadow
-                        Color.WHITE //highlight
-                );
-                //se quita el efecto 3d del boton, sombra y darkShadow no se aplican 
-                basicArrowButton.setBorder(BorderFactory.createLineBorder(col, 2));
-                basicArrowButton.setContentAreaFilled(false);
-                return basicArrowButton;
-            }
-
-            @Override
-            public void paintCurrentValueBackground(Graphics g,
-                    Rectangle bounds,
-                    boolean hasFocus) {
-                g.setColor(col);
-                g.fillRect(bounds.x, bounds.y, bounds.width, bounds.height);
-            }
-
-            //Pinta los items
-            @Override
-            protected ListCellRenderer createRenderer() {
-                return new DefaultListCellRenderer() {
-
-                    @Override
-                    public Component getListCellRendererComponent(JList list, Object value, int index,
-                            boolean isSelected, boolean cellHasFocus) {
-
-                        super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-                        list.setSelectionBackground(col);
-                        if (isSelected) {
-                            setBackground(col);
-                            setForeground(Color.WHITE);
-                        } else {
-                            setBackground(Color.WHITE);
-                            setForeground(new Color(70, 70, 70));
-                        }
-
-                        return this;
-                    }
-                };
-            }
-
-        });
-
-    }
-
-    public void personalizarComboBoxClientesDesabilitado() {
-        box_clientes.setForeground(Color.gray);
-        //Personalización comboBox clientes
-        box_clientes.setUI(new BasicComboBoxUI() {
-
-            private Color col = new Color(212, 208, 208);
-
-            @Override
-            protected JButton createArrowButton() {
-                BasicArrowButton basicArrowButton = new BasicArrowButton(BasicArrowButton.SOUTH, //Direccion de la flecha
-                        Color.WHITE, //Color de fondo
-                        new Color(130, 7, 7),//sombra
-                        new Color(130, 7, 7),//darkShadow
-                        Color.WHITE //highlight
-                );
-                //se quita el efecto 3d del boton, sombra y darkShadow no se aplican 
-                basicArrowButton.setBorder(BorderFactory.createLineBorder(col, 2));
-                basicArrowButton.setContentAreaFilled(false);
-                return basicArrowButton;
-            }
-
-            @Override
-            public void paintCurrentValueBackground(Graphics g,
-                    Rectangle bounds,
-                    boolean hasFocus) {
-                g.setColor(col);
-                g.fillRect(bounds.x, bounds.y, bounds.width, bounds.height);
-            }
-
-            //Pinta los items
-            @Override
-            protected ListCellRenderer createRenderer() {
-                return new DefaultListCellRenderer() {
-
-                    @Override
-                    public Component getListCellRendererComponent(JList list, Object value, int index,
-                            boolean isSelected, boolean cellHasFocus) {
-
-                        super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-                        list.setSelectionBackground(col);
-                        if (isSelected) {
-                            setBackground(col);
-                            setForeground(Color.WHITE);
-                        } else {
-                            setBackground(Color.WHITE);
-                            setForeground(new Color(70, 70, 70));
-                        }
-
-                        return this;
-                    }
-                };
-            }
-
-        });
-
-    }
-
-    public void personalizarComboBoxHorasHabilitado() {
-        //Personalización comboBox horas
-
-        box_horas_1.setForeground(Color.black);
-        box_horas_1.setUI(new BasicComboBoxUI() {
-
-            private Color col = new Color(237, 235, 235);
-
-            @Override
-            protected JButton createArrowButton() {
-                BasicArrowButton basicArrowButton = new BasicArrowButton(BasicArrowButton.SOUTH, //Direccion de la flecha
-                        Color.WHITE, //Color de fondo
-                        new Color(130, 7, 7),//sombra
-                        new Color(130, 7, 7),//darkShadow
-                        Color.WHITE //highlight
-                );
-                //se quita el efecto 3d del boton, sombra y darkShadow no se aplican 
-                basicArrowButton.setBorder(BorderFactory.createLineBorder(col, 2));
-                basicArrowButton.setContentAreaFilled(false);
-                return basicArrowButton;
-            }
-
-            @Override
-            public void paintCurrentValueBackground(Graphics g,
-                    Rectangle bounds,
-                    boolean hasFocus) {
-                g.setColor(col);
-                g.fillRect(bounds.x, bounds.y, bounds.width, bounds.height);
-            }
-
-            //Pinta los items
-            @Override
-            protected ListCellRenderer createRenderer() {
-                return new DefaultListCellRenderer() {
-
-                    @Override
-                    public Component getListCellRendererComponent(JList list, Object value, int index,
-                            boolean isSelected, boolean cellHasFocus) {
-
-                        super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-                        list.setSelectionBackground(col);
-                        if (isSelected) {
-                            setBackground(col);
-                            setForeground(Color.WHITE);
-                        } else {
-                            setBackground(Color.WHITE);
-                            setForeground(new Color(70, 70, 70));
-                        }
-
-                        return this;
-                    }
-                };
-            }
-
-        });
-
-    }
-
-    public void personalizarComboBoxHorasDesabilitado() {
-        box_horas_1.setForeground(Color.gray);
-        //Personalización comboBox horas
-        box_horas_1.setUI(new BasicComboBoxUI() {
-
-            private Color col = new Color(212, 208, 208);
-
-            @Override
-            protected JButton createArrowButton() {
-                BasicArrowButton basicArrowButton = new BasicArrowButton(BasicArrowButton.SOUTH, //Direccion de la flecha
-                        Color.WHITE, //Color de fondo
-                        new Color(130, 7, 7),//sombra
-                        new Color(130, 7, 7),//darkShadow
-                        Color.WHITE //highlight
-                );
-                //se quita el efecto 3d del boton, sombra y darkShadow no se aplican 
-                basicArrowButton.setBorder(BorderFactory.createLineBorder(col, 2));
-                basicArrowButton.setContentAreaFilled(false);
-                return basicArrowButton;
-            }
-
-            @Override
-            public void paintCurrentValueBackground(Graphics g,
-                    Rectangle bounds,
-                    boolean hasFocus) {
-                g.setColor(col);
-                g.fillRect(bounds.x, bounds.y, bounds.width, bounds.height);
-            }
-
-            //Pinta los items
-            @Override
-            protected ListCellRenderer createRenderer() {
-                return new DefaultListCellRenderer() {
-
-                    @Override
-                    public Component getListCellRendererComponent(JList list, Object value, int index,
-                            boolean isSelected, boolean cellHasFocus) {
-
-                        super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-                        list.setSelectionBackground(col);
-                        if (isSelected) {
-                            setBackground(col);
-                            setForeground(Color.WHITE);
-                        } else {
-                            setBackground(Color.WHITE);
-                            setForeground(new Color(70, 70, 70));
-                        }
-
-                        return this;
-                    }
-                };
-            }
-
-        });
-
-    }
-
-    public void personalizarComboBoxMinutosHabilitado() {
-        //Personalización comboBox minutos
-
-        box_minutos_1.setForeground(Color.black);
-        box_minutos_1.setUI(new BasicComboBoxUI() {
-
-            private Color col = new Color(237, 235, 235);
-
-            @Override
-            protected JButton createArrowButton() {
-                BasicArrowButton basicArrowButton = new BasicArrowButton(BasicArrowButton.SOUTH, //Direccion de la flecha
-                        Color.WHITE, //Color de fondo
-                        new Color(130, 7, 7),//sombra
-                        new Color(130, 7, 7),//darkShadow
-                        Color.WHITE //highlight
-                );
-                //se quita el efecto 3d del boton, sombra y darkShadow no se aplican 
-                basicArrowButton.setBorder(BorderFactory.createLineBorder(col, 2));
-                basicArrowButton.setContentAreaFilled(false);
-                return basicArrowButton;
-            }
-
-            @Override
-            public void paintCurrentValueBackground(Graphics g,
-                    Rectangle bounds,
-                    boolean hasFocus) {
-                g.setColor(col);
-                g.fillRect(bounds.x, bounds.y, bounds.width, bounds.height);
-            }
-
-            //Pinta los items
-            @Override
-            protected ListCellRenderer createRenderer() {
-                return new DefaultListCellRenderer() {
-
-                    @Override
-                    public Component getListCellRendererComponent(JList list, Object value, int index,
-                            boolean isSelected, boolean cellHasFocus) {
-
-                        super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-                        list.setSelectionBackground(col);
-                        if (isSelected) {
-                            setBackground(col);
-                            setForeground(Color.WHITE);
-                        } else {
-                            setBackground(Color.WHITE);
-                            setForeground(new Color(70, 70, 70));
-                        }
-
-                        return this;
-                    }
-                };
-            }
-
-        });
-
-    }
-
-    public void personalizarComboBoxMinutosDesabilitado() {
-        //Personalización comboBox minutos
-        box_minutos_1.setForeground(Color.gray);
-        box_minutos_1.setUI(new BasicComboBoxUI() {
-
-            private Color col = new Color(212, 208, 208);
-
-            @Override
-            protected JButton createArrowButton() {
-                BasicArrowButton basicArrowButton = new BasicArrowButton(BasicArrowButton.SOUTH, //Direccion de la flecha
-                        Color.WHITE, //Color de fondo
-                        new Color(130, 7, 7),//sombra
-                        new Color(130, 7, 7),//darkShadow
-                        Color.WHITE //highlight
-                );
-                //se quita el efecto 3d del boton, sombra y darkShadow no se aplican 
-                basicArrowButton.setBorder(BorderFactory.createLineBorder(col, 2));
-                basicArrowButton.setContentAreaFilled(false);
-                return basicArrowButton;
-            }
-
-            @Override
-            public void paintCurrentValueBackground(Graphics g,
-                    Rectangle bounds,
-                    boolean hasFocus) {
-                g.setColor(col);
-                g.fillRect(bounds.x, bounds.y, bounds.width, bounds.height);
-            }
-
-            //Pinta los items
-            @Override
-            protected ListCellRenderer createRenderer() {
-                return new DefaultListCellRenderer() {
-
-                    @Override
-                    public Component getListCellRendererComponent(JList list, Object value, int index,
-                            boolean isSelected, boolean cellHasFocus) {
-
-                        super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-                        list.setSelectionBackground(col);
-                        if (isSelected) {
-                            setBackground(col);
-                            setForeground(Color.WHITE);
-                        } else {
-                            setBackground(Color.WHITE);
-                            setForeground(new Color(70, 70, 70));
-                        }
-
-                        return this;
-                    }
-                };
-            }
-
-        });
-
-    }
-
+    
     public void llenarComboBox() {
         ControladorClientes controladorC = new ControladorClientes();
-        box_clientes.setModel(controladorC.llenarComboboxClientes());
+        box_clientes_1.setModel(controladorC.llenarComboboxClientes());
     }
 
     boolean btn_on_off = false; //en uso
@@ -427,11 +83,7 @@ public class ListaDeClientes extends javax.swing.JFrame {
         cobro1.calcularCobro();
     }
 
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -445,10 +97,11 @@ public class ListaDeClientes extends javax.swing.JFrame {
         btn_agregar_tiempo_1 = new javax.swing.JButton();
         btn_parar_1 = new javax.swing.JButton();
         btn_iniciar_pausar_1 = new javax.swing.JToggleButton();
-        txt_tiempo_agregado = new javax.swing.JLabel();
+        txt_tiempo_total_1 = new javax.swing.JLabel();
+        txt_tiempo_agregado_1 = new javax.swing.JLabel();
         box_minutos_1 = new javax.swing.JComboBox<>();
         box_horas_1 = new javax.swing.JComboBox<>();
-        box_clientes = new javax.swing.JComboBox<>();
+        box_clientes_1 = new javax.swing.JComboBox<>();
         txt_ingresar_tiempo_1 = new javax.swing.JLabel();
         btn_on_off_01 = new javax.swing.JToggleButton();
         txt_id_sesion = new javax.swing.JLabel();
@@ -522,10 +175,15 @@ public class ListaDeClientes extends javax.swing.JFrame {
         });
         fondo.add(btn_iniciar_pausar_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 170, 65, 60));
 
-        txt_tiempo_agregado.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
-        txt_tiempo_agregado.setForeground(new java.awt.Color(237, 235, 235));
-        txt_tiempo_agregado.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        fondo.add(txt_tiempo_agregado, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 150, 230, 20));
+        txt_tiempo_total_1.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        txt_tiempo_total_1.setForeground(new java.awt.Color(237, 235, 235));
+        txt_tiempo_total_1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        fondo.add(txt_tiempo_total_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 240, 200, 20));
+
+        txt_tiempo_agregado_1.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        txt_tiempo_agregado_1.setForeground(new java.awt.Color(237, 235, 235));
+        txt_tiempo_agregado_1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        fondo.add(txt_tiempo_agregado_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 150, 230, 20));
 
         box_minutos_1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Minutos", "0", "30" }));
         box_minutos_1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 0));
@@ -538,7 +196,6 @@ public class ListaDeClientes extends javax.swing.JFrame {
         });
         fondo.add(box_minutos_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 200, 90, 30));
 
-        box_horas_1.setForeground(new java.awt.Color(212, 208, 208));
         box_horas_1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Horas", "0", "1", "2", "3", "4", "5" }));
         box_horas_1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 0));
         box_horas_1.setFocusable(false);
@@ -550,15 +207,14 @@ public class ListaDeClientes extends javax.swing.JFrame {
         });
         fondo.add(box_horas_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 200, 70, 30));
 
-        box_clientes.setForeground(new java.awt.Color(237, 235, 235));
-        box_clientes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 0));
-        box_clientes.setFocusable(false);
-        box_clientes.addActionListener(new java.awt.event.ActionListener() {
+        box_clientes_1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 0));
+        box_clientes_1.setFocusable(false);
+        box_clientes_1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                box_clientesActionPerformed(evt);
+                box_clientes_1ActionPerformed(evt);
             }
         });
-        fondo.add(box_clientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, 140, 30));
+        fondo.add(box_clientes_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, 140, 30));
 
         txt_ingresar_tiempo_1.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
         txt_ingresar_tiempo_1.setForeground(new java.awt.Color(255, 255, 255));
@@ -619,10 +275,7 @@ public class ListaDeClientes extends javax.swing.JFrame {
             contenedor_01.setIcon(new ImageIcon(getClass().getResource("/contenedores/Contenedor_05.png")));
 
             //Habilitamos todos los componentes del contenedor
-            //personalizarComboBoxClientesHabilitado();
-            //personalizarComboBoxHorasHabilitado();
-            //personalizarComboBoxMinutosHabilitado();
-            box_clientes.setEnabled(true);
+            box_clientes_1.setEnabled(true);
             box_horas_1.setEnabled(true);
             box_minutos_1.setEnabled(true);
             txt_ingresar_tiempo_1.setEnabled(true);
@@ -642,10 +295,7 @@ public class ListaDeClientes extends javax.swing.JFrame {
             contenedor_01.setIcon(new ImageIcon(getClass().getResource("/contenedores/Contenedor_06.png")));
 
             //Deshabilitamos todos los componentes del contenedor
-            //personalizarComboBoxClientesDesabilitado();
-            //personalizarComboBoxHorasDesabilitado();
-            //personalizarComboBoxMinutosDesabilitado();
-            box_clientes.setEnabled(false);
+            box_clientes_1.setEnabled(false);
             box_horas_1.setEnabled(false);
             box_minutos_1.setEnabled(false);
             txt_ingresar_tiempo_1.setEnabled(false);
@@ -668,7 +318,7 @@ public class ListaDeClientes extends javax.swing.JFrame {
 
             //Habilitamos todos los componentes del contenedor
             btn_on_off_01.setSelected(true);
-            box_clientes.setEnabled(true);
+            box_clientes_1.setEnabled(true);
             txt_ingresar_tiempo_1.setEnabled(true);
             box_horas_1.setEnabled(true);
             box_minutos_1.setEnabled(true);
@@ -753,7 +403,7 @@ public class ListaDeClientes extends javax.swing.JFrame {
     private void inciarHiloCronometro() {
         if (iniciarHilo == true) {
             System.out.println("Inicia el hilo");
-            Cronometro miCronometro = new Cronometro(txt_tiempo_1, btn_iniciar_pausar_1, txt_iniciar_pausar_1, box_horas_1, box_minutos_1);
+            Cronometro miCronometro = new Cronometro(txt_tiempo_1, btn_iniciar_pausar_1, txt_iniciar_pausar_1, box_horas_1, box_minutos_1, txt_tiempo_agregado_1, txt_tiempo_total_1);
             miCronometro.start();
         }
 
@@ -765,6 +415,7 @@ public class ListaDeClientes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No se ha ingresado el tiempo");
         } else {
             agregarTiempo1.setVisible(true);
+            agregarTiempo1.agregarTextoTiempoAgregado(txt_tiempo_agregado_1, txt_tiempo_total_1);
             if (agregarTiempo1.isShowing()) {
                 System.out.println("Está mostrado");
             }
@@ -777,7 +428,7 @@ public class ListaDeClientes extends javax.swing.JFrame {
         if (hora != 0 || minuto != 0 || segundo != 0) {
             AlertaFinalizarEjecución finalizarEjecucion1 = new AlertaFinalizarEjecución();
 
-            finalizarEjecucion1.otorgarTextoAEtiqueta(txt_tiempo_1, btn_iniciar_pausar_1, txt_iniciar_pausar_1, box_horas_1, box_minutos_1);
+            finalizarEjecucion1.otorgarTextoAEtiqueta(txt_tiempo_1, btn_iniciar_pausar_1, txt_iniciar_pausar_1, box_horas_1, box_minutos_1, txt_tiempo_agregado_1, txt_tiempo_total_1);
             finalizarEjecucion1.setVisible(true);
         } else {
             System.out.println("Hora, minuto, segundo == 0");
@@ -786,38 +437,37 @@ public class ListaDeClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_parar_1MouseClicked
 
     private void box_horas_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_horas_1ActionPerformed
-        if (box_horas_1.getModel().getSelectedItem() == "0") {
+        if (box_horas_1.getModel().getSelectedItem().equals("0")) {
 
             item_horas = 0;
 
-            System.out.println("itemHoras = " + item_horas + " - itemMinutos: " + item_minutos);
-        } else if (box_horas_1.getModel().getSelectedItem() == "1") {
+            System.out.println("itemHoras = " + item_horas);
+        } else if (box_horas_1.getModel().getSelectedItem().equals("1")) {
 
             item_horas = 1;
 
             System.out.println("itemHoras = " + item_horas);
-        } else if (box_horas_1.getModel().getSelectedItem() == "2") {
+        } else if (box_horas_1.getModel().getSelectedItem().equals("2")) {
 
             item_horas = 2;
 
             System.out.println("itemHoras = " + item_horas);
-        } else if (box_horas_1.getModel().getSelectedItem() == "3") {
+        } else if (box_horas_1.getModel().getSelectedItem().equals("3")) {
 
             item_horas = 3;
 
             System.out.println("itemHoras = " + item_horas);
-        } else if (box_horas_1.getModel().getSelectedItem() == "4") {
+        } else if (box_horas_1.getModel().getSelectedItem().equals("4")) {
 
             item_horas = 4;
 
             System.out.println("itemHoras = " + item_horas);
-        } else if (box_horas_1.getModel().getSelectedItem() == "5") {
+        } else if (box_horas_1.getModel().getSelectedItem().equals("5")) {
 
             item_horas = 5;
 
             System.out.println("itemHoras = " + item_horas);
         }
-
 
     }//GEN-LAST:event_box_horas_1ActionPerformed
 
@@ -831,9 +481,9 @@ public class ListaDeClientes extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_box_minutos_1ActionPerformed
 
-    private void box_clientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_clientesActionPerformed
+    private void box_clientes_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_clientes_1ActionPerformed
 
-    }//GEN-LAST:event_box_clientesActionPerformed
+    }//GEN-LAST:event_box_clientes_1ActionPerformed
 
     private void btn_agregar_cliente_nuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_agregar_cliente_nuevoMouseClicked
         agregarCliente1.setVisible(true);
@@ -868,6 +518,7 @@ public class ListaDeClientes extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -880,6 +531,7 @@ public class ListaDeClientes extends javax.swing.JFrame {
                     break;
                 }
             }
+
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(ListaDeClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
@@ -900,7 +552,7 @@ public class ListaDeClientes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> box_clientes;
+    private javax.swing.JComboBox<String> box_clientes_1;
     private javax.swing.JComboBox<String> box_horas_1;
     private javax.swing.JComboBox<String> box_minutos_1;
     private javax.swing.JLabel btn_agregar_cliente_nuevo;
@@ -918,6 +570,7 @@ public class ListaDeClientes extends javax.swing.JFrame {
     private javax.swing.JLabel txt_iniciar_pausar_1;
     private javax.swing.JLabel txt_parar_1;
     private javax.swing.JLabel txt_tiempo_1;
-    public static javax.swing.JLabel txt_tiempo_agregado;
+    private javax.swing.JLabel txt_tiempo_agregado_1;
+    private javax.swing.JLabel txt_tiempo_total_1;
     // End of variables declaration//GEN-END:variables
 }

@@ -18,13 +18,15 @@ public class Cronometro extends Thread {
     JLabel etiqueta, txt_iniciar_pausar;
     JToggleButton boton_iniciar_pausar;
     JComboBox box_horas, box_minutos;
-
-    public Cronometro(JLabel cronometro, JToggleButton btn_iniciar_pausar, JLabel txt_iniciar_pausar, JComboBox box_horas, JComboBox box_minutos) {
+    JLabel txt_tiempo_agregado, txt_tiempo_total;
+    public Cronometro(JLabel cronometro, JToggleButton btn_iniciar_pausar, JLabel txt_iniciar_pausar, JComboBox box_horas, JComboBox box_minutos, JLabel txt_tiempo_agregado, JLabel txt_tiempo_total) {
         this.etiqueta = cronometro;
         this.boton_iniciar_pausar = btn_iniciar_pausar;
         this.txt_iniciar_pausar = txt_iniciar_pausar;
         this.box_horas = box_horas;
         this.box_minutos = box_minutos;
+        this.txt_tiempo_agregado = txt_tiempo_agregado;
+        this.txt_tiempo_total = txt_tiempo_total;
     }
 
     public void run() {
@@ -85,7 +87,8 @@ public class Cronometro extends Thread {
                                 ListaDeClientes.item_minutos = 0;
                                 box_horas.getModel().setSelectedItem("Horas");
                                 box_minutos.getModel().setSelectedItem("Minutos");
-                                
+                                txt_tiempo_agregado.setText("");
+                                txt_tiempo_total.setText("");
                                 boton_iniciar_pausar.setSelected(false);
                                 boton_iniciar_pausar.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_iniciar_pausar.png")));
                                 txt_iniciar_pausar.setText("Iniciar");
