@@ -1,4 +1,3 @@
-
 package ventanas;
 
 import javax.swing.JLabel;
@@ -19,6 +18,9 @@ public class Agregar_tiempo extends javax.swing.JFrame {
     }
     static int item_horas = 0, item_minutos = 0;
     JLabel txt_tiempo_agregado, txt_tiempo_total;
+
+    static int id = 0;
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -81,59 +83,337 @@ public class Agregar_tiempo extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_fondo_boton_agregarActionPerformed
 
-    
-    
-    public void agregarTextoTiempoAgregado(JLabel txt_tiempo_agregado, JLabel txt_tiempo_total){
+    public void asignarID(int id) {
+        this.id = id;
+    }
+
+    public void agregarTextoTiempoAgregado(JLabel txt_tiempo_agregado, JLabel txt_tiempo_total) {
         this.txt_tiempo_agregado = txt_tiempo_agregado;
         this.txt_tiempo_total = txt_tiempo_total;
-    } 
-    
-    public void ejecutarAgregarTexto(String textoTiempoAgregado, String textoTiempoTotal){
+    }
+
+    public void ejecutarAgregarTexto(String textoTiempoAgregado, String textoTiempoTotal) {
         txt_tiempo_agregado.setText(textoTiempoAgregado);
         txt_tiempo_total.setText(textoTiempoTotal);
     }
-    
+
     private void btn_agregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_agregarMouseClicked
         String textoAOtorgar = "";
-        
-        if (box_horas.getModel().getSelectedItem() == "Horas") {
 
-            JOptionPane.showMessageDialog(null, "No se seleccionó ninguna hora!!");
+        if (id == 1) {
+            if (box_horas.getModel().getSelectedItem() == "Horas") {
 
-        } else if (item_minutos == 30) {
-            System.out.println("Item horas lista: " + ListaDeClientes.item_horas);
-            System.out.println("Item minutos lista: " + ListaDeClientes.item_minutos);
+                JOptionPane.showMessageDialog(null, "No se seleccionó ninguna hora!!");
 
-            if (ListaDeClientes.item_minutos == 30) {
-                ListaDeClientes.item_horas = ListaDeClientes.item_horas + 1;
-                ListaDeClientes.item_minutos = 0;
-            } else {
+            } else if (item_minutos == 30) {
+                System.out.println("Item horas lista: " + ListaDeClientes.item_horas_1);
+                System.out.println("Item minutos lista: " + ListaDeClientes.item_minutos_1);
+
+                if (ListaDeClientes.item_minutos_1 == 30) {
+                    ListaDeClientes.item_horas_1 = ListaDeClientes.item_horas_1 + 1;
+                    ListaDeClientes.item_minutos_1 = 0;
+                } else {
 
 //                ListaDeClientes.item_horas = ListaDeClientes.item_horas + item_horas;
-                ListaDeClientes.item_minutos = ListaDeClientes.item_minutos + item_minutos;
+                    ListaDeClientes.item_minutos_1 = ListaDeClientes.item_minutos_1 + item_minutos;
+                }
+                textoAOtorgar = "Tiempo agregado: " + item_minutos + " minutos";
+            } else if (item_horas == 1) {
+
+                ListaDeClientes.item_horas_1 = ListaDeClientes.item_horas_1 + item_horas;
+                ListaDeClientes.item_minutos_1 = ListaDeClientes.item_minutos_1 + item_minutos;
+                textoAOtorgar = "Tiempo agregado: " + item_horas + " hora";
+            } else if (item_horas == 2) {
+
+                ListaDeClientes.item_horas_1 = ListaDeClientes.item_horas_1 + item_horas;
+                ListaDeClientes.item_minutos_1 = ListaDeClientes.item_minutos_1 + item_minutos;
+                textoAOtorgar = "Tiempo agregado: " + item_horas + " horas";
+            } else if (item_horas == 3) {
+
+                ListaDeClientes.item_horas_1 = ListaDeClientes.item_horas_1 + item_horas;
+                ListaDeClientes.item_minutos_1 = ListaDeClientes.item_minutos_1 + item_minutos;
+                textoAOtorgar = "Tiempo agregado: " + item_horas + " horas";
             }
-            textoAOtorgar = "Tiempo agregado: " + item_minutos + " minutos";
-        } else if (item_horas == 1) {
 
-            ListaDeClientes.item_horas = ListaDeClientes.item_horas + item_horas;
-            ListaDeClientes.item_minutos = ListaDeClientes.item_minutos + item_minutos;
-            textoAOtorgar = "Tiempo agregado: " + item_horas + " hora";
-        } else if (item_horas == 2) {
+            System.out.println("Hora final: " + ListaDeClientes.item_horas_1 + " horas con " + ListaDeClientes.item_minutos_1 + " minutos");
+            String textoTiempoTotal = "Tiempo total-> " + ListaDeClientes.item_horas_1 + " : " + ListaDeClientes.item_minutos_1;
+            ejecutarAgregarTexto(textoAOtorgar, textoTiempoTotal);
+            this.setVisible(false);
+        } else if (id == 2) {
+            if (box_horas.getModel().getSelectedItem() == "Horas") {
 
-            ListaDeClientes.item_horas = ListaDeClientes.item_horas + item_horas;
-            ListaDeClientes.item_minutos = ListaDeClientes.item_minutos + item_minutos;
-            textoAOtorgar = "Tiempo agregado: " + item_horas + " horas";
-        } else if (item_horas == 3) {
-            
-            ListaDeClientes.item_horas = ListaDeClientes.item_horas + item_horas;
-            ListaDeClientes.item_minutos = ListaDeClientes.item_minutos + item_minutos;
-            textoAOtorgar = "Tiempo agregado: " + item_horas + " horas";
+                JOptionPane.showMessageDialog(null, "No se seleccionó ninguna hora!!");
+
+            } else if (item_minutos == 30) {
+                System.out.println("Item horas lista: " + ListaDeClientes.item_horas_2);
+                System.out.println("Item minutos lista: " + ListaDeClientes.item_minutos_2);
+
+                if (ListaDeClientes.item_minutos_2 == 30) {
+                    ListaDeClientes.item_horas_2 = ListaDeClientes.item_horas_2 + 1;
+                    ListaDeClientes.item_minutos_2 = 0;
+                } else {
+
+//                ListaDeClientes.item_horas = ListaDeClientes.item_horas + item_horas;
+                    ListaDeClientes.item_minutos_2 = ListaDeClientes.item_minutos_2 + item_minutos;
+                }
+                textoAOtorgar = "Tiempo agregado: " + item_minutos + " minutos";
+            } else if (item_horas == 1) {
+
+                ListaDeClientes.item_horas_2 = ListaDeClientes.item_horas_2 + item_horas;
+                ListaDeClientes.item_minutos_2 = ListaDeClientes.item_minutos_2 + item_minutos;
+                textoAOtorgar = "Tiempo agregado: " + item_horas + " hora";
+            } else if (item_horas == 2) {
+
+                ListaDeClientes.item_horas_2 = ListaDeClientes.item_horas_2 + item_horas;
+                ListaDeClientes.item_minutos_2 = ListaDeClientes.item_minutos_2 + item_minutos;
+                textoAOtorgar = "Tiempo agregado: " + item_horas + " horas";
+            } else if (item_horas == 3) {
+
+                ListaDeClientes.item_horas_2 = ListaDeClientes.item_horas_2 + item_horas;
+                ListaDeClientes.item_minutos_2 = ListaDeClientes.item_minutos_2 + item_minutos;
+                textoAOtorgar = "Tiempo agregado: " + item_horas + " horas";
+            }
+
+            System.out.println("Hora final: " + ListaDeClientes.item_horas_2 + " horas con " + ListaDeClientes.item_minutos_2 + " minutos");
+            String textoTiempoTotal = "Tiempo total-> " + ListaDeClientes.item_horas_2 + " : " + ListaDeClientes.item_minutos_2;
+            ejecutarAgregarTexto(textoAOtorgar, textoTiempoTotal);
+            this.setVisible(false);
+        }else if(id==3){
+            if (box_horas.getModel().getSelectedItem() == "Horas") {
+
+                JOptionPane.showMessageDialog(null, "No se seleccionó ninguna hora!!");
+
+            } else if (item_minutos == 30) {
+                System.out.println("Item horas lista: " + ListaDeClientes.item_horas_3);
+                System.out.println("Item minutos lista: " + ListaDeClientes.item_minutos_3);
+
+                if (ListaDeClientes.item_minutos_3 == 30) {
+                    ListaDeClientes.item_horas_3 = ListaDeClientes.item_horas_3 + 1;
+                    ListaDeClientes.item_minutos_3 = 0;
+                } else {
+
+//                ListaDeClientes.item_horas = ListaDeClientes.item_horas + item_horas;
+                    ListaDeClientes.item_minutos_3 = ListaDeClientes.item_minutos_3 + item_minutos;
+                }
+                textoAOtorgar = "Tiempo agregado: " + item_minutos + " minutos";
+            } else if (item_horas == 1) {
+
+                ListaDeClientes.item_horas_3 = ListaDeClientes.item_horas_3 + item_horas;
+                ListaDeClientes.item_minutos_3 = ListaDeClientes.item_minutos_3 + item_minutos;
+                textoAOtorgar = "Tiempo agregado: " + item_horas + " hora";
+            } else if (item_horas == 2) {
+
+                ListaDeClientes.item_horas_3 = ListaDeClientes.item_horas_3 + item_horas;
+                ListaDeClientes.item_minutos_3 = ListaDeClientes.item_minutos_3 + item_minutos;
+                textoAOtorgar = "Tiempo agregado: " + item_horas + " horas";
+            } else if (item_horas == 3) {
+
+                ListaDeClientes.item_horas_3 = ListaDeClientes.item_horas_3 + item_horas;
+                ListaDeClientes.item_minutos_3 = ListaDeClientes.item_minutos_3 + item_minutos;
+                textoAOtorgar = "Tiempo agregado: " + item_horas + " horas";
+            }
+
+            System.out.println("Hora final: " + ListaDeClientes.item_horas_3 + " horas con " + ListaDeClientes.item_minutos_3 + " minutos");
+            String textoTiempoTotal = "Tiempo total-> " + ListaDeClientes.item_horas_3 + " : " + ListaDeClientes.item_minutos_3;
+            ejecutarAgregarTexto(textoAOtorgar, textoTiempoTotal);
+            this.setVisible(false);
+        }else if(id==4){
+            if (box_horas.getModel().getSelectedItem() == "Horas") {
+
+                JOptionPane.showMessageDialog(null, "No se seleccionó ninguna hora!!");
+
+            } else if (item_minutos == 30) {
+                System.out.println("Item horas lista: " + ListaDeClientes.item_horas_4);
+                System.out.println("Item minutos lista: " + ListaDeClientes.item_minutos_4);
+
+                if (ListaDeClientes.item_minutos_4 == 30) {
+                    ListaDeClientes.item_horas_4 = ListaDeClientes.item_horas_4 + 1;
+                    ListaDeClientes.item_minutos_4 = 0;
+                } else {
+
+//                ListaDeClientes.item_horas = ListaDeClientes.item_horas + item_horas;
+                    ListaDeClientes.item_minutos_4 = ListaDeClientes.item_minutos_4 + item_minutos;
+                }
+                textoAOtorgar = "Tiempo agregado: " + item_minutos + " minutos";
+            } else if (item_horas == 1) {
+
+                ListaDeClientes.item_horas_4 = ListaDeClientes.item_horas_4 + item_horas;
+                ListaDeClientes.item_minutos_4 = ListaDeClientes.item_minutos_4 + item_minutos;
+                textoAOtorgar = "Tiempo agregado: " + item_horas + " hora";
+            } else if (item_horas == 2) {
+
+                ListaDeClientes.item_horas_4 = ListaDeClientes.item_horas_4 + item_horas;
+                ListaDeClientes.item_minutos_4 = ListaDeClientes.item_minutos_4 + item_minutos;
+                textoAOtorgar = "Tiempo agregado: " + item_horas + " horas";
+            } else if (item_horas == 3) {
+
+                ListaDeClientes.item_horas_4 = ListaDeClientes.item_horas_4 + item_horas;
+                ListaDeClientes.item_minutos_4 = ListaDeClientes.item_minutos_4 + item_minutos;
+                textoAOtorgar = "Tiempo agregado: " + item_horas + " horas";
+            }
+
+            System.out.println("Hora final: " + ListaDeClientes.item_horas_4 + " horas con " + ListaDeClientes.item_minutos_4 + " minutos");
+            String textoTiempoTotal = "Tiempo total-> " + ListaDeClientes.item_horas_4 + " : " + ListaDeClientes.item_minutos_4;
+            ejecutarAgregarTexto(textoAOtorgar, textoTiempoTotal);
+            this.setVisible(false);
+        }else if(id==5){
+            if (box_horas.getModel().getSelectedItem() == "Horas") {
+
+                JOptionPane.showMessageDialog(null, "No se seleccionó ninguna hora!!");
+
+            } else if (item_minutos == 30) {
+                System.out.println("Item horas lista: " + ListaDeClientes.item_horas_5);
+                System.out.println("Item minutos lista: " + ListaDeClientes.item_minutos_5);
+
+                if (ListaDeClientes.item_minutos_5 == 30) {
+                    ListaDeClientes.item_horas_5 = ListaDeClientes.item_horas_5 + 1;
+                    ListaDeClientes.item_minutos_5 = 0;
+                } else {
+
+//                ListaDeClientes.item_horas = ListaDeClientes.item_horas + item_horas;
+                    ListaDeClientes.item_minutos_5 = ListaDeClientes.item_minutos_5 + item_minutos;
+                }
+                textoAOtorgar = "Tiempo agregado: " + item_minutos + " minutos";
+            } else if (item_horas == 1) {
+
+                ListaDeClientes.item_horas_5 = ListaDeClientes.item_horas_5 + item_horas;
+                ListaDeClientes.item_minutos_5 = ListaDeClientes.item_minutos_5 + item_minutos;
+                textoAOtorgar = "Tiempo agregado: " + item_horas + " hora";
+            } else if (item_horas == 2) {
+
+                ListaDeClientes.item_horas_5 = ListaDeClientes.item_horas_5 + item_horas;
+                ListaDeClientes.item_minutos_5 = ListaDeClientes.item_minutos_5 + item_minutos;
+                textoAOtorgar = "Tiempo agregado: " + item_horas + " horas";
+            } else if (item_horas == 3) {
+
+                ListaDeClientes.item_horas_5 = ListaDeClientes.item_horas_5 + item_horas;
+                ListaDeClientes.item_minutos_5 = ListaDeClientes.item_minutos_5 + item_minutos;
+                textoAOtorgar = "Tiempo agregado: " + item_horas + " horas";
+            }
+
+            System.out.println("Hora final: " + ListaDeClientes.item_horas_5 + " horas con " + ListaDeClientes.item_minutos_5 + " minutos");
+            String textoTiempoTotal = "Tiempo total-> " + ListaDeClientes.item_horas_5 + " : " + ListaDeClientes.item_minutos_5;
+            ejecutarAgregarTexto(textoAOtorgar, textoTiempoTotal);
+            this.setVisible(false);
+        }else if(id==6){
+            if (box_horas.getModel().getSelectedItem() == "Horas") {
+
+                JOptionPane.showMessageDialog(null, "No se seleccionó ninguna hora!!");
+
+            } else if (item_minutos == 30) {
+                System.out.println("Item horas lista: " + ListaDeClientes.item_horas_6);
+                System.out.println("Item minutos lista: " + ListaDeClientes.item_minutos_6);
+
+                if (ListaDeClientes.item_minutos_6 == 30) {
+                    ListaDeClientes.item_horas_6 = ListaDeClientes.item_horas_6 + 1;
+                    ListaDeClientes.item_minutos_6 = 0;
+                } else {
+
+//                ListaDeClientes.item_horas = ListaDeClientes.item_horas + item_horas;
+                    ListaDeClientes.item_minutos_6 = ListaDeClientes.item_minutos_6 + item_minutos;
+                }
+                textoAOtorgar = "Tiempo agregado: " + item_minutos + " minutos";
+            } else if (item_horas == 1) {
+
+                ListaDeClientes.item_horas_6 = ListaDeClientes.item_horas_6 + item_horas;
+                ListaDeClientes.item_minutos_6 = ListaDeClientes.item_minutos_6 + item_minutos;
+                textoAOtorgar = "Tiempo agregado: " + item_horas + " hora";
+            } else if (item_horas == 2) {
+
+                ListaDeClientes.item_horas_6 = ListaDeClientes.item_horas_6 + item_horas;
+                ListaDeClientes.item_minutos_6 = ListaDeClientes.item_minutos_6 + item_minutos;
+                textoAOtorgar = "Tiempo agregado: " + item_horas + " horas";
+            } else if (item_horas == 3) {
+
+                ListaDeClientes.item_horas_6 = ListaDeClientes.item_horas_6 + item_horas;
+                ListaDeClientes.item_minutos_6 = ListaDeClientes.item_minutos_6 + item_minutos;
+                textoAOtorgar = "Tiempo agregado: " + item_horas + " horas";
+            }
+
+            System.out.println("Hora final: " + ListaDeClientes.item_horas_6 + " horas con " + ListaDeClientes.item_minutos_6 + " minutos");
+            String textoTiempoTotal = "Tiempo total-> " + ListaDeClientes.item_horas_6 + " : " + ListaDeClientes.item_minutos_6;
+            ejecutarAgregarTexto(textoAOtorgar, textoTiempoTotal);
+            this.setVisible(false);
+        }else if(id==7){
+            if (box_horas.getModel().getSelectedItem() == "Horas") {
+
+                JOptionPane.showMessageDialog(null, "No se seleccionó ninguna hora!!");
+
+            } else if (item_minutos == 30) {
+                System.out.println("Item horas lista: " + ListaDeClientes.item_horas_7);
+                System.out.println("Item minutos lista: " + ListaDeClientes.item_minutos_7);
+
+                if (ListaDeClientes.item_minutos_7 == 30) {
+                    ListaDeClientes.item_horas_7 = ListaDeClientes.item_horas_7 + 1;
+                    ListaDeClientes.item_minutos_7 = 0;
+                } else {
+
+//                ListaDeClientes.item_horas = ListaDeClientes.item_horas + item_horas;
+                    ListaDeClientes.item_minutos_7 = ListaDeClientes.item_minutos_7 + item_minutos;
+                }
+                textoAOtorgar = "Tiempo agregado: " + item_minutos + " minutos";
+            } else if (item_horas == 1) {
+
+                ListaDeClientes.item_horas_7 = ListaDeClientes.item_horas_7 + item_horas;
+                ListaDeClientes.item_minutos_7 = ListaDeClientes.item_minutos_7 + item_minutos;
+                textoAOtorgar = "Tiempo agregado: " + item_horas + " hora";
+            } else if (item_horas == 2) {
+
+                ListaDeClientes.item_horas_7 = ListaDeClientes.item_horas_7 + item_horas;
+                ListaDeClientes.item_minutos_7 = ListaDeClientes.item_minutos_7 + item_minutos;
+                textoAOtorgar = "Tiempo agregado: " + item_horas + " horas";
+            } else if (item_horas == 3) {
+
+                ListaDeClientes.item_horas_7 = ListaDeClientes.item_horas_7 + item_horas;
+                ListaDeClientes.item_minutos_7 = ListaDeClientes.item_minutos_7 + item_minutos;
+                textoAOtorgar = "Tiempo agregado: " + item_horas + " horas";
+            }
+
+            System.out.println("Hora final: " + ListaDeClientes.item_horas_7 + " horas con " + ListaDeClientes.item_minutos_7 + " minutos");
+            String textoTiempoTotal = "Tiempo total-> " + ListaDeClientes.item_horas_7 + " : " + ListaDeClientes.item_minutos_7;
+            ejecutarAgregarTexto(textoAOtorgar, textoTiempoTotal);
+            this.setVisible(false);
+        }else if(id==8){
+            if (box_horas.getModel().getSelectedItem() == "Horas") {
+
+                JOptionPane.showMessageDialog(null, "No se seleccionó ninguna hora!!");
+
+            } else if (item_minutos == 30) {
+                System.out.println("Item horas lista: " + ListaDeClientes.item_horas_8);
+                System.out.println("Item minutos lista: " + ListaDeClientes.item_minutos_8);
+
+                if (ListaDeClientes.item_minutos_8 == 30) {
+                    ListaDeClientes.item_horas_8 = ListaDeClientes.item_horas_8 + 1;
+                    ListaDeClientes.item_minutos_8 = 0;
+                } else {
+
+//                ListaDeClientes.item_horas = ListaDeClientes.item_horas + item_horas;
+                    ListaDeClientes.item_minutos_8 = ListaDeClientes.item_minutos_8 + item_minutos;
+                }
+                textoAOtorgar = "Tiempo agregado: " + item_minutos + " minutos";
+            } else if (item_horas == 1) {
+
+                ListaDeClientes.item_horas_8 = ListaDeClientes.item_horas_8 + item_horas;
+                ListaDeClientes.item_minutos_8 = ListaDeClientes.item_minutos_8 + item_minutos;
+                textoAOtorgar = "Tiempo agregado: " + item_horas + " hora";
+            } else if (item_horas == 2) {
+
+                ListaDeClientes.item_horas_8 = ListaDeClientes.item_horas_8 + item_horas;
+                ListaDeClientes.item_minutos_8 = ListaDeClientes.item_minutos_8 + item_minutos;
+                textoAOtorgar = "Tiempo agregado: " + item_horas + " horas";
+            } else if (item_horas == 3) {
+
+                ListaDeClientes.item_horas_8 = ListaDeClientes.item_horas_8 + item_horas;
+                ListaDeClientes.item_minutos_8 = ListaDeClientes.item_minutos_8 + item_minutos;
+                textoAOtorgar = "Tiempo agregado: " + item_horas + " horas";
+            }
+
+            System.out.println("Hora final: " + ListaDeClientes.item_horas_8 + " horas con " + ListaDeClientes.item_minutos_8 + " minutos");
+            String textoTiempoTotal = "Tiempo total-> " + ListaDeClientes.item_horas_8 + " : " + ListaDeClientes.item_minutos_8;
+            ejecutarAgregarTexto(textoAOtorgar, textoTiempoTotal);
+            this.setVisible(false);
         }
-        
-        System.out.println("Hora final: " + ListaDeClientes.item_horas + " horas con " + ListaDeClientes.item_minutos + " minutos");
-        String textoTiempoTotal = "Tiempo total-> " + ListaDeClientes.item_horas + " : " + ListaDeClientes.item_minutos;
-        ejecutarAgregarTexto(textoAOtorgar, textoTiempoTotal);
-        this.setVisible(false);
+
     }//GEN-LAST:event_btn_agregarMouseClicked
 
     private void box_horasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_horasActionPerformed
@@ -142,7 +422,7 @@ public class Agregar_tiempo extends javax.swing.JFrame {
         } else if (box_horas.getModel().getSelectedItem().equals("1/2")) {
             item_horas = 0;
             item_minutos = 30;
-            
+
         } else if (box_horas.getModel().getSelectedItem().equals("1")) {
             item_minutos = 0;
             item_horas = 1;

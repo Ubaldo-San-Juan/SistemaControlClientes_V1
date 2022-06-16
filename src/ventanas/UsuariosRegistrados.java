@@ -39,7 +39,7 @@ public class UsuariosRegistrados extends javax.swing.JFrame {
         int valorColor1 = 0, valorColor2 = 0, valorColor3 = 0;
         int numAleatorio1;
         
-        numAleatorio1 = (int) (Math.random()*10+1);
+        numAleatorio1 = (int) (Math.random()*10);
 
         if(numAleatorio1 == 1){
             valorColor1 = 124;

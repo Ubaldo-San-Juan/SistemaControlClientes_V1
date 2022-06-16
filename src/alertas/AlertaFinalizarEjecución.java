@@ -27,7 +27,7 @@ public class AlertaFinalizarEjecución extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -100,30 +100,130 @@ public class AlertaFinalizarEjecución extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     JLabel txt_tiempo, txt_iniciar_pausar;
     JToggleButton btn_iniciar_pausar;
     JComboBox box_horas, box_minutos;
     JLabel txt_tiempo_agregado, txt_tiempo_total;
+    int id = 0;
     private void btn_siMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_siMouseClicked
-   
-        ListaDeClientes cobro1 = new ListaDeClientes();
-        cobro1.cobrar();
-        ListaDeClientes cliente1 = new ListaDeClientes();
-        cliente1.detenerYAsignarValoresDefault();
-        txt_tiempo.setText("00 : 00 : 00");
-        btn_iniciar_pausar.setSelected(false);
-        btn_iniciar_pausar.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_iniciar_pausar.png")));
-        txt_iniciar_pausar.setText("Iniciar");
-        box_horas.getModel().setSelectedItem("Horas");
-        box_minutos.getModel().setSelectedItem("Minutos");
-        txt_tiempo_agregado.setText("");
-        txt_tiempo_total.setText("");
-        this.dispose();
-        
+
+        if (id == 1) {
+            ListaDeClientes cobro = new ListaDeClientes();
+            cobro.cobrar_1();
+            ListaDeClientes cliente_1 = new ListaDeClientes();
+            cliente_1.detenerYAsignarValoresDefault_1();
+            txt_tiempo.setText("00 : 00 : 00");
+            btn_iniciar_pausar.setSelected(false);
+            btn_iniciar_pausar.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_iniciar_pausar.png")));
+            txt_iniciar_pausar.setText("Iniciar");
+            box_horas.getModel().setSelectedItem("Horas");
+            box_minutos.getModel().setSelectedItem("Minutos");
+            txt_tiempo_agregado.setText("");
+            txt_tiempo_total.setText("");
+            this.dispose();
+        } else if (id == 2) {
+            ListaDeClientes cobro = new ListaDeClientes();
+            cobro.cobrar_2();
+            ListaDeClientes cliente_2 = new ListaDeClientes();
+            cliente_2.detenerYAsignarValoresDefault_2();
+            txt_tiempo.setText("00 : 00 : 00");
+            btn_iniciar_pausar.setSelected(false);
+            btn_iniciar_pausar.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_iniciar_pausar.png")));
+            txt_iniciar_pausar.setText("Iniciar");
+            box_horas.getModel().setSelectedItem("Horas");
+            box_minutos.getModel().setSelectedItem("Minutos");
+            txt_tiempo_agregado.setText("");
+            txt_tiempo_total.setText("");
+            this.dispose();
+        }else if(id == 3){
+            ListaDeClientes cobro = new ListaDeClientes();
+            cobro.cobrar_3();
+            ListaDeClientes cliente_3 = new ListaDeClientes();
+            cliente_3.detenerYAsignarValoresDefault_3();
+            txt_tiempo.setText("00 : 00 : 00");
+            btn_iniciar_pausar.setSelected(false);
+            btn_iniciar_pausar.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_iniciar_pausar.png")));
+            txt_iniciar_pausar.setText("Iniciar");
+            box_horas.getModel().setSelectedItem("Horas");
+            box_minutos.getModel().setSelectedItem("Minutos");
+            txt_tiempo_agregado.setText("");
+            txt_tiempo_total.setText("");
+            this.dispose();
+        }else if(id == 4){
+            ListaDeClientes cobro = new ListaDeClientes();
+            cobro.cobrar_4();
+            ListaDeClientes cliente_4 = new ListaDeClientes();
+            cliente_4.detenerYAsignarValoresDefault_4();
+            txt_tiempo.setText("00 : 00 : 00");
+            btn_iniciar_pausar.setSelected(false);
+            btn_iniciar_pausar.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_iniciar_pausar.png")));
+            txt_iniciar_pausar.setText("Iniciar");
+            box_horas.getModel().setSelectedItem("Horas");
+            box_minutos.getModel().setSelectedItem("Minutos");
+            txt_tiempo_agregado.setText("");
+            txt_tiempo_total.setText("");
+            this.dispose();
+        }else if(id == 5){
+            ListaDeClientes cobro = new ListaDeClientes();
+            cobro.cobrar_5();
+            ListaDeClientes cliente_5 = new ListaDeClientes();
+            cliente_5.detenerYAsignarValoresDefault_5();
+            txt_tiempo.setText("00 : 00 : 00");
+            btn_iniciar_pausar.setSelected(false);
+            btn_iniciar_pausar.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_iniciar_pausar.png")));
+            txt_iniciar_pausar.setText("Iniciar");
+            box_horas.getModel().setSelectedItem("Horas");
+            box_minutos.getModel().setSelectedItem("Minutos");
+            txt_tiempo_agregado.setText("");
+            txt_tiempo_total.setText("");
+            this.dispose();
+        }else if(id == 6){
+            ListaDeClientes cobro = new ListaDeClientes();
+            cobro.cobrar_6();
+            ListaDeClientes cliente_6 = new ListaDeClientes();
+            cliente_6.detenerYAsignarValoresDefault_6();
+            txt_tiempo.setText("00 : 00 : 00");
+            btn_iniciar_pausar.setSelected(false);
+            btn_iniciar_pausar.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_iniciar_pausar.png")));
+            txt_iniciar_pausar.setText("Iniciar");
+            box_horas.getModel().setSelectedItem("Horas");
+            box_minutos.getModel().setSelectedItem("Minutos");
+            txt_tiempo_agregado.setText("");
+            txt_tiempo_total.setText("");
+            this.dispose();
+        }else if(id == 7){
+            ListaDeClientes cobro = new ListaDeClientes();
+            cobro.cobrar_7();
+            ListaDeClientes cliente_7 = new ListaDeClientes();
+            cliente_7.detenerYAsignarValoresDefault_7();
+            txt_tiempo.setText("00 : 00 : 00");
+            btn_iniciar_pausar.setSelected(false);
+            btn_iniciar_pausar.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_iniciar_pausar.png")));
+            txt_iniciar_pausar.setText("Iniciar");
+            box_horas.getModel().setSelectedItem("Horas");
+            box_minutos.getModel().setSelectedItem("Minutos");
+            txt_tiempo_agregado.setText("");
+            txt_tiempo_total.setText("");
+            this.dispose();
+        }else if(id == 8){
+            ListaDeClientes cobro = new ListaDeClientes();
+            cobro.cobrar_8();
+            ListaDeClientes cliente_8 = new ListaDeClientes();
+            cliente_8.detenerYAsignarValoresDefault_8();
+            txt_tiempo.setText("00 : 00 : 00");
+            btn_iniciar_pausar.setSelected(false);
+            btn_iniciar_pausar.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_iniciar_pausar.png")));
+            txt_iniciar_pausar.setText("Iniciar");
+            box_horas.getModel().setSelectedItem("Horas");
+            box_minutos.getModel().setSelectedItem("Minutos");
+            txt_tiempo_agregado.setText("");
+            txt_tiempo_total.setText("");
+            this.dispose();
+        }
     }//GEN-LAST:event_btn_siMouseClicked
 
-    public void otorgarTextoAEtiqueta(JLabel txt_tiempo, JToggleButton btn_iniciar_pausar, JLabel txt_iniciar_pausar, JComboBox box_horas, JComboBox box_minutos, JLabel txt_tiempo_agregado, JLabel txt_tiempo_total){
+    public void otorgarTextoAEtiqueta(JLabel txt_tiempo, JToggleButton btn_iniciar_pausar, JLabel txt_iniciar_pausar, JComboBox box_horas, JComboBox box_minutos, JLabel txt_tiempo_agregado, JLabel txt_tiempo_total) {
         this.txt_tiempo = txt_tiempo;
         this.btn_iniciar_pausar = btn_iniciar_pausar;
         this.txt_iniciar_pausar = txt_iniciar_pausar;
@@ -133,7 +233,11 @@ public class AlertaFinalizarEjecución extends javax.swing.JFrame {
         this.txt_tiempo_total = txt_tiempo_total;
     }
 
-    
+    public void otorgarID(int id) {
+        this.id = id;
+    }
+
+
     private void btn_noMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_noMouseClicked
         System.out.println("Aún no se requiere finalizar");
         this.dispose();

@@ -41,9 +41,11 @@ public class Configuracion extends javax.swing.JFrame {
         icono_contrasenia = new javax.swing.JLabel();
         txt_perfil_usuario = new javax.swing.JLabel();
         icono_usuario = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         titulo_sistema = new javax.swing.JLabel();
         txt_fecha = new javax.swing.JLabel();
+        icono_cambiar_tarifa = new javax.swing.JLabel();
+        btn_cambiar_tarifa = new javax.swing.JLabel();
+        fondo_btn_cambiar_tarifa = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -94,9 +96,6 @@ public class Configuracion extends javax.swing.JFrame {
         icono_usuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/IconoUsuario.png"))); // NOI18N
         fondo.add(icono_usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 110, 90, 90));
 
-        jButton1.setText("Cambiar tarifa");
-        fondo.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 430, 150, 40));
-
         titulo_sistema.setFont(new java.awt.Font("Microsoft New Tai Lue", 1, 36)); // NOI18N
         titulo_sistema.setText("Sistema de control clientes");
         fondo.add(titulo_sistema, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 20, -1, 67));
@@ -104,6 +103,33 @@ public class Configuracion extends javax.swing.JFrame {
         txt_fecha.setFont(new java.awt.Font("DejaVu Sans Light", 1, 14)); // NOI18N
         txt_fecha.setForeground(new java.awt.Color(153, 153, 153));
         fondo.add(txt_fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 200, 20));
+
+        icono_cambiar_tarifa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/cambiar_tarifa.png"))); // NOI18N
+        fondo.add(icono_cambiar_tarifa, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 250, 150, 160));
+
+        btn_cambiar_tarifa.setFont(new java.awt.Font("Microsoft New Tai Lue", 1, 18)); // NOI18N
+        btn_cambiar_tarifa.setForeground(new java.awt.Color(255, 255, 255));
+        btn_cambiar_tarifa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btn_cambiar_tarifa.setText("Cambiar tarifa");
+        btn_cambiar_tarifa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_cambiar_tarifa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_cambiar_tarifaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_cambiar_tarifaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_cambiar_tarifaMouseExited(evt);
+            }
+        });
+        fondo.add(btn_cambiar_tarifa, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 420, 220, 50));
+
+        fondo_btn_cambiar_tarifa.setFont(new java.awt.Font("Microsoft New Tai Lue", 1, 18)); // NOI18N
+        fondo_btn_cambiar_tarifa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/botones/BotonCambiarContrasenia.png"))); // NOI18N
+        fondo_btn_cambiar_tarifa.setToolTipText("");
+        fondo_btn_cambiar_tarifa.setContentAreaFilled(false);
+        fondo.add(fondo_btn_cambiar_tarifa, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 420, 220, 50));
 
         getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 750));
 
@@ -139,6 +165,18 @@ public class Configuracion extends javax.swing.JFrame {
     private void btn_cambiar_contraseniaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cambiar_contraseniaMouseExited
         fondo_btn_cambiar_contrasenia.setIcon(new ImageIcon(getClass().getResource("/botones/BotonCambiarContrasenia.png")));
     }//GEN-LAST:event_btn_cambiar_contraseniaMouseExited
+
+    private void btn_cambiar_tarifaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cambiar_tarifaMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_cambiar_tarifaMouseClicked
+
+    private void btn_cambiar_tarifaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cambiar_tarifaMouseEntered
+        fondo_btn_cambiar_tarifa.setIcon(new ImageIcon(getClass().getResource("/botones/BotonCambiarContraseniaHover.png")));
+    }//GEN-LAST:event_btn_cambiar_tarifaMouseEntered
+
+    private void btn_cambiar_tarifaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cambiar_tarifaMouseExited
+        fondo_btn_cambiar_tarifa.setIcon(new ImageIcon(getClass().getResource("/botones/BotonCambiarContrasenia.png")));
+    }//GEN-LAST:event_btn_cambiar_tarifaMouseExited
 
     
     /**
@@ -181,11 +219,13 @@ public class Configuracion extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btn_cambiar_contrasenia;
+    private javax.swing.JLabel btn_cambiar_tarifa;
     private javax.swing.JPanel fondo;
     private javax.swing.JButton fondo_btn_cambiar_contrasenia;
+    private javax.swing.JButton fondo_btn_cambiar_tarifa;
+    private javax.swing.JLabel icono_cambiar_tarifa;
     private javax.swing.JLabel icono_contrasenia;
     private javax.swing.JLabel icono_usuario;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel titulo_sistema;
     private javax.swing.JLabel txt_fecha;
     public javax.swing.JLabel txt_perfil_usuario;
