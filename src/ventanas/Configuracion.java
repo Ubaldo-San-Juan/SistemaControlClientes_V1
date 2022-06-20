@@ -42,10 +42,10 @@ public class Configuracion extends javax.swing.JFrame {
         txt_perfil_usuario = new javax.swing.JLabel();
         icono_usuario = new javax.swing.JLabel();
         titulo_sistema = new javax.swing.JLabel();
-        txt_fecha = new javax.swing.JLabel();
         icono_cambiar_tarifa = new javax.swing.JLabel();
         btn_cambiar_tarifa = new javax.swing.JLabel();
         fondo_btn_cambiar_tarifa = new javax.swing.JButton();
+        txt_fecha = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -100,10 +100,6 @@ public class Configuracion extends javax.swing.JFrame {
         titulo_sistema.setText("Sistema de control clientes");
         fondo.add(titulo_sistema, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 20, -1, 67));
 
-        txt_fecha.setFont(new java.awt.Font("DejaVu Sans Light", 1, 14)); // NOI18N
-        txt_fecha.setForeground(new java.awt.Color(153, 153, 153));
-        fondo.add(txt_fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 200, 20));
-
         icono_cambiar_tarifa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/cambiar_tarifa.png"))); // NOI18N
         fondo.add(icono_cambiar_tarifa, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 250, 150, 160));
 
@@ -130,6 +126,10 @@ public class Configuracion extends javax.swing.JFrame {
         fondo_btn_cambiar_tarifa.setToolTipText("");
         fondo_btn_cambiar_tarifa.setContentAreaFilled(false);
         fondo.add(fondo_btn_cambiar_tarifa, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 420, 220, 50));
+
+        txt_fecha.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
+        txt_fecha.setForeground(new java.awt.Color(102, 102, 102));
+        fondo.add(txt_fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 200, 20));
 
         getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 750));
 

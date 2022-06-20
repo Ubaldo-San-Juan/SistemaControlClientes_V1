@@ -16,9 +16,10 @@ public class AgregarClienteNuevo extends javax.swing.JFrame {
     public AgregarClienteNuevo() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setTitle("Agregar cliente nuevo");
     }
     ControladorClientes controladorCliente1 = new ControladorClientes();
-    
+ 
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -95,10 +96,12 @@ public class AgregarClienteNuevo extends javax.swing.JFrame {
         ListaDeClientes listaClientes1 = new ListaDeClientes();
         String nombreCliente = campo_nombreCliente.getText();
         controladorCliente1.agregarClienteNuevo(nombreCliente);
-        listaClientes1.llenarComboBox();
+
         this.dispose();
     }//GEN-LAST:event_btn_agregar_cliente_nuevoMouseClicked
 
+
+    
     /**
      * @param args the command line arguments
      */

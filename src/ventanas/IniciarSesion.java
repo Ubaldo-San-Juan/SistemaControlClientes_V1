@@ -45,6 +45,7 @@ public class IniciarSesion extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        this.setTitle("Iniciar sesión");
         campo_contrasenia.setEchoChar((char) 0);
         campo_contrasenia.setText("Ingresa tu contraseña");
         icono_mostra_ocultar_contrasenia.setEnabled(false);

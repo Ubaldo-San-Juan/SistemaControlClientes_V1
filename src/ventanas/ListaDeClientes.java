@@ -172,25 +172,25 @@ public class ListaDeClientes extends javax.swing.JFrame {
     }
 
     public void llenarComboBox() {
-        ControladorClientes controladorC = new ControladorClientes();
-        box_clientes_1.setModel(controladorC.llenarComboboxClientes());
-        box_clientes_2.setModel(controladorC.llenarComboboxClientes());
-        box_clientes_3.setModel(controladorC.llenarComboboxClientes());
-        box_clientes_4.setModel(controladorC.llenarComboboxClientes());
-        box_clientes_5.setModel(controladorC.llenarComboboxClientes());
-        box_clientes_6.setModel(controladorC.llenarComboboxClientes());
-        box_clientes_7.setModel(controladorC.llenarComboboxClientes());
-        box_clientes_8.setModel(controladorC.llenarComboboxClientes());
+
+        box_clientes_1.setModel(new ControladorClientes().llenarComboboxClientes());
+        box_clientes_2.setModel(new ControladorClientes().llenarComboboxClientes());
+        box_clientes_3.setModel(new ControladorClientes().llenarComboboxClientes());
+        box_clientes_4.setModel(new ControladorClientes().llenarComboboxClientes());
+        box_clientes_5.setModel(new ControladorClientes().llenarComboboxClientes());
+        box_clientes_6.setModel(new ControladorClientes().llenarComboboxClientes());
+        box_clientes_7.setModel(new ControladorClientes().llenarComboboxClientes());
+        box_clientes_8.setModel(new ControladorClientes().llenarComboboxClientes());
     }
 
-    boolean var_btn_iniciar_pausar_1;
-    boolean var_btn_iniciar_pausar_2;
-    boolean var_btn_iniciar_pausar_3;
-    boolean var_btn_iniciar_pausar_4;
-    boolean var_btn_iniciar_pausar_5;
-    boolean var_btn_iniciar_pausar_6;
-    boolean var_btn_iniciar_pausar_7;
-    boolean var_btn_iniciar_pausar_8;
+    boolean var_btn_iniciar_pausar_1 = false;
+    boolean var_btn_iniciar_pausar_2 = false;
+    boolean var_btn_iniciar_pausar_3 = false;
+    boolean var_btn_iniciar_pausar_4 = false;
+    boolean var_btn_iniciar_pausar_5 = false;
+    boolean var_btn_iniciar_pausar_6 = false;
+    boolean var_btn_iniciar_pausar_7 = false;
+    boolean var_btn_iniciar_pausar_8 = false;
 
     //Variables 
     public static int hora_1 = 0, minuto_1 = 0, segundo_1 = 0, milesima_1 = 0;
@@ -237,6 +237,15 @@ public class ListaDeClientes extends javax.swing.JFrame {
     public static int item_horas_6 = 0, item_minutos_6 = 0;
     public static int item_horas_7 = 0, item_minutos_7 = 0;
     public static int item_horas_8 = 0, item_minutos_8 = 0;
+
+    public static String item_clientes_1 = "";
+    public static String item_clientes_2 = "";
+    public static String item_clientes_3 = "";
+    public static String item_clientes_4 = "";
+    public static String item_clientes_5 = "";
+    public static String item_clientes_6 = "";
+    public static String item_clientes_7 = "";
+    public static String item_clientes_8 = "";
 
     Agregar_tiempo agregarTiempo_1 = new Agregar_tiempo();
     Agregar_tiempo agregarTiempo_2 = new Agregar_tiempo();
@@ -293,43 +302,12 @@ public class ListaDeClientes extends javax.swing.JFrame {
         cobro_8.calcularCobro();
     }
 
-    public void procesoBotonIniciarPausar(JComboBox box_horas, JComboBox box_minutos, boolean var_btn_iniciar_pausar, JToggleButton btn_iniciar_pausar, JLabel txt_iniciar_pausar, boolean corriendo, boolean iniciarHilo, boolean pausar, JToggleButton btn_on_off, int id) {
+    public void procesoBotonIniciarPausar(int id, JComboBox box_clientes, JComboBox box_horas, JComboBox box_minutos, boolean var_btn_iniciar_pausar, JToggleButton btn_iniciar_pausar, JLabel txt_iniciar_pausar, boolean corriendo, boolean pausar, JToggleButton btn_on_off) {
+
         System.out.println("Horas: " + box_horas.getModel().getSelectedItem() + " - Minutos: " + box_minutos.getModel().getSelectedItem());
-        //Diseño del boton iniciar-pausar
         var_btn_iniciar_pausar = btn_iniciar_pausar.getModel().isSelected();
-        System.out.println("Propiedad del boton(selected):" + var_btn_iniciar_pausar);
 
-        if (var_btn_iniciar_pausar == true) { //Si el botón iniciar pausar está encendido
-            btn_iniciar_pausar.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_pausar.png")));
-            txt_iniciar_pausar.setText("Pausar");
-
-            //Funcionalidad del boton
-            if (corriendo == false) {
-                iniciarHilo = true;
-                corriendo = true;
-                pausar = false;
-
-                if (id == 1) {
-                    inciarHiloCronometro_1();
-                } else if (id == 2) {
-                    inciarHiloCronometro_2();
-                } else if (id == 3) {
-                    inciarHiloCronometro_3();
-                } else if (id == 4) {
-                    inciarHiloCronometro_4();
-                } else if (id == 5) {
-                    inciarHiloCronometro_5();
-                } else if (id == 6) {
-                    inciarHiloCronometro_6();
-                } else if (id == 7) {
-                    inciarHiloCronometro_7();
-                } else if (id == 8) {
-                    inciarHiloCronometro_8();
-                }
-            }
-
-            System.out.println(box_horas.getModel().getSelectedItem());
-
+        if (btn_on_off.isSelected() == true) {
             if (box_horas.getModel().getSelectedItem() == "Horas" || box_minutos.getModel().getSelectedItem() == "Minutos") {
                 btn_iniciar_pausar.setSelected(false);
                 var_btn_iniciar_pausar = false;
@@ -337,32 +315,182 @@ public class ListaDeClientes extends javax.swing.JFrame {
                 txt_iniciar_pausar.setText("Iniciar");
 
                 corriendo = false;
-                iniciarHilo = false;
+                switch (id) {
+                    case 1:
+                        iniciarHilo_1 = false;
+                        break;
+                    case 2:
+                        iniciarHilo_2 = false;
+                        break;
+                    case 3:
+                        iniciarHilo_3 = false;
+                        break;
+                    case 4:
+                        iniciarHilo_4 = false;
+                    case 5:
+                        iniciarHilo_5 = false;
+                        break;
+                    case 6:
+                        iniciarHilo_6 = false;
+                        break;
+                    case 7:
+                        iniciarHilo_7 = false;
+                        break;
+                    case 8:
+                        iniciarHilo_8 = false;
+
+                }
                 pausar = false;
 
                 JOptionPane.showMessageDialog(null, "Por favor ingrese el tiempo (horas y minutos)");
 
             } else {
-                System.out.println("Puede pasar");
+
+                if (box_clientes.getSelectedItem() == "Seleccionar cliente") {
+
+                    btn_iniciar_pausar.setSelected(false);
+                    var_btn_iniciar_pausar = false;
+                    btn_iniciar_pausar.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_iniciar_pausar.png")));
+                    txt_iniciar_pausar.setText("Iniciar");
+
+                    corriendo = false;
+                    switch (id) {
+                        case 1:
+                            iniciarHilo_1 = false;
+                            break;
+                        case 2:
+                            iniciarHilo_2 = false;
+                            break;
+                        case 3:
+                            iniciarHilo_3 = false;
+                            break;
+                        case 4:
+                            iniciarHilo_4 = false;
+                        case 5:
+                            iniciarHilo_5 = false;
+                            break;
+                        case 6:
+                            iniciarHilo_6 = false;
+                            break;
+                        case 7:
+                            iniciarHilo_7 = false;
+                            break;
+                        case 8:
+                            iniciarHilo_8 = false;
+                    }
+                    pausar = false;
+
+                    JOptionPane.showMessageDialog(null, "Por favor seleccione el cliente");
+
+                } else {
+                    System.out.println("Puede pasar");
+                    //Diseño del boton iniciar-pausar
+                    System.out.println("Propiedad del boton(selected):" + var_btn_iniciar_pausar);
+
+                    if (var_btn_iniciar_pausar == true) { //Si el botón iniciar pausar está encendido
+                        btn_iniciar_pausar.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_pausar.png")));
+                        txt_iniciar_pausar.setText("Pausar");
+
+                        //Funcionalidad del boton
+                        if (corriendo == false) {
+
+                            corriendo = true;
+                            switch (id) {
+                                case 1:
+                                    iniciarHilo_1 = true;
+                                    break;
+                                case 2:
+                                    iniciarHilo_2 = true;
+                                    break;
+                                case 3:
+                                    iniciarHilo_3 = true;
+                                    break;
+                                case 4:
+                                    iniciarHilo_4 = true;
+                                case 5:
+                                    iniciarHilo_5 = true;
+                                    break;
+                                case 6:
+                                    iniciarHilo_6 = true;
+                                    break;
+                                case 7:
+                                    iniciarHilo_7 = true;
+                                    break;
+                                case 8:
+                                    iniciarHilo_8 = true;
+
+                            }
+                            pausar = false;
+
+                            switch (id) {
+                                case 1:
+                                    iniciarHiloCronometro_1();
+                                    break;
+                                case 2:
+                                    iniciarHiloCronometro_2();
+                                    break;
+                                case 3:
+                                    iniciarHiloCronometro_3();
+                                    break;
+                                case 4:
+                                    iniciarHiloCronometro_4();
+                                    break;
+                                case 5:
+                                    iniciarHiloCronometro_5();
+                                    break;
+                                case 6:
+                                    iniciarHiloCronometro_6();
+                                    break;
+                                case 7:
+                                    iniciarHiloCronometro_7();
+                                    break;
+                                case 8:
+                                    iniciarHiloCronometro_8();
+                                    break;
+                            }
+                        }
+
+                    } else if (var_btn_iniciar_pausar == false) { //Si el botón iniciar pausar está apagado
+
+                        btn_iniciar_pausar.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_iniciar_pausar.png")));
+                        txt_iniciar_pausar.setText("Reaundar");
+
+                        //Funcionalidad del botón
+                        corriendo = false;
+                        switch (id) {
+                            case 1:
+                                iniciarHilo_1 = false;
+                                break;
+                            case 2:
+                                iniciarHilo_2 = false;
+                                break;
+                            case 3:
+                                iniciarHilo_3 = false;
+                                break;
+                            case 4:
+                                iniciarHilo_4 = false;
+                            case 5:
+                                iniciarHilo_5 = false;
+                                break;
+                            case 6:
+                                iniciarHilo_6 = false;
+                                break;
+                            case 7:
+                                iniciarHilo_7 = false;
+                                break;
+                            case 8:
+                                iniciarHilo_8 = false;
+                        }
+                        pausar = false;
+
+                        System.out.println("Propiedad del boton(selected):" + var_btn_iniciar_pausar);
+
+                    }
+                }
 
             }
+        } else {
 
-        } else if (var_btn_iniciar_pausar == false) { //Si el botón iniciar pausar está apagado
-            btn_iniciar_pausar.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_iniciar_pausar.png")));
-            txt_iniciar_pausar.setText("Reaundar");
-
-            //Funcionalidad del botón
-            corriendo = false;
-            iniciarHilo = false;
-            pausar = false;
-
-            System.out.println("Propiedad del boton(selected):" + var_btn_iniciar_pausar);
-
-        }
-
-        if (btn_on_off.getModel().isSelected() == false) {
-            btn_iniciar_pausar.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_iniciar_pausar.png")));
-            txt_iniciar_pausar.setText("Iniciar");
         }
 
     }
@@ -438,49 +566,49 @@ public class ListaDeClientes extends javax.swing.JFrame {
                     if (agregarTiempo_1.isShowing()) {
                         System.out.println("Está mostrado");
                     }
-                }else if(id == 2){
+                } else if (id == 2) {
                     agregarTiempo_2.setVisible(true);
                     agregarTiempo_2.agregarTextoTiempoAgregado(txt_tiempo_agregado, txt_tiempo_total);
                     agregarTiempo_2.asignarID(id);
                     if (agregarTiempo_2.isShowing()) {
                         System.out.println("Está mostrado");
                     }
-                }else if(id == 3){
+                } else if (id == 3) {
                     agregarTiempo_3.setVisible(true);
                     agregarTiempo_3.agregarTextoTiempoAgregado(txt_tiempo_agregado, txt_tiempo_total);
                     agregarTiempo_3.asignarID(id);
                     if (agregarTiempo_3.isShowing()) {
                         System.out.println("Está mostrado");
                     }
-                }else if(id == 4){
+                } else if (id == 4) {
                     agregarTiempo_4.setVisible(true);
                     agregarTiempo_4.agregarTextoTiempoAgregado(txt_tiempo_agregado, txt_tiempo_total);
                     agregarTiempo_4.asignarID(id);
                     if (agregarTiempo_4.isShowing()) {
                         System.out.println("Está mostrado");
                     }
-                }else if(id == 5){
+                } else if (id == 5) {
                     agregarTiempo_5.setVisible(true);
                     agregarTiempo_5.agregarTextoTiempoAgregado(txt_tiempo_agregado, txt_tiempo_total);
                     agregarTiempo_5.asignarID(id);
                     if (agregarTiempo_5.isShowing()) {
                         System.out.println("Está mostrado");
                     }
-                }else if(id == 6){
+                } else if (id == 6) {
                     agregarTiempo_6.setVisible(true);
                     agregarTiempo_6.agregarTextoTiempoAgregado(txt_tiempo_agregado, txt_tiempo_total);
                     agregarTiempo_6.asignarID(id);
                     if (agregarTiempo_6.isShowing()) {
                         System.out.println("Está mostrado");
                     }
-                }else if(id == 7){
+                } else if (id == 7) {
                     agregarTiempo_7.setVisible(true);
                     agregarTiempo_7.agregarTextoTiempoAgregado(txt_tiempo_agregado, txt_tiempo_total);
                     agregarTiempo_7.asignarID(id);
                     if (agregarTiempo_7.isShowing()) {
                         System.out.println("Está mostrado");
                     }
-                }else if(id == 8){
+                } else if (id == 8) {
                     agregarTiempo_8.setVisible(true);
                     agregarTiempo_8.agregarTextoTiempoAgregado(txt_tiempo_agregado, txt_tiempo_total);
                     agregarTiempo_8.asignarID(id);
@@ -490,6 +618,42 @@ public class ListaDeClientes extends javax.swing.JFrame {
                 }
 
             }
+        }
+    }
+
+    public void procesoBotonOn_Off(JToggleButton btn_on_off, JLabel contenedor, JComboBox box_clientes, JComboBox box_horas, JComboBox box_minutos, JLabel txt_ingresar_tiempo, JToggleButton btn_iniciar_pausar, JLabel txt_iniciar_pausar, JButton btn_parar, JLabel txt_parar, JLabel txt_H_M_S, JLabel txt_tiempo, JButton btn_agregar_tiempo, JLabel txt_agregar_tiempo, int hora, int minuto, int segundo) {
+        System.out.println("Selected: " + btn_on_off.getModel().isSelected());
+
+        if (btn_on_off.getModel().isSelected() == true) { //Si el boton está encendido
+
+            //Agregamos el icono de encendido y el contenedor encendido
+            btn_on_off.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_ON.png")));
+            contenedor.setIcon(new ImageIcon(getClass().getResource("/contenedores/Contenedor_05.png")));
+
+            //Habilitamos todos los componentes del grupo 1
+            habilitarComponentesPorGrupo(box_clientes, box_horas, box_minutos, txt_ingresar_tiempo, btn_iniciar_pausar, txt_iniciar_pausar, btn_parar, txt_parar, txt_H_M_S, txt_tiempo, btn_agregar_tiempo, txt_agregar_tiempo);
+
+        } else {    //Si el botón está apagado
+
+            //Agregamos el icono de apagado y el contenedor apagado
+            btn_on_off.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_OFF.png")));
+            contenedor.setIcon(new ImageIcon(getClass().getResource("/contenedores/Contenedor_06.png")));
+
+            //Deshabilitamos todos los componentes del grupo 1
+            deshabilitarComponentesPorGrupo(box_clientes, box_horas, box_minutos, txt_ingresar_tiempo, btn_iniciar_pausar, txt_iniciar_pausar, btn_parar, txt_parar, txt_H_M_S, txt_tiempo, btn_agregar_tiempo, txt_agregar_tiempo);
+        }
+
+        if (hora != 0 || minuto != 0 || segundo != 0) {
+
+            //Agregamos el icono de encendido y el contenedor encendido
+            btn_on_off.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_ON.png")));
+            contenedor.setIcon(new ImageIcon(getClass().getResource("/contenedores/Contenedor_05.png")));
+
+            //Habilitamos todos los componentes del grupo 1
+            habilitarComponentesPorGrupo(box_clientes, box_horas, box_minutos, txt_ingresar_tiempo, btn_iniciar_pausar, txt_iniciar_pausar, btn_parar, txt_parar, txt_H_M_S, txt_tiempo, btn_agregar_tiempo, txt_agregar_tiempo);
+
+            JOptionPane.showMessageDialog(null, "Hay una sesión corriendo");
+            btn_on_off.setSelected(true);
         }
     }
 
@@ -519,7 +683,7 @@ public class ListaDeClientes extends javax.swing.JFrame {
         txt_ingresar_tiempo_1 = new javax.swing.JLabel();
         btn_on_off_1 = new javax.swing.JToggleButton();
         txt_id_sesion_1 = new javax.swing.JLabel();
-        contenedor_01 = new javax.swing.JLabel();
+        contenedor_1 = new javax.swing.JLabel();
         txt_parar_2 = new javax.swing.JLabel();
         txt_iniciar_pausar_2 = new javax.swing.JLabel();
         txt_H_M_S_2 = new javax.swing.JLabel();
@@ -639,6 +803,7 @@ public class ListaDeClientes extends javax.swing.JFrame {
         btn_on_off_8 = new javax.swing.JToggleButton();
         txt_id_sesion_8 = new javax.swing.JLabel();
         contenedor_8 = new javax.swing.JLabel();
+        btn_recargar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -646,8 +811,8 @@ public class ListaDeClientes extends javax.swing.JFrame {
         fondo.setBackground(new java.awt.Color(239, 233, 233));
         fondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txt_fecha.setFont(new java.awt.Font("DejaVu Sans Light", 1, 14)); // NOI18N
-        txt_fecha.setForeground(new java.awt.Color(153, 153, 153));
+        txt_fecha.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
+        txt_fecha.setForeground(new java.awt.Color(102, 102, 102));
         fondo.add(txt_fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 200, 20));
 
         titulo_sistema.setFont(new java.awt.Font("Microsoft New Tai Lue", 1, 36)); // NOI18N
@@ -756,6 +921,11 @@ public class ListaDeClientes extends javax.swing.JFrame {
         box_horas_1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 0));
         box_horas_1.setFocusable(false);
         box_horas_1.setRequestFocusEnabled(false);
+        box_horas_1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                box_horas_1MouseClicked(evt);
+            }
+        });
         box_horas_1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 box_horas_1ActionPerformed(evt);
@@ -793,9 +963,9 @@ public class ListaDeClientes extends javax.swing.JFrame {
         txt_id_sesion_1.setText("1");
         jPanel2.add(txt_id_sesion_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 20, 30));
 
-        contenedor_01.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        contenedor_01.setIcon(new javax.swing.ImageIcon(getClass().getResource("/contenedores/Contenedor_06.png"))); // NOI18N
-        jPanel2.add(contenedor_01, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 135));
+        contenedor_1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        contenedor_1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/contenedores/Contenedor_06.png"))); // NOI18N
+        jPanel2.add(contenedor_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 135));
 
         txt_parar_2.setFont(new java.awt.Font("Microsoft New Tai Lue", 1, 15)); // NOI18N
         txt_parar_2.setForeground(new java.awt.Color(255, 255, 255));
@@ -853,6 +1023,9 @@ public class ListaDeClientes extends javax.swing.JFrame {
         btn_iniciar_pausar_2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_iniciar_pausar_2MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_iniciar_pausar_2MouseEntered(evt);
             }
         });
         jPanel2.add(btn_iniciar_pausar_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 180, 65, 60));
@@ -1231,6 +1404,9 @@ public class ListaDeClientes extends javax.swing.JFrame {
         btn_iniciar_pausar_5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_iniciar_pausar_5MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_iniciar_pausar_5MouseEntered(evt);
             }
         });
         jPanel2.add(btn_iniciar_pausar_5, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 640, 65, 60));
@@ -1683,6 +1859,14 @@ public class ListaDeClientes extends javax.swing.JFrame {
 
         fondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 870, 600));
 
+        btn_recargar.setText("Recargar");
+        btn_recargar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_recargarMouseClicked(evt);
+            }
+        });
+        fondo.add(btn_recargar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
+
         getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 1380));
         fondo.getAccessibleContext().setAccessibleName("");
 
@@ -1691,41 +1875,7 @@ public class ListaDeClientes extends javax.swing.JFrame {
 
     // Componentes del grupo 1
     private void btn_on_off_1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_on_off_1MouseClicked
-
-        System.out.println("Selected: " + btn_on_off_1.getModel().isSelected());
-
-        if (btn_on_off_1.getModel().isSelected() == true) { //Si el boton está encendido
-
-            //Agregamos el icono de encendido y el contenedor encendido
-            btn_on_off_1.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_ON.png")));
-            contenedor_01.setIcon(new ImageIcon(getClass().getResource("/contenedores/Contenedor_05.png")));
-
-            //Habilitamos todos los componentes del grupo 1
-            habilitarComponentesPorGrupo(box_clientes_1, box_horas_1, box_minutos_1, txt_ingresar_tiempo_1, btn_iniciar_pausar_1, txt_iniciar_pausar_1, btn_parar_1, txt_parar_1, txt_H_M_S_1, txt_tiempo_1, btn_agregar_tiempo_1, txt_agregar_tiempo_1);
-
-        } else {    //Si el botón está apagado
-
-            //Agregamos el icono de apagado y el contenedor apagado
-            btn_on_off_1.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_OFF.png")));
-            contenedor_01.setIcon(new ImageIcon(getClass().getResource("/contenedores/Contenedor_06.png")));
-
-            //Deshabilitamos todos los componentes del grupo 1
-            deshabilitarComponentesPorGrupo(box_clientes_1, box_horas_1, box_minutos_1, txt_ingresar_tiempo_1, btn_iniciar_pausar_1, txt_iniciar_pausar_1, btn_parar_1, txt_parar_1, txt_H_M_S_1, txt_tiempo_1, btn_agregar_tiempo_1, txt_agregar_tiempo_1);
-        }
-
-        if (hora_1 != 0 || minuto_1 != 0 || segundo_1 != 0) {
-
-            //Agregamos el icono de encendido y el contenedor encendido
-            btn_on_off_1.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_ON.png")));
-            contenedor_01.setIcon(new ImageIcon(getClass().getResource("/contenedores/Contenedor_05.png")));
-
-            //Habilitamos todos los componentes del grupo 1
-            habilitarComponentesPorGrupo(box_clientes_1, box_horas_1, box_minutos_1, txt_ingresar_tiempo_1, btn_iniciar_pausar_1, txt_iniciar_pausar_1, btn_parar_1, txt_parar_1, txt_H_M_S_1, txt_tiempo_1, btn_agregar_tiempo_1, txt_agregar_tiempo_1);
-
-            JOptionPane.showMessageDialog(null, "Hay una sesión corriendo");
-
-        }
-
+        procesoBotonOn_Off(btn_on_off_1, contenedor_1, box_clientes_1, box_horas_1, box_minutos_1, txt_ingresar_tiempo_1, btn_iniciar_pausar_1, txt_iniciar_pausar_1, btn_parar_1, txt_parar_1, txt_H_M_S_1, txt_tiempo_1, btn_agregar_tiempo_1, txt_agregar_tiempo_1, hora_1, minuto_1, segundo_1);
 
     }//GEN-LAST:event_btn_on_off_1MouseClicked
 
@@ -1763,62 +1913,10 @@ public class ListaDeClientes extends javax.swing.JFrame {
 
 
     private void btn_iniciar_pausar_1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_iniciar_pausar_1MouseClicked
-        System.out.println("Horas: " + box_horas_1.getModel().getSelectedItem() + " - Minutos: " + box_minutos_1.getModel().getSelectedItem());
-        //Diseño del boton iniciar-pausar
-        var_btn_iniciar_pausar_1 = btn_iniciar_pausar_1.getModel().isSelected();
-        System.out.println("Propiedad del boton(selected):" + var_btn_iniciar_pausar_1);
-
-        if (var_btn_iniciar_pausar_1 == true) { //Si el botón iniciar pausar está encendido
-            btn_iniciar_pausar_1.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_pausar.png")));
-            txt_iniciar_pausar_1.setText("Pausar");
-
-            //Funcionalidad del boton
-            if (corriendo_1 == false) {
-                iniciarHilo_1 = true;
-                corriendo_1 = true;
-                pausar_1 = false;
-                inciarHiloCronometro_1();
-            }
-
-            System.out.println(box_horas_1.getModel().getSelectedItem());
-
-            if (box_horas_1.getModel().getSelectedItem() == "Horas" || box_minutos_1.getModel().getSelectedItem() == "Minutos") {
-                btn_iniciar_pausar_1.setSelected(false);
-                var_btn_iniciar_pausar_1 = false;
-                btn_iniciar_pausar_1.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_iniciar_pausar.png")));
-                txt_iniciar_pausar_1.setText("Iniciar");
-
-                corriendo_1 = false;
-                iniciarHilo_1 = false;
-                pausar_1 = false;
-
-                JOptionPane.showMessageDialog(null, "Por favor ingrese el tiempo (horas y minutos)");
-
-            } else {
-                System.out.println("Puede pasar");
-
-            }
-
-        } else if (var_btn_iniciar_pausar_1 == false) { //Si el botón iniciar pausar está apagado
-            btn_iniciar_pausar_1.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_iniciar_pausar.png")));
-            txt_iniciar_pausar_1.setText("Reaundar");
-
-            //Funcionalidad del botón
-            corriendo_1 = false;
-            iniciarHilo_1 = false;
-            pausar_1 = false;
-
-            System.out.println("Propiedad del boton(selected):" + var_btn_iniciar_pausar_1);
-
-        }
-
-        if (btn_on_off_1.getModel().isSelected() == false) {
-            btn_iniciar_pausar_1.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_iniciar_pausar.png")));
-            txt_iniciar_pausar_1.setText("Iniciar");
-        }
+        procesoBotonIniciarPausar(1, box_clientes_1, box_horas_1, box_minutos_1, var_btn_iniciar_pausar_1, btn_iniciar_pausar_1, txt_iniciar_pausar_1, corriendo_1, pausar_1, btn_on_off_1);
     }//GEN-LAST:event_btn_iniciar_pausar_1MouseClicked
 
-    private void inciarHiloCronometro_1() {
+    private void iniciarHiloCronometro_1() {
         if (iniciarHilo_1 == true) {
             System.out.println("Inicia el hilo");
             Cronometro_1 miCronometro_1 = new Cronometro_1(txt_tiempo_1, btn_iniciar_pausar_1, txt_iniciar_pausar_1, box_horas_1, box_minutos_1, txt_tiempo_agregado_1, txt_tiempo_total_1);
@@ -1827,7 +1925,7 @@ public class ListaDeClientes extends javax.swing.JFrame {
 
     }
 
-    private void inciarHiloCronometro_2() {
+    private void iniciarHiloCronometro_2() {
         if (iniciarHilo_2 == true) {
             System.out.println("Inicia el hilo");
             Cronometro_2 miCronometro_2 = new Cronometro_2(txt_tiempo_2, btn_iniciar_pausar_2, txt_iniciar_pausar_2, box_horas_2, box_minutos_2, txt_tiempo_agregado_2, txt_tiempo_total_2);
@@ -1836,7 +1934,7 @@ public class ListaDeClientes extends javax.swing.JFrame {
 
     }
 
-    private void inciarHiloCronometro_3() {
+    private void iniciarHiloCronometro_3() {
         if (iniciarHilo_3 == true) {
             System.out.println("Inicia el hilo");
             Cronometro_3 miCronometro_3 = new Cronometro_3(txt_tiempo_3, btn_iniciar_pausar_3, txt_iniciar_pausar_3, box_horas_3, box_minutos_3, txt_tiempo_agregado_3, txt_tiempo_total_3);
@@ -1844,7 +1942,7 @@ public class ListaDeClientes extends javax.swing.JFrame {
         }
     }
 
-    private void inciarHiloCronometro_4() {
+    private void iniciarHiloCronometro_4() {
         if (iniciarHilo_4 == true) {
             System.out.println("Inicia el hilo");
             Cronometro_4 miCronometro_4 = new Cronometro_4(txt_tiempo_4, btn_iniciar_pausar_4, txt_iniciar_pausar_4, box_horas_4, box_minutos_4, txt_tiempo_agregado_4, txt_tiempo_total_4);
@@ -1852,7 +1950,7 @@ public class ListaDeClientes extends javax.swing.JFrame {
         }
     }
 
-    private void inciarHiloCronometro_5() {
+    private void iniciarHiloCronometro_5() {
         if (iniciarHilo_5 == true) {
             System.out.println("Inicia el hilo");
             Cronometro_5 miCronometro_5 = new Cronometro_5(txt_tiempo_5, btn_iniciar_pausar_5, txt_iniciar_pausar_5, box_horas_5, box_minutos_5, txt_tiempo_agregado_5, txt_tiempo_total_5);
@@ -1860,7 +1958,7 @@ public class ListaDeClientes extends javax.swing.JFrame {
         }
     }
 
-    private void inciarHiloCronometro_6() {
+    private void iniciarHiloCronometro_6() {
         if (iniciarHilo_6 == true) {
             System.out.println("Inicia el hilo");
             Cronometro_6 miCronometro_6 = new Cronometro_6(txt_tiempo_6, btn_iniciar_pausar_6, txt_iniciar_pausar_6, box_horas_6, box_minutos_6, txt_tiempo_agregado_6, txt_tiempo_total_6);
@@ -1868,7 +1966,7 @@ public class ListaDeClientes extends javax.swing.JFrame {
         }
     }
 
-    private void inciarHiloCronometro_7() {
+    private void iniciarHiloCronometro_7() {
         if (iniciarHilo_7 == true) {
             System.out.println("Inicia el hilo");
             Cronometro_7 miCronometro_7 = new Cronometro_7(txt_tiempo_7, btn_iniciar_pausar_7, txt_iniciar_pausar_7, box_horas_7, box_minutos_7, txt_tiempo_agregado_7, txt_tiempo_total_7);
@@ -1876,7 +1974,7 @@ public class ListaDeClientes extends javax.swing.JFrame {
         }
     }
 
-    private void inciarHiloCronometro_8() {
+    private void iniciarHiloCronometro_8() {
         if (iniciarHilo_8 == true) {
             System.out.println("Inicia el hilo");
             Cronometro_8 miCronometro_8 = new Cronometro_8(txt_tiempo_8, btn_iniciar_pausar_8, txt_iniciar_pausar_8, box_horas_8, box_minutos_8, txt_tiempo_agregado_8, txt_tiempo_total_8);
@@ -1886,34 +1984,11 @@ public class ListaDeClientes extends javax.swing.JFrame {
 
 
     private void btn_agregar_tiempo_1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_agregar_tiempo_1MouseClicked
-
-        if (btn_on_off_1.isSelected() == true) {
-            if (box_horas_1.getModel().getSelectedItem().equals("Horas") || box_minutos_1.getModel().getSelectedItem().equals("Minutos")) {
-                JOptionPane.showMessageDialog(null, "No se ha ingresado el tiempo");
-            } else {
-                agregarTiempo_1.setVisible(true);
-                agregarTiempo_1.agregarTextoTiempoAgregado(txt_tiempo_agregado_1, txt_tiempo_total_1);
-                agregarTiempo_1.asignarID(1);
-                if (agregarTiempo_1.isShowing()) {
-                    System.out.println("Está mostrado");
-                }
-            }
-        }
-
+        procesoBotonAgregarTiempo(btn_on_off_1, box_horas_1, box_minutos_1, 1, txt_tiempo_agregado_1, txt_tiempo_total_1);
     }//GEN-LAST:event_btn_agregar_tiempo_1MouseClicked
 
     private void btn_parar_1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_parar_1MouseClicked
-
-        if (hora_1 != 0 || minuto_1 != 0 || segundo_1 != 0) {
-            AlertaFinalizarEjecución finalizarEjecucion_1 = new AlertaFinalizarEjecución();
-
-            finalizarEjecucion_1.otorgarTextoAEtiqueta(txt_tiempo_1, btn_iniciar_pausar_1, txt_iniciar_pausar_1, box_horas_1, box_minutos_1, txt_tiempo_agregado_1, txt_tiempo_total_1);
-            finalizarEjecucion_1.otorgarID(1);
-            finalizarEjecucion_1.setVisible(true);
-        } else {
-            System.out.println("Hora, minuto, segundo == 0");
-        }
-
+        procesoBotonParar(hora_1, minuto_1, segundo_1, 1, txt_tiempo_1, btn_iniciar_pausar_1, txt_iniciar_pausar_1, box_horas_1, box_minutos_1, txt_tiempo_agregado_1, txt_tiempo_total_1);
     }//GEN-LAST:event_btn_parar_1MouseClicked
 
     private void box_horas_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_horas_1ActionPerformed
@@ -1962,100 +2037,30 @@ public class ListaDeClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_box_minutos_1ActionPerformed
 
     private void box_clientes_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_clientes_1ActionPerformed
-
+        item_clientes_1 = (String) box_clientes_1.getModel().getSelectedItem();
+        System.out.println(item_clientes_1);
     }//GEN-LAST:event_box_clientes_1ActionPerformed
 
     private void btn_agregar_cliente_nuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_agregar_cliente_nuevoMouseClicked
         agregarCliente1.setVisible(true);
+
         if (agregarCliente1.isShowing()) {
             System.out.println("Está mostrado");
         }
+
     }//GEN-LAST:event_btn_agregar_cliente_nuevoMouseClicked
 
     // Componentes del grupo 2    
     private void btn_agregar_tiempo_2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_agregar_tiempo_2MouseClicked
-        if (btn_on_off_2.isSelected() == true) {
-            if (box_horas_2.getModel().getSelectedItem().equals("Horas") || box_minutos_2.getModel().getSelectedItem().equals("Minutos")) {
-                JOptionPane.showMessageDialog(null, "No se ha ingresado el tiempo");
-            } else {
-                agregarTiempo_2.setVisible(true);
-                agregarTiempo_2.agregarTextoTiempoAgregado(txt_tiempo_agregado_2, txt_tiempo_total_2);
-                agregarTiempo_2.asignarID(2);
-                if (agregarTiempo_2.isShowing()) {
-                    System.out.println("Está mostrado");
-                }
-            }
-        }
-
+        procesoBotonAgregarTiempo(btn_on_off_2, box_horas_2, box_minutos_2, 2, txt_tiempo_agregado_2, txt_tiempo_total_2);
     }//GEN-LAST:event_btn_agregar_tiempo_2MouseClicked
 
     private void btn_parar_2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_parar_2MouseClicked
-        if (hora_2 != 0 || minuto_2 != 0 || segundo_2 != 0) {
-            AlertaFinalizarEjecución finalizarEjecucion_2 = new AlertaFinalizarEjecución();
-
-            finalizarEjecucion_2.otorgarTextoAEtiqueta(txt_tiempo_2, btn_iniciar_pausar_2, txt_iniciar_pausar_2, box_horas_2, box_minutos_2, txt_tiempo_agregado_2, txt_tiempo_total_2);
-            finalizarEjecucion_2.otorgarID(2);
-            finalizarEjecucion_2.setVisible(true);
-        } else {
-            System.out.println("Hora, minuto, segundo == 0");
-        }
-
+        procesoBotonParar(hora_2, minuto_2, segundo_2, 2, txt_tiempo_2, btn_iniciar_pausar_2, txt_iniciar_pausar_2, box_horas_2, box_minutos_2, txt_tiempo_agregado_2, txt_tiempo_total_2);
     }//GEN-LAST:event_btn_parar_2MouseClicked
 
     private void btn_iniciar_pausar_2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_iniciar_pausar_2MouseClicked
-        System.out.println("Horas: " + box_horas_2.getModel().getSelectedItem() + " - Minutos: " + box_minutos_2.getModel().getSelectedItem());
-        //Diseño del boton iniciar-pausar
-        var_btn_iniciar_pausar_2 = btn_iniciar_pausar_2.getModel().isSelected();
-        System.out.println("Propiedad del boton(selected):" + var_btn_iniciar_pausar_2);
-
-        if (var_btn_iniciar_pausar_2 == true) { //Si el botón iniciar pausar está encendido
-            btn_iniciar_pausar_2.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_pausar.png")));
-            txt_iniciar_pausar_2.setText("Pausar");
-
-            //Funcionalidad del boton
-            if (corriendo_2 == false) {
-                iniciarHilo_2 = true;
-                corriendo_2 = true;
-                pausar_2 = false;
-                inciarHiloCronometro_2();
-            }
-
-            System.out.println(box_horas_2.getModel().getSelectedItem());
-
-            if (box_horas_2.getModel().getSelectedItem() == "Horas" || box_minutos_2.getModel().getSelectedItem() == "Minutos") {
-                btn_iniciar_pausar_2.setSelected(false);
-                var_btn_iniciar_pausar_2 = false;
-                btn_iniciar_pausar_2.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_iniciar_pausar.png")));
-                txt_iniciar_pausar_2.setText("Iniciar");
-
-                corriendo_2 = false;
-                iniciarHilo_2 = false;
-                pausar_2 = false;
-
-                JOptionPane.showMessageDialog(null, "Por favor ingrese el tiempo (horas y minutos)");
-
-            } else {
-                System.out.println("Puede pasar");
-
-            }
-
-        } else if (var_btn_iniciar_pausar_2 == false) { //Si el botón iniciar pausar está apagado
-            btn_iniciar_pausar_2.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_iniciar_pausar.png")));
-            txt_iniciar_pausar_2.setText("Reaundar");
-
-            //Funcionalidad del botón
-            corriendo_2 = false;
-            iniciarHilo_2 = false;
-            pausar_2 = false;
-
-            System.out.println("Propiedad del boton(selected):" + var_btn_iniciar_pausar_2);
-
-        }
-
-        if (btn_on_off_2.getModel().isSelected() == false) {
-            btn_iniciar_pausar_2.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_iniciar_pausar.png")));
-            txt_iniciar_pausar_2.setText("Iniciar");
-        }
+        procesoBotonIniciarPausar(2, box_clientes_2, box_horas_2, box_minutos_2, var_btn_iniciar_pausar_2, btn_iniciar_pausar_2, txt_iniciar_pausar_2, corriendo_2, pausar_2, btn_on_off_2);
     }//GEN-LAST:event_btn_iniciar_pausar_2MouseClicked
 
     private void box_minutos_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_minutos_2ActionPerformed
@@ -2103,115 +2108,25 @@ public class ListaDeClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_box_horas_2ActionPerformed
 
     private void box_clientes_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_clientes_2ActionPerformed
-        // TODO add your handling code here:
+        item_clientes_2 = (String) box_clientes_2.getModel().getSelectedItem();
+        System.out.println(item_clientes_2);
     }//GEN-LAST:event_box_clientes_2ActionPerformed
 
     private void btn_on_off_2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_on_off_2MouseClicked
-        System.out.println("Selected: " + btn_on_off_1.getModel().isSelected());
-
-        if (btn_on_off_2.getModel().isSelected() == true) { //Si el boton está encendido
-
-            //Agregamos el icono de encendido y el contenedor encendido
-            btn_on_off_2.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_ON.png")));
-            contenedor_2.setIcon(new ImageIcon(getClass().getResource("/contenedores/Contenedor_05.png")));
-
-            //Habilitamos todos los componentes del grupo 1
-            habilitarComponentesPorGrupo(box_clientes_2, box_horas_2, box_minutos_2, txt_ingresar_tiempo_2, btn_iniciar_pausar_2, txt_iniciar_pausar_2, btn_parar_2, txt_parar_2, txt_H_M_S_2, txt_tiempo_2, btn_agregar_tiempo_2, txt_agregar_tiempo_2);
-
-        } else {    //Si el botón está apagado
-
-            //Agregamos el icono de apagado y el contenedor apagado
-            btn_on_off_2.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_OFF.png")));
-            contenedor_2.setIcon(new ImageIcon(getClass().getResource("/contenedores/Contenedor_06.png")));
-
-            //Deshabilitamos todos los componentes del grupo 1
-            deshabilitarComponentesPorGrupo(box_clientes_2, box_horas_2, box_minutos_2, txt_ingresar_tiempo_2, btn_iniciar_pausar_2, txt_iniciar_pausar_2, btn_parar_2, txt_parar_2, txt_H_M_S_2, txt_tiempo_2, btn_agregar_tiempo_2, txt_agregar_tiempo_2);
-        }
+        procesoBotonOn_Off(btn_on_off_2, contenedor_2, box_clientes_2, box_horas_2, box_minutos_2, txt_ingresar_tiempo_2, btn_iniciar_pausar_2, txt_iniciar_pausar_2, btn_parar_2, txt_parar_2, txt_H_M_S_2, txt_tiempo_2, btn_agregar_tiempo_2, txt_agregar_tiempo_2, hora_2, minuto_2, segundo_2);
     }//GEN-LAST:event_btn_on_off_2MouseClicked
 
     // Componentes del grupo 3
     private void btn_agregar_tiempo_3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_agregar_tiempo_3MouseClicked
-        if (btn_on_off_3.isSelected() == true) {
-            if (box_horas_3.getModel().getSelectedItem().equals("Horas") || box_minutos_3.getModel().getSelectedItem().equals("Minutos")) {
-                JOptionPane.showMessageDialog(null, "No se ha ingresado el tiempo");
-            } else {
-                agregarTiempo_3.setVisible(true);
-                agregarTiempo_3.agregarTextoTiempoAgregado(txt_tiempo_agregado_3, txt_tiempo_total_3);
-                agregarTiempo_3.asignarID(3);
-                if (agregarTiempo_3.isShowing()) {
-                    System.out.println("Está mostrado");
-                }
-            }
-        }
-
+        procesoBotonAgregarTiempo(btn_on_off_3, box_horas_3, box_minutos_3, 3, txt_tiempo_agregado_3, txt_tiempo_total_3);
     }//GEN-LAST:event_btn_agregar_tiempo_3MouseClicked
 
     private void btn_parar_3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_parar_3MouseClicked
-        if (hora_3 != 0 || minuto_3 != 0 || segundo_3 != 0) {
-            AlertaFinalizarEjecución finalizarEjecucion_3 = new AlertaFinalizarEjecución();
-
-            finalizarEjecucion_3.otorgarTextoAEtiqueta(txt_tiempo_3, btn_iniciar_pausar_3, txt_iniciar_pausar_3, box_horas_3, box_minutos_3, txt_tiempo_agregado_3, txt_tiempo_total_3);
-            finalizarEjecucion_3.otorgarID(3);
-            finalizarEjecucion_3.setVisible(true);
-        } else {
-            System.out.println("Hora, minuto, segundo == 0");
-        }
+        procesoBotonParar(hora_3, minuto_3, segundo_3, 3, txt_tiempo_3, btn_iniciar_pausar_3, txt_iniciar_pausar_3, box_horas_3, box_minutos_3, txt_tiempo_agregado_3, txt_tiempo_total_3);
     }//GEN-LAST:event_btn_parar_3MouseClicked
 
     private void btn_iniciar_pausar_3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_iniciar_pausar_3MouseClicked
-        System.out.println("Horas: " + box_horas_3.getModel().getSelectedItem() + " - Minutos: " + box_minutos_3.getModel().getSelectedItem());
-        //Diseño del boton iniciar-pausar
-        var_btn_iniciar_pausar_3 = btn_iniciar_pausar_3.getModel().isSelected();
-        System.out.println("Propiedad del boton(selected):" + var_btn_iniciar_pausar_3);
-
-        if (var_btn_iniciar_pausar_3 == true) { //Si el botón iniciar pausar está encendido
-            btn_iniciar_pausar_3.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_pausar.png")));
-            txt_iniciar_pausar_3.setText("Pausar");
-
-            //Funcionalidad del boton
-            if (corriendo_3 == false) {
-                iniciarHilo_3 = true;
-                corriendo_3 = true;
-                pausar_3 = false;
-                inciarHiloCronometro_3();
-            }
-
-            System.out.println(box_horas_3.getModel().getSelectedItem());
-
-            if (box_horas_3.getModel().getSelectedItem() == "Horas" || box_minutos_3.getModel().getSelectedItem() == "Minutos") {
-                btn_iniciar_pausar_3.setSelected(false);
-                var_btn_iniciar_pausar_3 = false;
-                btn_iniciar_pausar_3.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_iniciar_pausar.png")));
-                txt_iniciar_pausar_3.setText("Iniciar");
-
-                corriendo_3 = false;
-                iniciarHilo_3 = false;
-                pausar_3 = false;
-
-                JOptionPane.showMessageDialog(null, "Por favor ingrese el tiempo (horas y minutos)");
-
-            } else {
-                System.out.println("Puede pasar");
-
-            }
-
-        } else if (var_btn_iniciar_pausar_3 == false) { //Si el botón iniciar pausar está apagado
-            btn_iniciar_pausar_3.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_iniciar_pausar.png")));
-            txt_iniciar_pausar_3.setText("Reaundar");
-
-            //Funcionalidad del botón
-            corriendo_3 = false;
-            iniciarHilo_3 = false;
-            pausar_3 = false;
-
-            System.out.println("Propiedad del boton(selected):" + var_btn_iniciar_pausar_3);
-
-        }
-
-        if (btn_on_off_3.getModel().isSelected() == false) {
-            btn_iniciar_pausar_3.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_iniciar_pausar.png")));
-            txt_iniciar_pausar_3.setText("Iniciar");
-        }
+        procesoBotonIniciarPausar(3, box_clientes_3, box_horas_3, box_minutos_3, var_btn_iniciar_pausar_3, btn_iniciar_pausar_3, txt_iniciar_pausar_3, corriendo_3, pausar_3, btn_on_off_3);
     }//GEN-LAST:event_btn_iniciar_pausar_3MouseClicked
 
     private void box_minutos_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_minutos_3ActionPerformed
@@ -2259,116 +2174,25 @@ public class ListaDeClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_box_horas_3ActionPerformed
 
     private void box_clientes_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_clientes_3ActionPerformed
-        // TODO add your handling code here:
+        item_clientes_3 = (String) box_clientes_3.getModel().getSelectedItem();
+        System.out.println(item_clientes_3);
     }//GEN-LAST:event_box_clientes_3ActionPerformed
 
     private void btn_on_off_3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_on_off_3MouseClicked
-        System.out.println("Selected: " + btn_on_off_3.getModel().isSelected());
-
-        if (btn_on_off_3.getModel().isSelected() == true) { //Si el boton está encendido
-
-            //Agregamos el icono de encendido y el contenedor encendido
-            btn_on_off_3.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_ON.png")));
-            contenedor_3.setIcon(new ImageIcon(getClass().getResource("/contenedores/Contenedor_05.png")));
-
-            //Habilitamos todos los componentes del grupo 1
-            habilitarComponentesPorGrupo(box_clientes_3, box_horas_3, box_minutos_3, txt_ingresar_tiempo_3, btn_iniciar_pausar_3, txt_iniciar_pausar_3, btn_parar_3, txt_parar_3, txt_H_M_S_3, txt_tiempo_3, btn_agregar_tiempo_3, txt_agregar_tiempo_3);
-
-        } else {    //Si el botón está apagado
-            //Agregamos el icono de apagado y el contenedor apagado
-            btn_on_off_3.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_OFF.png")));
-            contenedor_3.setIcon(new ImageIcon(getClass().getResource("/contenedores/Contenedor_06.png")));
-
-            //Deshabilitamos todos los componentes del grupo 1
-            deshabilitarComponentesPorGrupo(box_clientes_3, box_horas_3, box_minutos_3, txt_ingresar_tiempo_3, btn_iniciar_pausar_3, txt_iniciar_pausar_3, btn_parar_3, txt_parar_3, txt_H_M_S_3, txt_tiempo_3, btn_agregar_tiempo_3, txt_agregar_tiempo_3);
-        }
+        procesoBotonOn_Off(btn_on_off_3, contenedor_3, box_clientes_3, box_horas_3, box_minutos_3, txt_ingresar_tiempo_3, btn_iniciar_pausar_3, txt_iniciar_pausar_3, btn_parar_3, txt_parar_3, txt_H_M_S_3, txt_tiempo_3, btn_agregar_tiempo_3, txt_agregar_tiempo_3, hora_3, minuto_3, segundo_3);
     }//GEN-LAST:event_btn_on_off_3MouseClicked
 
     // Componentes del grupo 4
     private void btn_agregar_tiempo_4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_agregar_tiempo_4MouseClicked
-        if (btn_on_off_4.isSelected() == true) {
-            if (box_horas_4.getModel().getSelectedItem().equals("Horas") || box_minutos_4.getModel().getSelectedItem().equals("Minutos")) {
-                JOptionPane.showMessageDialog(null, "No se ha ingresado el tiempo");
-            } else {
-                agregarTiempo_4.setVisible(true);
-                agregarTiempo_4.agregarTextoTiempoAgregado(txt_tiempo_agregado_4, txt_tiempo_total_4);
-                agregarTiempo_4.asignarID(4);
-                if (agregarTiempo_4.isShowing()) {
-                    System.out.println("Está mostrado");
-                }
-            }
-        }
-
+        procesoBotonAgregarTiempo(btn_on_off_4, box_horas_4, box_minutos_4, 4, txt_tiempo_agregado_4, txt_tiempo_total_4);
     }//GEN-LAST:event_btn_agregar_tiempo_4MouseClicked
 
     private void btn_parar_4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_parar_4MouseClicked
-        if (hora_4 != 0 || minuto_4 != 0 || segundo_4 != 0) {
-            AlertaFinalizarEjecución finalizarEjecucion_4 = new AlertaFinalizarEjecución();
-
-            finalizarEjecucion_4.otorgarTextoAEtiqueta(txt_tiempo_4, btn_iniciar_pausar_4, txt_iniciar_pausar_4, box_horas_4, box_minutos_4, txt_tiempo_agregado_4, txt_tiempo_total_4);
-            finalizarEjecucion_4.otorgarID(4);
-            finalizarEjecucion_4.setVisible(true);
-        } else {
-            System.out.println("Hora, minuto, segundo == 0");
-        }
-
+        procesoBotonParar(hora_4, minuto_4, segundo_4, 4, txt_tiempo_4, btn_iniciar_pausar_4, txt_iniciar_pausar_4, box_horas_4, box_minutos_4, txt_tiempo_agregado_4, txt_tiempo_total_4);
     }//GEN-LAST:event_btn_parar_4MouseClicked
 
     private void btn_iniciar_pausar_4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_iniciar_pausar_4MouseClicked
-        System.out.println("Horas: " + box_horas_4.getModel().getSelectedItem() + " - Minutos: " + box_minutos_4.getModel().getSelectedItem());
-        //Diseño del boton iniciar-pausar
-        var_btn_iniciar_pausar_4 = btn_iniciar_pausar_4.getModel().isSelected();
-        System.out.println("Propiedad del boton(selected):" + var_btn_iniciar_pausar_4);
-
-        if (var_btn_iniciar_pausar_4 == true) { //Si el botón iniciar pausar está encendido
-            btn_iniciar_pausar_4.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_pausar.png")));
-            txt_iniciar_pausar_4.setText("Pausar");
-
-            //Funcionalidad del boton
-            if (corriendo_4 == false) {
-                iniciarHilo_4 = true;
-                corriendo_4 = true;
-                pausar_4 = false;
-                inciarHiloCronometro_4();
-            }
-
-            System.out.println(box_horas_4.getModel().getSelectedItem());
-
-            if (box_horas_4.getModel().getSelectedItem() == "Horas" || box_minutos_4.getModel().getSelectedItem() == "Minutos") {
-                btn_iniciar_pausar_4.setSelected(false);
-                var_btn_iniciar_pausar_4 = false;
-                btn_iniciar_pausar_4.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_iniciar_pausar.png")));
-                txt_iniciar_pausar_4.setText("Iniciar");
-
-                corriendo_4 = false;
-                iniciarHilo_4 = false;
-                pausar_4 = false;
-
-                JOptionPane.showMessageDialog(null, "Por favor ingrese el tiempo (horas y minutos)");
-
-            } else {
-                System.out.println("Puede pasar");
-
-            }
-
-        } else if (var_btn_iniciar_pausar_4 == false) { //Si el botón iniciar pausar está apagado
-            btn_iniciar_pausar_4.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_iniciar_pausar.png")));
-            txt_iniciar_pausar_4.setText("Reaundar");
-
-            //Funcionalidad del botón
-            corriendo_4 = false;
-            iniciarHilo_4 = false;
-            pausar_4 = false;
-
-            System.out.println("Propiedad del boton(selected):" + var_btn_iniciar_pausar_4);
-
-        }
-
-        if (btn_on_off_4.getModel().isSelected() == false) {
-            btn_iniciar_pausar_4.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_iniciar_pausar.png")));
-            txt_iniciar_pausar_4.setText("Iniciar");
-        }
-
+        procesoBotonIniciarPausar(4, box_clientes_4, box_horas_4, box_minutos_4, var_btn_iniciar_pausar_4, btn_iniciar_pausar_4, txt_iniciar_pausar_4, corriendo_4, pausar_4, btn_on_off_4);
     }//GEN-LAST:event_btn_iniciar_pausar_4MouseClicked
 
     private void box_minutos_4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_minutos_4ActionPerformed
@@ -2416,117 +2240,24 @@ public class ListaDeClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_box_horas_4ActionPerformed
 
     private void box_clientes_4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_clientes_4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_box_clientes_4ActionPerformed
+        item_clientes_4 = (String) box_clientes_4.getModel().getSelectedItem();
+        System.out.println(item_clientes_4);    }//GEN-LAST:event_box_clientes_4ActionPerformed
 
     private void btn_on_off_4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_on_off_4MouseClicked
-        System.out.println("Selected: " + btn_on_off_4.getModel().isSelected());
-
-        if (btn_on_off_4.getModel().isSelected() == true) { //Si el boton está encendido
-
-            //Agregamos el icono de encendido y el contenedor encendido
-            btn_on_off_4.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_ON.png")));
-            contenedor_4.setIcon(new ImageIcon(getClass().getResource("/contenedores/Contenedor_05.png")));
-
-            //Habilitamos todos los componentes del grupo 1
-            habilitarComponentesPorGrupo(box_clientes_4, box_horas_4, box_minutos_4, txt_ingresar_tiempo_4, btn_iniciar_pausar_4, txt_iniciar_pausar_4, btn_parar_4, txt_parar_4, txt_H_M_S_4, txt_tiempo_4, btn_agregar_tiempo_4, txt_agregar_tiempo_4);
-
-        } else {    //Si el botón está apagado
-
-            //Agregamos el icono de apagado y el contenedor apagado
-            btn_on_off_4.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_OFF.png")));
-            contenedor_4.setIcon(new ImageIcon(getClass().getResource("/contenedores/Contenedor_06.png")));
-
-            //Deshabilitamos todos los componentes del grupo 1
-            deshabilitarComponentesPorGrupo(box_clientes_4, box_horas_4, box_minutos_4, txt_ingresar_tiempo_4, btn_iniciar_pausar_4, txt_iniciar_pausar_4, btn_parar_4, txt_parar_4, txt_H_M_S_4, txt_tiempo_4, btn_agregar_tiempo_4, txt_agregar_tiempo_4);
-        }
+        procesoBotonOn_Off(btn_on_off_4, contenedor_4, box_clientes_4, box_horas_4, box_minutos_4, txt_ingresar_tiempo_4, btn_iniciar_pausar_4, txt_iniciar_pausar_4, btn_parar_4, txt_parar_4, txt_H_M_S_4, txt_tiempo_4, btn_agregar_tiempo_4, txt_agregar_tiempo_4, hora_4, minuto_4, segundo_4);
     }//GEN-LAST:event_btn_on_off_4MouseClicked
 
     // Componentes del grupo 5
     private void btn_agregar_tiempo_5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_agregar_tiempo_5MouseClicked
-        if (btn_on_off_5.isSelected() == true) {
-            if (box_horas_5.getModel().getSelectedItem().equals("Horas") || box_minutos_5.getModel().getSelectedItem().equals("Minutos")) {
-                JOptionPane.showMessageDialog(null, "No se ha ingresado el tiempo");
-            } else {
-                agregarTiempo_5.setVisible(true);
-                agregarTiempo_5.agregarTextoTiempoAgregado(txt_tiempo_agregado_5, txt_tiempo_total_5);
-                agregarTiempo_5.asignarID(5);
-                if (agregarTiempo_5.isShowing()) {
-                    System.out.println("Está mostrado");
-                }
-            }
-        }
-
+        procesoBotonAgregarTiempo(btn_on_off_5, box_horas_5, box_minutos_5, 5, txt_tiempo_agregado_5, txt_tiempo_total_5);
     }//GEN-LAST:event_btn_agregar_tiempo_5MouseClicked
 
     private void btn_parar_5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_parar_5MouseClicked
-        if (hora_5 != 0 || minuto_5 != 0 || segundo_5 != 0) {
-            AlertaFinalizarEjecución finalizarEjecucion_5 = new AlertaFinalizarEjecución();
-
-            finalizarEjecucion_5.otorgarTextoAEtiqueta(txt_tiempo_5, btn_iniciar_pausar_5, txt_iniciar_pausar_5, box_horas_5, box_minutos_5, txt_tiempo_agregado_5, txt_tiempo_total_5);
-            finalizarEjecucion_5.otorgarID(5);
-            finalizarEjecucion_5.setVisible(true);
-        } else {
-            System.out.println("Hora, minuto, segundo == 0");
-        }
-
+        procesoBotonParar(hora_5, minuto_5, segundo_5, 5, txt_tiempo_5, btn_iniciar_pausar_5, txt_iniciar_pausar_5, box_horas_5, box_minutos_5, txt_tiempo_agregado_5, txt_tiempo_total_5);
     }//GEN-LAST:event_btn_parar_5MouseClicked
 
     private void btn_iniciar_pausar_5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_iniciar_pausar_5MouseClicked
-        System.out.println("Horas: " + box_horas_5.getModel().getSelectedItem() + " - Minutos: " + box_minutos_5.getModel().getSelectedItem());
-        //Diseño del boton iniciar-pausar
-        var_btn_iniciar_pausar_5 = btn_iniciar_pausar_5.getModel().isSelected();
-        System.out.println("Propiedad del boton(selected):" + var_btn_iniciar_pausar_5);
-
-        if (var_btn_iniciar_pausar_5 == true) { //Si el botón iniciar pausar está encendido
-            btn_iniciar_pausar_5.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_pausar.png")));
-            txt_iniciar_pausar_5.setText("Pausar");
-
-            //Funcionalidad del boton
-            if (corriendo_5 == false) {
-                iniciarHilo_5 = true;
-                corriendo_5 = true;
-                pausar_5 = false;
-                inciarHiloCronometro_5();
-            }
-
-            System.out.println(box_horas_5.getModel().getSelectedItem());
-
-            if (box_horas_5.getModel().getSelectedItem() == "Horas" || box_minutos_5.getModel().getSelectedItem() == "Minutos") {
-                btn_iniciar_pausar_5.setSelected(false);
-                var_btn_iniciar_pausar_5 = false;
-                btn_iniciar_pausar_5.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_iniciar_pausar.png")));
-                txt_iniciar_pausar_5.setText("Iniciar");
-
-                corriendo_5 = false;
-                iniciarHilo_5 = false;
-                pausar_5 = false;
-
-                JOptionPane.showMessageDialog(null, "Por favor ingrese el tiempo (horas y minutos)");
-
-            } else {
-                System.out.println("Puede pasar");
-
-            }
-
-        } else if (var_btn_iniciar_pausar_5 == false) { //Si el botón iniciar pausar está apagado
-            btn_iniciar_pausar_5.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_iniciar_pausar.png")));
-            txt_iniciar_pausar_5.setText("Reaundar");
-
-            //Funcionalidad del botón
-            corriendo_5 = false;
-            iniciarHilo_5 = false;
-            pausar_5 = false;
-
-            System.out.println("Propiedad del boton(selected):" + var_btn_iniciar_pausar_5);
-
-        }
-
-        if (btn_on_off_5.getModel().isSelected() == false) {
-            btn_iniciar_pausar_5.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_iniciar_pausar.png")));
-            txt_iniciar_pausar_5.setText("Iniciar");
-        }
-
+        procesoBotonIniciarPausar(5, box_clientes_5, box_horas_5, box_minutos_5, var_btn_iniciar_pausar_5, btn_iniciar_pausar_5, txt_iniciar_pausar_5, corriendo_5, pausar_5, btn_on_off_5);
     }//GEN-LAST:event_btn_iniciar_pausar_5MouseClicked
 
     private void box_minutos_5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_minutos_5ActionPerformed
@@ -2574,116 +2305,26 @@ public class ListaDeClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_box_horas_5ActionPerformed
 
     private void box_clientes_5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_clientes_5ActionPerformed
-        // TODO add your handling code here:
+        item_clientes_5 = (String) box_clientes_5.getModel().getSelectedItem();
+        System.out.println(item_clientes_5);
     }//GEN-LAST:event_box_clientes_5ActionPerformed
 
     private void btn_on_off_5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_on_off_5MouseClicked
-        System.out.println("Selected: " + btn_on_off_5.getModel().isSelected());
-
-        if (btn_on_off_5.getModel().isSelected() == true) { //Si el boton está encendido
-
-            //Agregamos el icono de encendido y el contenedor encendido
-            btn_on_off_5.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_ON.png")));
-            contenedor_5.setIcon(new ImageIcon(getClass().getResource("/contenedores/Contenedor_05.png")));
-
-            //Habilitamos todos los componentes del grupo 1
-            habilitarComponentesPorGrupo(box_clientes_5, box_horas_5, box_minutos_5, txt_ingresar_tiempo_5, btn_iniciar_pausar_5, txt_iniciar_pausar_5, btn_parar_5, txt_parar_5, txt_H_M_S_5, txt_tiempo_5, btn_agregar_tiempo_5, txt_agregar_tiempo_5);
-
-        } else {    //Si el botón está apagado
-
-            //Agregamos el icono de apagado y el contenedor apagado
-            btn_on_off_5.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_OFF.png")));
-            contenedor_5.setIcon(new ImageIcon(getClass().getResource("/contenedores/Contenedor_06.png")));
-
-            //Deshabilitamos todos los componentes del grupo 1
-            deshabilitarComponentesPorGrupo(box_clientes_5, box_horas_5, box_minutos_5, txt_ingresar_tiempo_5, btn_iniciar_pausar_5, txt_iniciar_pausar_5, btn_parar_5, txt_parar_5, txt_H_M_S_5, txt_tiempo_5, btn_agregar_tiempo_5, txt_agregar_tiempo_5);
-        }
+        procesoBotonOn_Off(btn_on_off_5, contenedor_5, box_clientes_5, box_horas_5, box_minutos_5, txt_ingresar_tiempo_5, btn_iniciar_pausar_5, txt_iniciar_pausar_5, btn_parar_5, txt_parar_5, txt_H_M_S_5, txt_tiempo_5, btn_agregar_tiempo_5, txt_agregar_tiempo_5, hora_5, minuto_5, segundo_5);
     }//GEN-LAST:event_btn_on_off_5MouseClicked
 
     //Componentes del grupo 6
 
     private void btn_agregar_tiempo_6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_agregar_tiempo_6MouseClicked
-        if (btn_on_off_6.isSelected() == true) {
-            if (box_horas_6.getModel().getSelectedItem().equals("Horas") || box_minutos_6.getModel().getSelectedItem().equals("Minutos")) {
-                JOptionPane.showMessageDialog(null, "No se ha ingresado el tiempo");
-            } else {
-                agregarTiempo_6.setVisible(true);
-                agregarTiempo_6.agregarTextoTiempoAgregado(txt_tiempo_agregado_6, txt_tiempo_total_6);
-                agregarTiempo_6.asignarID(6);
-                if (agregarTiempo_6.isShowing()) {
-                    System.out.println("Está mostrado");
-                }
-            }
-        }
+        procesoBotonAgregarTiempo(btn_on_off_6, box_horas_6, box_minutos_6, 6, txt_tiempo_agregado_6, txt_tiempo_total_6);
     }//GEN-LAST:event_btn_agregar_tiempo_6MouseClicked
 
     private void btn_parar_6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_parar_6MouseClicked
-        if (hora_6 != 0 || minuto_6 != 0 || segundo_6 != 0) {
-            AlertaFinalizarEjecución finalizarEjecucion_6 = new AlertaFinalizarEjecución();
-
-            finalizarEjecucion_6.otorgarTextoAEtiqueta(txt_tiempo_6, btn_iniciar_pausar_6, txt_iniciar_pausar_6, box_horas_6, box_minutos_6, txt_tiempo_agregado_6, txt_tiempo_total_6);
-            finalizarEjecucion_6.otorgarID(6);
-            finalizarEjecucion_6.setVisible(true);
-        } else {
-            System.out.println("Hora, minuto, segundo == 0");
-        }
+        procesoBotonParar(hora_6, minuto_6, segundo_6, 6, txt_tiempo_6, btn_iniciar_pausar_6, txt_iniciar_pausar_6, box_horas_6, box_minutos_6, txt_tiempo_agregado_6, txt_tiempo_total_6);
     }//GEN-LAST:event_btn_parar_6MouseClicked
 
     private void btn_iniciar_pausar_6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_iniciar_pausar_6MouseClicked
-        System.out.println("Horas: " + box_horas_6.getModel().getSelectedItem() + " - Minutos: " + box_minutos_6.getModel().getSelectedItem());
-        //Diseño del boton iniciar-pausar
-        var_btn_iniciar_pausar_6 = btn_iniciar_pausar_6.getModel().isSelected();
-        System.out.println("Propiedad del boton(selected):" + var_btn_iniciar_pausar_6);
-
-        if (var_btn_iniciar_pausar_6 == true) { //Si el botón iniciar pausar está encendido
-            btn_iniciar_pausar_6.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_pausar.png")));
-            txt_iniciar_pausar_6.setText("Pausar");
-
-            //Funcionalidad del boton
-            if (corriendo_6 == false) {
-                iniciarHilo_6 = true;
-                corriendo_6 = true;
-                pausar_6 = false;
-                inciarHiloCronometro_6();
-            }
-
-            System.out.println(box_horas_6.getModel().getSelectedItem());
-
-            if (box_horas_6.getModel().getSelectedItem() == "Horas" || box_minutos_6.getModel().getSelectedItem() == "Minutos") {
-                btn_iniciar_pausar_6.setSelected(false);
-                var_btn_iniciar_pausar_6 = false;
-                btn_iniciar_pausar_6.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_iniciar_pausar.png")));
-                txt_iniciar_pausar_6.setText("Iniciar");
-
-                corriendo_6 = false;
-                iniciarHilo_6 = false;
-                pausar_6 = false;
-
-                JOptionPane.showMessageDialog(null, "Por favor ingrese el tiempo (horas y minutos)");
-
-            } else {
-                System.out.println("Puede pasar");
-
-            }
-
-        } else if (var_btn_iniciar_pausar_6 == false) { //Si el botón iniciar pausar está apagado
-            btn_iniciar_pausar_6.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_iniciar_pausar.png")));
-            txt_iniciar_pausar_6.setText("Reaundar");
-
-            //Funcionalidad del botón
-            corriendo_6 = false;
-            iniciarHilo_6 = false;
-            pausar_6 = false;
-
-            System.out.println("Propiedad del boton(selected):" + var_btn_iniciar_pausar_6);
-
-        }
-
-        if (btn_on_off_6.getModel().isSelected() == false) {
-            btn_iniciar_pausar_6.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_iniciar_pausar.png")));
-            txt_iniciar_pausar_6.setText("Iniciar");
-        }
-
+        procesoBotonIniciarPausar(6, box_clientes_6, box_horas_6, box_minutos_6, var_btn_iniciar_pausar_6, btn_iniciar_pausar_6, txt_iniciar_pausar_6, corriendo_6, pausar_6, btn_on_off_6);
     }//GEN-LAST:event_btn_iniciar_pausar_6MouseClicked
 
     private void box_minutos_6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_minutos_6ActionPerformed
@@ -2731,30 +2372,12 @@ public class ListaDeClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_box_horas_6ActionPerformed
 
     private void box_clientes_6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_clientes_6ActionPerformed
-        // TODO add your handling code here:
+        item_clientes_6 = (String) box_clientes_6.getModel().getSelectedItem();
+        System.out.println(item_clientes_6);
     }//GEN-LAST:event_box_clientes_6ActionPerformed
 
     private void btn_on_off_6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_on_off_6MouseClicked
-        System.out.println("Selected: " + btn_on_off_6.getModel().isSelected());
-
-        if (btn_on_off_6.getModel().isSelected() == true) { //Si el boton está encendido
-
-            //Agregamos el icono de encendido y el contenedor encendido
-            btn_on_off_6.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_ON.png")));
-            contenedor_6.setIcon(new ImageIcon(getClass().getResource("/contenedores/Contenedor_05.png")));
-
-            //Habilitamos todos los componentes del grupo 6
-            habilitarComponentesPorGrupo(box_clientes_6, box_horas_6, box_minutos_6, txt_ingresar_tiempo_6, btn_iniciar_pausar_6, txt_iniciar_pausar_6, btn_parar_6, txt_parar_6, txt_H_M_S_6, txt_tiempo_6, btn_agregar_tiempo_6, txt_agregar_tiempo_6);
-
-        } else {    //Si el botón está apagado
-
-            //Agregamos el icono de apagado y el contenedor apagado
-            btn_on_off_6.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_OFF.png")));
-            contenedor_6.setIcon(new ImageIcon(getClass().getResource("/contenedores/Contenedor_06.png")));
-
-            //Deshabilitamos todos los componentes del grupo 6
-            deshabilitarComponentesPorGrupo(box_clientes_6, box_horas_6, box_minutos_6, txt_ingresar_tiempo_6, btn_iniciar_pausar_6, txt_iniciar_pausar_6, btn_parar_6, txt_parar_6, txt_H_M_S_6, txt_tiempo_6, btn_agregar_tiempo_6, txt_agregar_tiempo_6);
-        }
+        procesoBotonOn_Off(btn_on_off_6, contenedor_6, box_clientes_6, box_horas_6, box_minutos_6, txt_ingresar_tiempo_6, btn_iniciar_pausar_6, txt_iniciar_pausar_6, btn_parar_6, txt_parar_6, txt_H_M_S_6, txt_tiempo_6, btn_agregar_tiempo_6, txt_agregar_tiempo_6, hora_6, minuto_6, segundo_6);
     }//GEN-LAST:event_btn_on_off_6MouseClicked
 
 
@@ -2767,7 +2390,7 @@ public class ListaDeClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_parar_7MouseClicked
 
     private void btn_iniciar_pausar_7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_iniciar_pausar_7MouseClicked
-        procesoBotonIniciarPausar(box_horas_7, box_minutos_7, var_btn_iniciar_pausar_7, btn_iniciar_pausar_7, txt_iniciar_pausar_7, corriendo_7, iniciarHilo_7, pausar_7, btn_on_off_7, 7);
+        procesoBotonIniciarPausar(7, box_clientes_7, box_horas_7, box_minutos_7, var_btn_iniciar_pausar_7, btn_iniciar_pausar_7, txt_iniciar_pausar_7, corriendo_7, pausar_7, btn_on_off_7);
     }//GEN-LAST:event_btn_iniciar_pausar_7MouseClicked
 
     private void box_minutos_7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_minutos_7ActionPerformed
@@ -2814,30 +2437,12 @@ public class ListaDeClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_box_horas_7ActionPerformed
 
     private void box_clientes_7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_clientes_7ActionPerformed
-        // TODO add your handling code here:
+        item_clientes_7 = (String) box_clientes_7.getModel().getSelectedItem();
+        System.out.println(item_clientes_7);
     }//GEN-LAST:event_box_clientes_7ActionPerformed
 
     private void btn_on_off_7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_on_off_7MouseClicked
-        System.out.println("Selected: " + btn_on_off_7.getModel().isSelected());
-
-        if (btn_on_off_7.getModel().isSelected() == true) { //Si el boton está encendido
-
-            //Agregamos el icono de encendido y el contenedor encendido
-            btn_on_off_7.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_ON.png")));
-            contenedor_7.setIcon(new ImageIcon(getClass().getResource("/contenedores/Contenedor_05.png")));
-
-            //Habilitamos todos los componentes del grupo 7
-            habilitarComponentesPorGrupo(box_clientes_7, box_horas_7, box_minutos_7, txt_ingresar_tiempo_7, btn_iniciar_pausar_7, txt_iniciar_pausar_7, btn_parar_7, txt_parar_7, txt_H_M_S_7, txt_tiempo_7, btn_agregar_tiempo_7, txt_agregar_tiempo_7);
-
-        } else {    //Si el botón está apagado
-
-            //Agregamos el icono de apagado y el contenedor apagado
-            btn_on_off_7.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_OFF.png")));
-            contenedor_7.setIcon(new ImageIcon(getClass().getResource("/contenedores/Contenedor_06.png")));
-
-            //Deshabilitamos todos los componentes del grupo 7
-            deshabilitarComponentesPorGrupo(box_clientes_7, box_horas_7, box_minutos_7, txt_ingresar_tiempo_7, btn_iniciar_pausar_7, txt_iniciar_pausar_7, btn_parar_7, txt_parar_7, txt_H_M_S_7, txt_tiempo_7, btn_agregar_tiempo_7, txt_agregar_tiempo_7);
-        }
+        procesoBotonOn_Off(btn_on_off_7, contenedor_7, box_clientes_7, box_horas_7, box_minutos_7, txt_ingresar_tiempo_7, btn_iniciar_pausar_7, txt_iniciar_pausar_7, btn_parar_7, txt_parar_7, txt_H_M_S_7, txt_tiempo_7, btn_agregar_tiempo_7, txt_agregar_tiempo_7, hora_7, minuto_7, segundo_7);
     }//GEN-LAST:event_btn_on_off_7MouseClicked
 
     //Componentes del grupo 8
@@ -2850,7 +2455,7 @@ public class ListaDeClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_parar_8MouseClicked
 
     private void btn_iniciar_pausar_8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_iniciar_pausar_8MouseClicked
-        procesoBotonIniciarPausar(box_horas_8, box_minutos_8, var_btn_iniciar_pausar_8, btn_iniciar_pausar_8, txt_iniciar_pausar_8, corriendo_8, iniciarHilo_8, pausar_8, btn_on_off_8, 8);
+        procesoBotonIniciarPausar(8, box_clientes_8, box_horas_8, box_minutos_8, var_btn_iniciar_pausar_8, btn_iniciar_pausar_8, txt_iniciar_pausar_8, corriendo_8, pausar_8, btn_on_off_8);
     }//GEN-LAST:event_btn_iniciar_pausar_8MouseClicked
 
     private void box_minutos_8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_minutos_8ActionPerformed
@@ -2898,32 +2503,43 @@ public class ListaDeClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_box_horas_8ActionPerformed
 
     private void box_clientes_8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_clientes_8ActionPerformed
-        // TODO add your handling code here:
+        item_clientes_8 = (String) box_clientes_8.getModel().getSelectedItem();
+        System.out.println(item_clientes_8);
     }//GEN-LAST:event_box_clientes_8ActionPerformed
 
     private void btn_on_off_8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_on_off_8MouseClicked
-        System.out.println("Selected: " + btn_on_off_8.getModel().isSelected());
-
-        if (btn_on_off_8.getModel().isSelected() == true) { //Si el boton está encendido
-
-            //Agregamos el icono de encendido y el contenedor encendido
-            btn_on_off_8.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_ON.png")));
-            contenedor_8.setIcon(new ImageIcon(getClass().getResource("/contenedores/Contenedor_05.png")));
-
-            //Habilitamos todos los componentes del grupo 8
-            habilitarComponentesPorGrupo(box_clientes_8, box_horas_8, box_minutos_8, txt_ingresar_tiempo_8, btn_iniciar_pausar_8, txt_iniciar_pausar_8, btn_parar_8, txt_parar_8, txt_H_M_S_8, txt_tiempo_8, btn_agregar_tiempo_8, txt_agregar_tiempo_8);
-
-        } else {    //Si el botón está apagado
-
-            //Agregamos el icono de apagado y el contenedor apagado
-            btn_on_off_8.setIcon(new ImageIcon(getClass().getResource("/botones/Boton_OFF.png")));
-            contenedor_8.setIcon(new ImageIcon(getClass().getResource("/contenedores/Contenedor_06.png")));
-
-            //Deshabilitamos todos los componentes del grupo 8
-            deshabilitarComponentesPorGrupo(box_clientes_8, box_horas_8, box_minutos_8, txt_ingresar_tiempo_8, btn_iniciar_pausar_8, txt_iniciar_pausar_8, btn_parar_8, txt_parar_8, txt_H_M_S_8, txt_tiempo_8, btn_agregar_tiempo_8, txt_agregar_tiempo_8);
-        }
-
+        procesoBotonOn_Off(btn_on_off_8, contenedor_8, box_clientes_8, box_horas_8, box_minutos_8, txt_ingresar_tiempo_8, btn_iniciar_pausar_8, txt_iniciar_pausar_8, btn_parar_8, txt_parar_8, txt_H_M_S_8, txt_tiempo_8, btn_agregar_tiempo_8, txt_agregar_tiempo_8, hora_8, minuto_8, segundo_8);
     }//GEN-LAST:event_btn_on_off_8MouseClicked
+
+    private void box_horas_1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_box_horas_1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_box_horas_1MouseClicked
+
+    private void btn_iniciar_pausar_2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_iniciar_pausar_2MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_iniciar_pausar_2MouseEntered
+
+    private void btn_iniciar_pausar_5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_iniciar_pausar_5MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_iniciar_pausar_5MouseEntered
+
+    private void btn_recargarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_recargarMouseClicked
+        recargarBoxClientes(box_clientes_1);
+        recargarBoxClientes(box_clientes_2);
+        recargarBoxClientes(box_clientes_3);
+        recargarBoxClientes(box_clientes_4);
+        recargarBoxClientes(box_clientes_5);
+        recargarBoxClientes(box_clientes_6);
+        recargarBoxClientes(box_clientes_7);
+        recargarBoxClientes(box_clientes_8);
+
+    }//GEN-LAST:event_btn_recargarMouseClicked
+
+    public void recargarBoxClientes(JComboBox box_clientes) {
+        if (box_clientes.getModel().getSelectedItem().equals("Seleccionar cliente")) {
+            box_clientes.setModel(new ControladorClientes().llenarComboboxClientes());
+        }
+    }
 
     public void detenerYAsignarValoresDefault_1() {
         System.out.println("Hemos entrado a la funcion detenerYAsignarValoresDefault 1");
@@ -3118,7 +2734,8 @@ public class ListaDeClientes extends javax.swing.JFrame {
     private javax.swing.JButton btn_parar_6;
     private javax.swing.JButton btn_parar_7;
     private javax.swing.JButton btn_parar_8;
-    private javax.swing.JLabel contenedor_01;
+    private javax.swing.JButton btn_recargar;
+    private javax.swing.JLabel contenedor_1;
     private javax.swing.JLabel contenedor_2;
     private javax.swing.JLabel contenedor_3;
     private javax.swing.JLabel contenedor_4;

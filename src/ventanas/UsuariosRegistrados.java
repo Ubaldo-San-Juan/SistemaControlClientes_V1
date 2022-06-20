@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package ventanas;
 
 import chart.ModelChart;
@@ -84,8 +80,7 @@ public class UsuariosRegistrados extends javax.swing.JFrame {
         System.out.println("Valor color 3: " + valorColor3);
         
         
-        graficaBarras.addLegend("Eddy", new Color(valorColor1, valorColor2, valorColor3));
-
+        graficaBarras.addLegend("Nico", new Color(valorColor1, valorColor2, valorColor3));
         graficaBarras.addData(new ModelChart("Lunes", new double[]{3, 5, 2}));
         graficaBarras.addData(new ModelChart("Martes", new double[]{2, 1, 6}));
         graficaBarras.addData(new ModelChart("Miercoles", new double[]{5, 1, 6}));
@@ -96,6 +91,17 @@ public class UsuariosRegistrados extends javax.swing.JFrame {
 
     }
 
+    public void vaciarJTable(){
+        graficaBarras.addLegend("", new Color(255, 255, 255));
+        graficaBarras.addData(new ModelChart("Lunes", new double[]{0, 5, 2}));
+        graficaBarras.addData(new ModelChart("Martes", new double[]{0, 1, 6}));
+        graficaBarras.addData(new ModelChart("Miercoles", new double[]{0, 1, 6}));
+        graficaBarras.addData(new ModelChart("Jueves", new double[]{0, 5, 6}));
+        graficaBarras.addData(new ModelChart("Viernes", new double[]{0, 1, 6}));
+        graficaBarras.addData(new ModelChart("Sábado", new double[]{0, 6, 5}));
+        graficaBarras.addData(new ModelChart("Domingo", new double[]{0, 3, 6}));
+    }
+    
     public void llenarJtable() {
         agregarFechaALabel();
         ControladorClientes controladorC = new ControladorClientes();
@@ -152,6 +158,12 @@ public class UsuariosRegistrados extends javax.swing.JFrame {
 
             }
         ));
+        tabla_clientes.setCellSelectionEnabled(true);
+        tabla_clientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabla_clientesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabla_clientes);
 
         fondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 130, 480, 210));
@@ -170,14 +182,18 @@ public class UsuariosRegistrados extends javax.swing.JFrame {
         titulo_sistema.setText("Sistema de control clientes");
         fondo.add(titulo_sistema, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 20, -1, 67));
 
-        txt_fecha.setFont(new java.awt.Font("DejaVu Sans Light", 1, 14)); // NOI18N
-        txt_fecha.setForeground(new java.awt.Color(153, 153, 153));
+        txt_fecha.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
+        txt_fecha.setForeground(new java.awt.Color(102, 102, 102));
         fondo.add(txt_fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 200, 20));
 
         getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 750));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tabla_clientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabla_clientesMouseClicked
+        vaciarJTable();
+    }//GEN-LAST:event_tabla_clientesMouseClicked
 
     /**
      * @param args the command line arguments

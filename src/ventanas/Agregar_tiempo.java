@@ -15,6 +15,7 @@ public class Agregar_tiempo extends javax.swing.JFrame {
     public Agregar_tiempo() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setTitle("Agregar tiempo");
     }
     static int item_horas = 0, item_minutos = 0;
     JLabel txt_tiempo_agregado, txt_tiempo_total;
