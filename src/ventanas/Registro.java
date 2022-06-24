@@ -2,7 +2,7 @@
 package ventanas;
 
 import conexion.Conector;
-import controladores.Controlador;
+import controladores.ControladorUsuarios;
 import java.awt.Color;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -26,7 +26,7 @@ import javax.swing.JToggleButton;
 public class Registro extends javax.swing.JFrame {
 
     
-    Controlador controlador1 = new Controlador();
+    ControladorUsuarios controlador1 = new ControladorUsuarios();
     
     
     public Registro() {

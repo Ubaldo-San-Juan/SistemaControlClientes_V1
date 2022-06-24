@@ -1,13 +1,16 @@
 package ventanas;
 
 import alertas.AlertaCobrar;
+import controladores.ControladorTarifa;
 import java.text.DecimalFormat;
 
 /**
  *
  * @author Ubaldo
  */
+
 public class Cobro {
+    
     int numHoras, numMinutos, numSegundos;
     float costoPorHora,costoPorMinuto, costoPorSegundo, precioHoras, precioMinutos, precioSegundos, precioTotal; 
     
@@ -21,7 +24,8 @@ public class Cobro {
     
     public void calcularCobro(){
         System.out.println(numHoras + " : " + numMinutos + " : " + numSegundos);
-        costoPorHora = 5;
+        ControladorTarifa controladorTarifa1 = new ControladorTarifa();
+        costoPorHora = controladorTarifa1.obtenerTarifa();
         costoPorMinuto = costoPorHora / 60;
         costoPorSegundo = costoPorMinuto / 60;
         

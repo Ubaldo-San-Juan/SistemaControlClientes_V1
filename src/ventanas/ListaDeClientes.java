@@ -2453,7 +2453,7 @@ public class ListaDeClientes extends javax.swing.JFrame {
     private void btn_parar_8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_parar_8MouseClicked
         procesoBotonParar(hora_8, minuto_8, segundo_8, 8, txt_tiempo_8, btn_iniciar_pausar_8, txt_iniciar_pausar_8, box_horas_8, box_minutos_8, txt_tiempo_agregado_8, txt_tiempo_total_8);
     }//GEN-LAST:event_btn_parar_8MouseClicked
-
+    
     private void btn_iniciar_pausar_8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_iniciar_pausar_8MouseClicked
         procesoBotonIniciarPausar(8, box_clientes_8, box_horas_8, box_minutos_8, var_btn_iniciar_pausar_8, btn_iniciar_pausar_8, txt_iniciar_pausar_8, corriendo_8, pausar_8, btn_on_off_8);
     }//GEN-LAST:event_btn_iniciar_pausar_8MouseClicked

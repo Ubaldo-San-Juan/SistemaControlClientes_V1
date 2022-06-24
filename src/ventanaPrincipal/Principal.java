@@ -14,7 +14,7 @@ import com.formdev.flatlaf.intellijthemes.FlatLightFlatIJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatVuesionIJTheme;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatArcDarkContrastIJTheme;
 import conexion.Conector;
-import controladores.Controlador;
+import controladores.ControladorUsuarios;
 import java.awt.Color;
 import ventanas.*;
 import java.awt.event.ItemEvent;
@@ -49,7 +49,7 @@ public class Principal extends javax.swing.JFrame {
     ListaDeClientes panel01 = new ListaDeClientes();
     Perfil perfil1 = new Perfil();
     AlertaPreguntarSalida preguntarSalida1 = new AlertaPreguntarSalida();
-    UsuariosRegistrados panel02 = new UsuariosRegistrados();
+    ClientesRegistrados panel02 = new ClientesRegistrados();
     Configuracion configuracion1 = new Configuracion();
 
     public Principal() {

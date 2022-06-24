@@ -1,7 +1,7 @@
 
 package ventanas;
 
-import controladores.Controlador;
+import controladores.ControladorUsuarios;
 import controladores.Fecha;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -14,15 +14,14 @@ import ventanaPrincipal.Principal;
  */
 public class Configuracion extends javax.swing.JFrame {
     public static String usuarioRecibido = "";  
-    
-    
+   
     public Configuracion() {
         initComponents();
         this.setResizable(false);
         agregarFechaALabel();
         
     }
-    
+         
     public JPanel getFondo() {
         return fondo;
     }
@@ -140,10 +139,9 @@ public class Configuracion extends javax.swing.JFrame {
 
          
     }//GEN-LAST:event_txt_perfil_usuarioMouseClicked
-
+    
     private void btn_cambiar_contraseniaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cambiar_contraseniaMouseClicked
-        System.out.println("Configuracion usuario recibido: " + usuarioRecibido);
-        ActualizarContrasenia actualizarContrasenia1 = new ActualizarContrasenia();   
+        ActualizarContrasenia actualizarContrasenia1 = new ActualizarContrasenia();
         actualizarContrasenia1.usuarioRecibido = usuarioRecibido;
         //System.out.println("btn_cambiar_contraseniaMouseClicke Usuario recibido: " + usuario_recibido);
         /*
@@ -167,7 +165,11 @@ public class Configuracion extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_cambiar_contraseniaMouseExited
 
     private void btn_cambiar_tarifaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cambiar_tarifaMouseClicked
-        // TODO add your handling code here:
+        CambiarTarifa actualizarTarifa1 = new CambiarTarifa();        
+        actualizarTarifa1.setVisible(true);
+        if(actualizarTarifa1.isShowing()){
+            System.out.println("Está mostrado");
+        }
     }//GEN-LAST:event_btn_cambiar_tarifaMouseClicked
 
     private void btn_cambiar_tarifaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cambiar_tarifaMouseEntered

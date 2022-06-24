@@ -2,7 +2,7 @@
 package ventanas;
 
 import conexion.Conector;
-import controladores.Controlador;
+import controladores.ControladorUsuarios;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -30,7 +30,7 @@ import ventanaPrincipal.Principal;
 public class ActualizarContrasenia extends javax.swing.JFrame {
     public static String usuarioRecibido = "";
    
-    Controlador controlador1 = new Controlador();
+    ControladorUsuarios controlador1 = new ControladorUsuarios();
     
     public ActualizarContrasenia() {
         

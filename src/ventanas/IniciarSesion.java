@@ -8,7 +8,7 @@ package ventanas;
 import alertas.AlertaInicioFallidoLogin;
 import alertas.AlertaPreguntarSalida;
 import conexion.Conector;
-import controladores.Controlador;
+import controladores.ControladorUsuarios;
 import java.awt.Color;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -409,7 +409,7 @@ public class IniciarSesion extends javax.swing.JFrame {
         String campoUsuario = campo_usuario.getText();
         String campoContrasenia = campo_contrasenia.getText();
 
-        Controlador controlador1 = new Controlador();
+        ControladorUsuarios controlador1 = new ControladorUsuarios();
         controlador1.iniciarSesion(campoUsuario, campoContrasenia);
 
         if (controlador1.isSiExiste()) {
@@ -450,7 +450,7 @@ public class IniciarSesion extends javax.swing.JFrame {
             String campoUsuario = campo_usuario.getText();
             String campoContrasenia = campo_contrasenia.getText();
 
-            Controlador controlador1 = new Controlador();
+            ControladorUsuarios controlador1 = new ControladorUsuarios();
             controlador1.iniciarSesion(campoUsuario, campoContrasenia);
 
             if (controlador1.isSiExiste()) {
@@ -465,7 +465,7 @@ public class IniciarSesion extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             String campoUsuario = campo_usuario.getText();
             String campoContrasenia = campo_contrasenia.getText();
-            Controlador controlador1 = new Controlador();
+            ControladorUsuarios controlador1 = new ControladorUsuarios();
             controlador1.iniciarSesion(campoUsuario, campoContrasenia);
             if (controlador1.isSiExiste()) {
                 this.dispose();

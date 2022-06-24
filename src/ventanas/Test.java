@@ -2,7 +2,7 @@
 package ventanas;
 
 import conexion.Conector;
-import controladores.Controlador;
+import controladores.ControladorUsuarios;
 import controladores.ControladorClientes;
 
 /**
