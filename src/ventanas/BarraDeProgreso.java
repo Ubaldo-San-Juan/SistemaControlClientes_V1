@@ -8,6 +8,7 @@ import java.awt.Rectangle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.control.ProgressBar;
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.UIManager;
 import javax.swing.plaf.basic.BasicProgressBarUI;
@@ -24,6 +25,7 @@ public class BarraDeProgreso extends javax.swing.JFrame {
         
     public BarraDeProgreso() {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("iconos/Icono.png")).getImage());  
         this.setLocationRelativeTo(null);
         this.setTitle("Iniciando sistema");
         bar_progreso.setForeground(new Color(0, 80, 115));

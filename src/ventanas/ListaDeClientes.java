@@ -804,6 +804,7 @@ public class ListaDeClientes extends javax.swing.JFrame {
         txt_id_sesion_8 = new javax.swing.JLabel();
         contenedor_8 = new javax.swing.JLabel();
         btn_recargar = new javax.swing.JButton();
+        txt_creditos = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1867,6 +1868,10 @@ public class ListaDeClientes extends javax.swing.JFrame {
         });
         fondo.add(btn_recargar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
 
+        txt_creditos.setForeground(new java.awt.Color(153, 153, 153));
+        txt_creditos.setText("Elaborado por: Ubaldo S.J");
+        fondo.add(txt_creditos, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 730, 140, -1));
+
         getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 1380));
         fondo.getAccessibleContext().setAccessibleName("");
 
@@ -2763,6 +2768,7 @@ public class ListaDeClientes extends javax.swing.JFrame {
     private javax.swing.JLabel txt_agregar_tiempo_6;
     private javax.swing.JLabel txt_agregar_tiempo_7;
     private javax.swing.JLabel txt_agregar_tiempo_8;
+    private javax.swing.JLabel txt_creditos;
     private javax.swing.JLabel txt_fecha;
     private javax.swing.JLabel txt_id_sesion_1;
     private javax.swing.JLabel txt_id_sesion_2;

@@ -54,7 +54,14 @@ public class ControladorClientes {
 
     
     public DefaultTableModel llenarJTable(){
-        DefaultTableModel modelo = new DefaultTableModel();
+        
+        //Evitar que las celdas puedan ser editadas
+        DefaultTableModel modelo = new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int filas, int columnas){
+                return false;
+            }
+        };
         modelo.addColumn("Id");
         modelo.addColumn("Nombre");
         try {

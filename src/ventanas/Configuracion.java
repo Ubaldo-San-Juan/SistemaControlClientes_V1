@@ -45,6 +45,7 @@ public class Configuracion extends javax.swing.JFrame {
         btn_cambiar_tarifa = new javax.swing.JLabel();
         fondo_btn_cambiar_tarifa = new javax.swing.JButton();
         txt_fecha = new javax.swing.JLabel();
+        txt_creditos = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -130,6 +131,10 @@ public class Configuracion extends javax.swing.JFrame {
         txt_fecha.setForeground(new java.awt.Color(102, 102, 102));
         fondo.add(txt_fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 200, 20));
 
+        txt_creditos.setForeground(new java.awt.Color(153, 153, 153));
+        txt_creditos.setText("Elaborado por: Ubaldo S.J");
+        fondo.add(txt_creditos, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 730, 140, -1));
+
         getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 750));
 
         pack();
@@ -146,8 +151,7 @@ public class Configuracion extends javax.swing.JFrame {
         //System.out.println("btn_cambiar_contraseniaMouseClicke Usuario recibido: " + usuario_recibido);
         /*
         actualizarContrasenia1.setUsuarioRecibido(usuarioRecibidoK);
-        */
-        
+        */  
         
         actualizarContrasenia1.setVisible(true);
         if(actualizarContrasenia1.isShowing()){
@@ -229,6 +233,7 @@ public class Configuracion extends javax.swing.JFrame {
     private javax.swing.JLabel icono_contrasenia;
     private javax.swing.JLabel icono_usuario;
     private javax.swing.JLabel titulo_sistema;
+    private javax.swing.JLabel txt_creditos;
     private javax.swing.JLabel txt_fecha;
     public javax.swing.JLabel txt_perfil_usuario;
     // End of variables declaration//GEN-END:variables

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package ventanas;
 
 import alertas.AlertaInicioFallidoLogin;
@@ -84,6 +80,7 @@ public class IniciarSesion extends javax.swing.JFrame {
         txt_bienvenido = new javax.swing.JLabel();
         contenedor_01 = new javax.swing.JLabel();
         titulo_sistema = new javax.swing.JLabel();
+        txt_creditos = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -259,6 +256,10 @@ public class IniciarSesion extends javax.swing.JFrame {
         titulo_sistema.setFont(new java.awt.Font("Microsoft New Tai Lue", 1, 36)); // NOI18N
         titulo_sistema.setText("Sistema de control clientes");
         panel_fondo.add(titulo_sistema, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, -1, 67));
+
+        txt_creditos.setForeground(new java.awt.Color(153, 153, 153));
+        txt_creditos.setText("Elaborado por: Ubaldo S.J");
+        panel_fondo.add(txt_creditos, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 700, 140, -1));
 
         getContentPane().add(panel_fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1211, 750));
 
@@ -625,6 +626,7 @@ public class IniciarSesion extends javax.swing.JFrame {
     private javax.swing.JLabel txt_bienvenido;
     private javax.swing.JLabel txt_contrasenia;
     private javax.swing.JLabel txt_contrasenia1;
+    private javax.swing.JLabel txt_creditos;
     private javax.swing.JLabel txt_mostrar_ocultar;
     private javax.swing.JLabel txt_usuario;
     // End of variables declaration//GEN-END:variables

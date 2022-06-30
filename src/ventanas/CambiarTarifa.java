@@ -51,7 +51,7 @@ public class CambiarTarifa extends javax.swing.JFrame {
 
         campo_tarifa_nueva.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         campo_tarifa_nueva.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        campo_tarifa_nueva.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        campo_tarifa_nueva.setBorder(new javax.swing.border.MatteBorder(null));
         campo_tarifa_nueva.setCaretColor(new java.awt.Color(112, 112, 112));
         jPanel1.add(campo_tarifa_nueva, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 90, 40));
 

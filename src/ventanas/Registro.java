@@ -70,6 +70,7 @@ public class Registro extends javax.swing.JFrame {
         txt_usuario = new javax.swing.JLabel();
         txt_registrarse = new javax.swing.JLabel();
         contenedor_01 = new javax.swing.JLabel();
+        txt_creditos = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -309,6 +310,10 @@ public class Registro extends javax.swing.JFrame {
             }
         });
         panel_fondo.add(contenedor_01, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 810, 535));
+
+        txt_creditos.setForeground(new java.awt.Color(153, 153, 153));
+        txt_creditos.setText("Elaborado por: Ubaldo S.J");
+        panel_fondo.add(txt_creditos, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 700, 140, -1));
 
         getContentPane().add(panel_fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1211, 750));
 
@@ -645,6 +650,7 @@ public class Registro extends javax.swing.JFrame {
     private javax.swing.JPanel panel_fondo;
     private javax.swing.JLabel txt_confirmar_contrasenia;
     private javax.swing.JLabel txt_contrasenia;
+    private javax.swing.JLabel txt_creditos;
     private javax.swing.JLabel txt_mostrar_ocultar_confirmar_contrasenia;
     private javax.swing.JLabel txt_mostrar_ocultar_contrasenia;
     private javax.swing.JLabel txt_nombre;
