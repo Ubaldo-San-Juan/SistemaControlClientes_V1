@@ -10,6 +10,7 @@ import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -28,6 +29,7 @@ public class ClientesRegistrados extends javax.swing.JFrame {
      */
     public ClientesRegistrados() {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/iconos/Icono.png")).getImage());
         llenarTabla();
         llenarGraficaBarras();
         agregarFechaALabel();

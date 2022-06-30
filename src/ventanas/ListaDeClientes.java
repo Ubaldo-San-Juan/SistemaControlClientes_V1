@@ -45,6 +45,7 @@ public class ListaDeClientes extends javax.swing.JFrame {
      */
     public ListaDeClientes() {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/iconos/Icono.png")).getImage());
         fondo.setPreferredSize(new Dimension(400, 400));
 
         deshabilitarComponentesDeTodosLosGrupos();

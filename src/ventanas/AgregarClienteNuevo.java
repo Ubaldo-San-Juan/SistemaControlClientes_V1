@@ -15,6 +15,7 @@ public class AgregarClienteNuevo extends javax.swing.JFrame {
      */
     public AgregarClienteNuevo() {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/iconos/Icono.png")).getImage());
         this.setLocationRelativeTo(null);
         this.setTitle("Agregar cliente nuevo");
     }

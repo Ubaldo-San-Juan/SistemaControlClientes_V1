@@ -16,6 +16,7 @@ public class CambiarTarifa extends javax.swing.JFrame {
     
     public CambiarTarifa() {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/iconos/Icono.png")).getImage());
         setLocationRelativeTo(null);
         asignarTarifaActual();
     }

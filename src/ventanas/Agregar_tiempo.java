@@ -1,5 +1,6 @@
 package ventanas;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -14,6 +15,7 @@ public class Agregar_tiempo extends javax.swing.JFrame {
      */
     public Agregar_tiempo() {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/iconos/Icono.png")).getImage());
         this.setLocationRelativeTo(null);
         this.setTitle("Agregar tiempo");
     }

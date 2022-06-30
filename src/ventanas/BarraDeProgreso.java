@@ -25,7 +25,7 @@ public class BarraDeProgreso extends javax.swing.JFrame {
         
     public BarraDeProgreso() {
         initComponents();
-        setIconImage(new ImageIcon(getClass().getResource("iconos/Icono.png")).getImage());  
+        setIconImage(new ImageIcon(getClass().getResource("/iconos/Icono.png")).getImage());  
         this.setLocationRelativeTo(null);
         this.setTitle("Iniciando sistema");
         bar_progreso.setForeground(new Color(0, 80, 115));

@@ -39,6 +39,7 @@ public class IniciarSesion extends javax.swing.JFrame {
      */
     public IniciarSesion() {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/iconos/Icono.png")).getImage());
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setTitle("Iniciar sesión");

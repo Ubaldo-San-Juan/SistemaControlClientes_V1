@@ -53,9 +53,8 @@ public class Principal extends javax.swing.JFrame {
     Configuracion configuracion1 = new Configuracion();
 
     public Principal() {
-
         initComponents();
-
+        setIconImage(new ImageIcon(getClass().getResource("/iconos/Icono.png")).getImage());
         this.setLocationRelativeTo(null);
         this.setResizable(false);
 

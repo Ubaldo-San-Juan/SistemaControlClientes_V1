@@ -17,6 +17,7 @@ public class Configuracion extends javax.swing.JFrame {
    
     public Configuracion() {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/iconos/Icono.png")).getImage());
         this.setResizable(false);
         agregarFechaALabel();
         

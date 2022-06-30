@@ -1,6 +1,7 @@
 
 package ventanas;
 
+import javax.swing.ImageIcon;
 import ventanaPrincipal.Principal;
 
 /**
@@ -15,6 +16,7 @@ public class Perfil extends javax.swing.JFrame {
      */
     public Perfil() {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/iconos/Icono.png")).getImage());
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setTitle("Perfil");
