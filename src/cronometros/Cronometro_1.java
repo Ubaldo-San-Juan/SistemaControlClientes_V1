@@ -20,7 +20,9 @@ public class Cronometro_1 extends Thread {
     JToggleButton boton_iniciar_pausar;
     JComboBox box_horas, box_minutos;
     JLabel txt_tiempo_agregado, txt_tiempo_total;
-    public Cronometro_1(JLabel cronometro, JToggleButton btn_iniciar_pausar, JLabel txt_iniciar_pausar, JComboBox box_horas, JComboBox box_minutos, JLabel txt_tiempo_agregado, JLabel txt_tiempo_total) {
+    int idCliente = 0;
+    public Cronometro_1(int idCliente, JLabel cronometro, JToggleButton btn_iniciar_pausar, JLabel txt_iniciar_pausar, JComboBox box_horas, JComboBox box_minutos, JLabel txt_tiempo_agregado, JLabel txt_tiempo_total) {
+        this.idCliente = idCliente;
         this.etiqueta = cronometro;
         this.boton_iniciar_pausar = btn_iniciar_pausar;
         this.txt_iniciar_pausar = txt_iniciar_pausar;
@@ -39,11 +41,11 @@ public class Cronometro_1 extends Thread {
 
                     if (ListaDeClientes.milesima_1 == 1000) {
                         ListaDeClientes.milesima_1 = 0;
-                        ListaDeClientes.segundo_1 += 1;
+                        ListaDeClientes.segundo_1 += 30;
 
                         if (ListaDeClientes.segundo_1 == 60) {
                             ListaDeClientes.segundo_1 = 0;
-                            ListaDeClientes.minuto_1 += 1;
+                            ListaDeClientes.minuto_1 += 10;
 
                             if (ListaDeClientes.minuto_1 == 60) {
                                 ListaDeClientes.minuto_1 = 0;
@@ -76,7 +78,7 @@ public class Cronometro_1 extends Thread {
 
                                 JOptionPane.showMessageDialog(null, "Se acabó el tiempo");
                                 ListaDeClientes cobro_1 = new ListaDeClientes();
-                                cobro_1.cobrar_1();
+                                cobro_1.cobrar_1(ListaDeClientes.id_usuario, idCliente);
                                 
                                 ListaDeClientes.iniciarHilo_1 = false;
                                 etiqueta.setText("00 : 00 : 00");

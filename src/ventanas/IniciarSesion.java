@@ -408,9 +408,10 @@ public class IniciarSesion extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_contrasenia1MouseClicked
 
     private void btn_iniciar_sesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_iniciar_sesionMouseClicked
+      
         String campoUsuario = campo_usuario.getText();
         String campoContrasenia = campo_contrasenia.getText();
-
+        
         ControladorUsuarios controlador1 = new ControladorUsuarios();
         controlador1.iniciarSesion(campoUsuario, campoContrasenia);
 

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package alertas;
 
 import javax.swing.ImageIcon;
@@ -105,12 +101,12 @@ public class AlertaFinalizarEjecución extends javax.swing.JFrame {
     JToggleButton btn_iniciar_pausar;
     JComboBox box_horas, box_minutos;
     JLabel txt_tiempo_agregado, txt_tiempo_total;
-    int id = 0;
+    int id = 0, idUsuario = 0, idCliente = 0;
     private void btn_siMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_siMouseClicked
 
         if (id == 1) {
             ListaDeClientes cobro = new ListaDeClientes();
-            cobro.cobrar_1();
+            cobro.cobrar_1(idUsuario, idCliente);
             ListaDeClientes cliente_1 = new ListaDeClientes();
             cliente_1.detenerYAsignarValoresDefault_1();
             txt_tiempo.setText("00 : 00 : 00");
@@ -124,7 +120,7 @@ public class AlertaFinalizarEjecución extends javax.swing.JFrame {
             this.dispose();
         } else if (id == 2) {
             ListaDeClientes cobro = new ListaDeClientes();
-            cobro.cobrar_2();
+            cobro.cobrar_2(idUsuario, idCliente);
             ListaDeClientes cliente_2 = new ListaDeClientes();
             cliente_2.detenerYAsignarValoresDefault_2();
             txt_tiempo.setText("00 : 00 : 00");
@@ -138,7 +134,7 @@ public class AlertaFinalizarEjecución extends javax.swing.JFrame {
             this.dispose();
         }else if(id == 3){
             ListaDeClientes cobro = new ListaDeClientes();
-            cobro.cobrar_3();
+            cobro.cobrar_3(idUsuario, idCliente);
             ListaDeClientes cliente_3 = new ListaDeClientes();
             cliente_3.detenerYAsignarValoresDefault_3();
             txt_tiempo.setText("00 : 00 : 00");
@@ -152,7 +148,7 @@ public class AlertaFinalizarEjecución extends javax.swing.JFrame {
             this.dispose();
         }else if(id == 4){
             ListaDeClientes cobro = new ListaDeClientes();
-            cobro.cobrar_4();
+            cobro.cobrar_4(idUsuario, idCliente);
             ListaDeClientes cliente_4 = new ListaDeClientes();
             cliente_4.detenerYAsignarValoresDefault_4();
             txt_tiempo.setText("00 : 00 : 00");
@@ -166,7 +162,7 @@ public class AlertaFinalizarEjecución extends javax.swing.JFrame {
             this.dispose();
         }else if(id == 5){
             ListaDeClientes cobro = new ListaDeClientes();
-            cobro.cobrar_5();
+            cobro.cobrar_5(idUsuario, idCliente);
             ListaDeClientes cliente_5 = new ListaDeClientes();
             cliente_5.detenerYAsignarValoresDefault_5();
             txt_tiempo.setText("00 : 00 : 00");
@@ -180,7 +176,7 @@ public class AlertaFinalizarEjecución extends javax.swing.JFrame {
             this.dispose();
         }else if(id == 6){
             ListaDeClientes cobro = new ListaDeClientes();
-            cobro.cobrar_6();
+            cobro.cobrar_6(idUsuario, idCliente);
             ListaDeClientes cliente_6 = new ListaDeClientes();
             cliente_6.detenerYAsignarValoresDefault_6();
             txt_tiempo.setText("00 : 00 : 00");
@@ -194,7 +190,7 @@ public class AlertaFinalizarEjecución extends javax.swing.JFrame {
             this.dispose();
         }else if(id == 7){
             ListaDeClientes cobro = new ListaDeClientes();
-            cobro.cobrar_7();
+            cobro.cobrar_7(idUsuario, idCliente);
             ListaDeClientes cliente_7 = new ListaDeClientes();
             cliente_7.detenerYAsignarValoresDefault_7();
             txt_tiempo.setText("00 : 00 : 00");
@@ -208,7 +204,7 @@ public class AlertaFinalizarEjecución extends javax.swing.JFrame {
             this.dispose();
         }else if(id == 8){
             ListaDeClientes cobro = new ListaDeClientes();
-            cobro.cobrar_8();
+            cobro.cobrar_8(idUsuario, idCliente);
             ListaDeClientes cliente_8 = new ListaDeClientes();
             cliente_8.detenerYAsignarValoresDefault_8();
             txt_tiempo.setText("00 : 00 : 00");
@@ -236,7 +232,14 @@ public class AlertaFinalizarEjecución extends javax.swing.JFrame {
     public void otorgarID(int id) {
         this.id = id;
     }
-
+    
+    public void otorgarIdUsuario (int idUsuario){
+        this.idUsuario = idUsuario;
+    }
+    
+    public void otorgarIdCliente(int idCliente){
+        this.idCliente = idCliente;
+    }
 
     private void btn_noMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_noMouseClicked
         System.out.println("Aún no se requiere finalizar");

@@ -131,6 +131,9 @@ public class Perfil extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_volverMouseClicked
 
+    public void setIdUsuario(int idUsuario){
+        txt_valor_id.setText(String.valueOf(idUsuario));
+    }
 
     /**
      * @param args the command line arguments

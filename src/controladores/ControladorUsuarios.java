@@ -25,11 +25,13 @@ import ventanas.Registro;
 public class ControladorUsuarios {
 
     boolean siExiste = false;
+    int idUsuario = 0;
     String usuarioDeLaSesion = "";
     String primerCaracterUsuario = "";
     String nombreDelUsuario = "";
 
     Principal principal1 = new Principal();
+    ListaDeClientes listaClientes1 = new ListaDeClientes();
     AlertaInicioFallidoLogin inicioFallido1 = new AlertaInicioFallidoLogin();
     Perfil perfil1 = new Perfil();
     
@@ -41,11 +43,12 @@ public class ControladorUsuarios {
             Connection cn = conexion.conectar();
 
             Statement st = cn.createStatement();
-            ResultSet rst = st.executeQuery("SELECT * FROM usuarios WHERE usuario='" + campoUsuario + "' AND contrasenia='" + campoContrasenia + "';");
+            ResultSet rst = st.executeQuery("SELECT id_usuario, usuario, nombre FROM usuarios WHERE usuario='" + campoUsuario + "' AND contrasenia='" + campoContrasenia + "';");
 
             if (rst.next()) {
-                this.usuarioDeLaSesion = rst.getString(1);
-                this.nombreDelUsuario = rst.getString(2);
+                this.idUsuario = rst.getInt(1);
+                this.usuarioDeLaSesion = rst.getString(2);
+                this.nombreDelUsuario = rst.getString(3);
                 this.siExiste = true;
 
                 principal1.setVisible(true);
@@ -58,6 +61,8 @@ public class ControladorUsuarios {
                 principal1.usuarioDeLaSesion = usuarioDeLaSesion;
                 principal1.nombreDelUsuario = nombreDelUsuario;
                 principal1.primerCaracterUsuario = primerCaracterUsuario;
+                principal1.idUsuario = idUsuario;
+                listaClientes1.id_usuario = idUsuario;
                 conexion.desconectar();
             } else {
                 inicioFallido1.setVisible(true);
@@ -67,7 +72,10 @@ public class ControladorUsuarios {
             Logger.getLogger(IniciarSesion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
+    public int getIdUsuario(){
+        return idUsuario;
+    }
     
     public void otorgarDatosPerfil(){
         perfil1.txt_perfil_usuario.setText(primerCaracterUsuario);
@@ -81,7 +89,7 @@ public class ControladorUsuarios {
             Conector conexion = new Conector();
             Connection cn = conexion.conectar();
 
-            PreparedStatement ps = cn.prepareStatement("INSERT INTO usuarios VALUES(?, ?, ?);");
+            PreparedStatement ps = cn.prepareStatement("INSERT INTO usuarios(usuario, nombre, contrasenia) VALUES(?, ?, ?);");
 
             ps.setString(1, campoUsuario);
             ps.setString(2, campoNombre);
@@ -90,7 +98,7 @@ public class ControladorUsuarios {
 
             conexion.desconectar();
         } catch (SQLException ex) {
-            Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControladorUsuarios.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -126,7 +134,7 @@ public class ControladorUsuarios {
                 JOptionPane.showMessageDialog(null, "Error al ingresar la contraseña");
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ActualizarContrasenia.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControladorUsuarios.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

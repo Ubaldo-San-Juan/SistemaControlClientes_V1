@@ -2,7 +2,7 @@
 package ventanas;
 
 import controladores.ControladorUsuarios;
-import controladores.Fecha;
+import controladores.ControladorFecha;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import ventanaPrincipal.Principal;
@@ -28,7 +28,7 @@ public class Configuracion extends javax.swing.JFrame {
     }
     
     public void agregarFechaALabel(){
-        txt_fecha.setText(new Fecha().obtenerFecha());
+        txt_fecha.setText(new ControladorFecha().obtenerFecha());
     }
     
     @SuppressWarnings("unchecked")

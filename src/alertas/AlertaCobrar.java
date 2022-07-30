@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package alertas;
 
 import java.text.DecimalFormat;
@@ -12,7 +8,6 @@ import java.text.DecimalFormat;
  * @author Ubaldo
  */
 public class AlertaCobrar extends javax.swing.JFrame {
-
     
     public AlertaCobrar() {
         initComponents();
@@ -77,10 +72,11 @@ public class AlertaCobrar extends javax.swing.JFrame {
 
     private void btn_aceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_aceptarMouseClicked
         this.dispose();
+        
     }//GEN-LAST:event_btn_aceptarMouseClicked
-
+    
     public void setPrecioTotal(float precioTotal){
-        txt_aviso.setText("Cantidad a cobrar: " + (float)Math.round(precioTotal * 100f) / 100f);
+        txt_aviso.setText("Cantidad a cobrar: " + precioTotal);
     }
     
 

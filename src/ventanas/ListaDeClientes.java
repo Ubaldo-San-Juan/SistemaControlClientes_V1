@@ -2,8 +2,11 @@ package ventanas;
 
 import alertas.AlertaFinalizarEjecución;
 import com.formdev.flatlaf.FlatIntelliJLaf;
+import conexion.Conector;
+import controladores.Clientes;
 import controladores.ControladorClientes;
-import controladores.Fecha;
+import controladores.ControladorFecha;
+import controladores.ControladorUsuarios;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -33,6 +36,14 @@ import cronometros.Cronometro_5;
 import cronometros.Cronometro_6;
 import cronometros.Cronometro_7;
 import cronometros.Cronometro_8;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ComboBoxModel;
 
 /**
  *
@@ -169,19 +180,55 @@ public class ListaDeClientes extends javax.swing.JFrame {
     }
 
     public void agregarFechaALabel() {
-        txt_fecha.setText(new Fecha().obtenerFecha());
+        txt_fecha.setText(new ControladorFecha().obtenerFecha());
     }
 
     public void llenarComboBox() {
 
-        box_clientes_1.setModel(new ControladorClientes().llenarComboboxClientes());
-        box_clientes_2.setModel(new ControladorClientes().llenarComboboxClientes());
-        box_clientes_3.setModel(new ControladorClientes().llenarComboboxClientes());
-        box_clientes_4.setModel(new ControladorClientes().llenarComboboxClientes());
-        box_clientes_5.setModel(new ControladorClientes().llenarComboboxClientes());
-        box_clientes_6.setModel(new ControladorClientes().llenarComboboxClientes());
-        box_clientes_7.setModel(new ControladorClientes().llenarComboboxClientes());
-        box_clientes_8.setModel(new ControladorClientes().llenarComboboxClientes());
+//        box_clientes_1.setModel(new ControladorClientes().llenarComboboxClientes());
+//        box_clientes_2.setModel(new ControladorClientes().llenarComboboxClientes());
+//        box_clientes_3.setModel(new ControladorClientes().llenarComboboxClientes());
+//        box_clientes_4.setModel(new ControladorClientes().llenarComboboxClientes());
+//        box_clientes_5.setModel(new ControladorClientes().llenarComboboxClientes());
+//        box_clientes_6.setModel(new ControladorClientes().llenarComboboxClientes());
+//        box_clientes_7.setModel(new ControladorClientes().llenarComboboxClientes());
+//        box_clientes_8.setModel(new ControladorClientes().llenarComboboxClientes());
+        procesoLlenadoComboBox(box_clientes_1);
+        procesoLlenadoComboBox(box_clientes_2);
+        procesoLlenadoComboBox(box_clientes_3);
+        procesoLlenadoComboBox(box_clientes_4);
+        procesoLlenadoComboBox(box_clientes_5);
+        procesoLlenadoComboBox(box_clientes_6);
+        procesoLlenadoComboBox(box_clientes_7);
+        procesoLlenadoComboBox(box_clientes_8);
+
+    }
+
+    public void procesoLlenadoComboBox(JComboBox box_Clientes) {
+        try {
+
+            Conector conexion = new Conector();
+
+            Connection cn = conexion.conectar();
+
+            Statement st = cn.createStatement();
+
+            ResultSet rst = st.executeQuery("SELECT id_cliente, nombre FROM clientes");
+            box_Clientes.addItem(new Clientes(0, "Selecciona un cliente"));
+
+            while (rst.next()) {
+                int idCliente = Integer.parseInt(rst.getString(1));
+                String nombreCliente = rst.getString(2);
+                System.out.println("idCliente: " + idCliente);
+                System.out.println("nombreCliente: " + nombreCliente);
+                box_Clientes.addItem(new Clientes(idCliente, nombreCliente));
+
+            }
+
+            conexion.desconectar();
+        } catch (SQLException ex) {
+            Logger.getLogger(ListaDeClientes.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     boolean var_btn_iniciar_pausar_1 = false;
@@ -248,6 +295,19 @@ public class ListaDeClientes extends javax.swing.JFrame {
     public static String item_clientes_7 = "";
     public static String item_clientes_8 = "";
 
+    
+    public static int id_usuario = 0;
+    
+    public static int id_cliente_1 = 0;
+    public static int id_cliente_2 = 0;
+    public static int id_cliente_3 = 0;
+    public static int id_cliente_4 = 0;
+    public static int id_cliente_5 = 0;
+    public static int id_cliente_6 = 0;
+    public static int id_cliente_7 = 0;
+    public static int id_cliente_8 = 0;
+    
+
     Agregar_tiempo agregarTiempo_1 = new Agregar_tiempo();
     Agregar_tiempo agregarTiempo_2 = new Agregar_tiempo();
     Agregar_tiempo agregarTiempo_3 = new Agregar_tiempo();
@@ -263,43 +323,45 @@ public class ListaDeClientes extends javax.swing.JFrame {
         return fondo;
     }
 
-    public void cobrar_1() {
-        Cobro cobro_1 = new Cobro(hora_1, minuto_1, segundo_1);
+    public void cobrar_1(int idUsuario, int idcliente) {
+        System.out.println("id del Cliente: " + idcliente);
+        System.out.println("id del Usuario: " + idUsuario);
+        Cobro cobro_1 = new Cobro(hora_1, minuto_1, segundo_1, idUsuario, idcliente);
         cobro_1.calcularCobro();
     }
 
-    public void cobrar_2() {
-        Cobro cobro_2 = new Cobro(hora_2, minuto_2, segundo_2);
+    public void cobrar_2(int idUsuario, int idCliente) {
+        Cobro cobro_2 = new Cobro(hora_2, minuto_2, segundo_2, idUsuario, idCliente);
         cobro_2.calcularCobro();
     }
 
-    public void cobrar_3() {
-        Cobro cobro_3 = new Cobro(hora_3, minuto_3, segundo_3);
+    public void cobrar_3(int idUsuario, int idCliente) {
+        Cobro cobro_3 = new Cobro(hora_3, minuto_3, segundo_3, idUsuario, idCliente);
         cobro_3.calcularCobro();
     }
 
-    public void cobrar_4() {
-        Cobro cobro_4 = new Cobro(hora_4, minuto_4, segundo_4);
+    public void cobrar_4(int idUsuario, int idCliente) {
+        Cobro cobro_4 = new Cobro(hora_4, minuto_4, segundo_4, idUsuario, idCliente);
         cobro_4.calcularCobro();
     }
 
-    public void cobrar_5() {
-        Cobro cobro_5 = new Cobro(hora_5, minuto_5, segundo_5);
+    public void cobrar_5(int idUsuario, int idCliente) {
+        Cobro cobro_5 = new Cobro(hora_5, minuto_5, segundo_5, idUsuario, idCliente);
         cobro_5.calcularCobro();
     }
 
-    public void cobrar_6() {
-        Cobro cobro_6 = new Cobro(hora_6, minuto_6, segundo_6);
+    public void cobrar_6(int idUsuario, int idCliente) {
+        Cobro cobro_6 = new Cobro(hora_6, minuto_6, segundo_6, idUsuario, idCliente);
         cobro_6.calcularCobro();
     }
 
-    public void cobrar_7() {
-        Cobro cobro_7 = new Cobro(hora_7, minuto_7, segundo_7);
+    public void cobrar_7(int idUsuario, int idCliente) {
+        Cobro cobro_7 = new Cobro(hora_7, minuto_7, segundo_7, idUsuario, idCliente);
         cobro_7.calcularCobro();
     }
 
-    public void cobrar_8() {
-        Cobro cobro_8 = new Cobro(hora_8, minuto_8, segundo_8);
+    public void cobrar_8(int idUsuario, int idCliente) {
+        Cobro cobro_8 = new Cobro(hora_8, minuto_8, segundo_8, idUsuario, idCliente);
         cobro_8.calcularCobro();
     }
 
@@ -496,7 +558,7 @@ public class ListaDeClientes extends javax.swing.JFrame {
 
     }
 
-    public void procesoBotonParar(int hora, int minuto, int segundo, int id, JLabel txt_tiempo, JToggleButton btn_iniciar_pausar, JLabel txt_iniciar_pausar, JComboBox box_horas, JComboBox box_minutos, JLabel txt_tiempo_agregado, JLabel txt_tiempo_total) {
+    public void procesoBotonParar(int hora, int minuto, int segundo, int idUsuario, int idCliente, int id, JLabel txt_tiempo, JToggleButton btn_iniciar_pausar, JLabel txt_iniciar_pausar, JComboBox box_horas, JComboBox box_minutos, JLabel txt_tiempo_agregado, JLabel txt_tiempo_total) {
         if (hora != 0 || minuto != 0 || segundo != 0) {
 
             if (id == 1) {
@@ -504,48 +566,64 @@ public class ListaDeClientes extends javax.swing.JFrame {
 
                 finalizarEjecucion_1.otorgarTextoAEtiqueta(txt_tiempo, btn_iniciar_pausar, txt_iniciar_pausar, box_horas, box_minutos, txt_tiempo_agregado, txt_tiempo_total);
                 finalizarEjecucion_1.otorgarID(id);
+                finalizarEjecucion_1.otorgarIdUsuario(idUsuario);
+                finalizarEjecucion_1.otorgarIdCliente(idCliente);
                 finalizarEjecucion_1.setVisible(true);
             } else if (id == 2) {
                 AlertaFinalizarEjecución finalizarEjecucion_2 = new AlertaFinalizarEjecución();
 
                 finalizarEjecucion_2.otorgarTextoAEtiqueta(txt_tiempo, btn_iniciar_pausar, txt_iniciar_pausar, box_horas, box_minutos, txt_tiempo_agregado, txt_tiempo_total);
                 finalizarEjecucion_2.otorgarID(id);
+                finalizarEjecucion_2.otorgarIdUsuario(idUsuario);
+                finalizarEjecucion_2.otorgarIdCliente(idCliente);
                 finalizarEjecucion_2.setVisible(true);
             } else if (id == 3) {
                 AlertaFinalizarEjecución finalizarEjecucion_3 = new AlertaFinalizarEjecución();
-
+                
                 finalizarEjecucion_3.otorgarTextoAEtiqueta(txt_tiempo, btn_iniciar_pausar, txt_iniciar_pausar, box_horas, box_minutos, txt_tiempo_agregado, txt_tiempo_total);
                 finalizarEjecucion_3.otorgarID(id);
+                finalizarEjecucion_3.otorgarIdUsuario(idUsuario);
+                finalizarEjecucion_3.otorgarIdCliente(idCliente);
                 finalizarEjecucion_3.setVisible(true);
             } else if (id == 4) {
                 AlertaFinalizarEjecución finalizarEjecucion_4 = new AlertaFinalizarEjecución();
 
                 finalizarEjecucion_4.otorgarTextoAEtiqueta(txt_tiempo, btn_iniciar_pausar, txt_iniciar_pausar, box_horas, box_minutos, txt_tiempo_agregado, txt_tiempo_total);
                 finalizarEjecucion_4.otorgarID(id);
+                finalizarEjecucion_4.otorgarIdUsuario(idUsuario);
+                finalizarEjecucion_4.otorgarIdCliente(idCliente);
                 finalizarEjecucion_4.setVisible(true);
             } else if (id == 5) {
                 AlertaFinalizarEjecución finalizarEjecucion_5 = new AlertaFinalizarEjecución();
 
                 finalizarEjecucion_5.otorgarTextoAEtiqueta(txt_tiempo, btn_iniciar_pausar, txt_iniciar_pausar, box_horas, box_minutos, txt_tiempo_agregado, txt_tiempo_total);
                 finalizarEjecucion_5.otorgarID(id);
+                finalizarEjecucion_5.otorgarIdUsuario(idUsuario);
+                finalizarEjecucion_5.otorgarIdCliente(idCliente);
                 finalizarEjecucion_5.setVisible(true);
             } else if (id == 6) {
                 AlertaFinalizarEjecución finalizarEjecucion_6 = new AlertaFinalizarEjecución();
 
                 finalizarEjecucion_6.otorgarTextoAEtiqueta(txt_tiempo, btn_iniciar_pausar, txt_iniciar_pausar, box_horas, box_minutos, txt_tiempo_agregado, txt_tiempo_total);
                 finalizarEjecucion_6.otorgarID(id);
+                finalizarEjecucion_6.otorgarIdUsuario(idUsuario);
+                finalizarEjecucion_6.otorgarIdCliente(idCliente);
                 finalizarEjecucion_6.setVisible(true);
             } else if (id == 7) {
                 AlertaFinalizarEjecución finalizarEjecucion_7 = new AlertaFinalizarEjecución();
 
                 finalizarEjecucion_7.otorgarTextoAEtiqueta(txt_tiempo, btn_iniciar_pausar, txt_iniciar_pausar, box_horas, box_minutos, txt_tiempo_agregado, txt_tiempo_total);
                 finalizarEjecucion_7.otorgarID(id);
+                finalizarEjecucion_7.otorgarIdUsuario(idUsuario);
+                finalizarEjecucion_7.otorgarIdCliente(idCliente);
                 finalizarEjecucion_7.setVisible(true);
             } else if (id == 8) {
                 AlertaFinalizarEjecución finalizarEjecucion_8 = new AlertaFinalizarEjecución();
 
                 finalizarEjecucion_8.otorgarTextoAEtiqueta(txt_tiempo, btn_iniciar_pausar, txt_iniciar_pausar, box_horas, box_minutos, txt_tiempo_agregado, txt_tiempo_total);
                 finalizarEjecucion_8.otorgarID(id);
+                finalizarEjecucion_8.otorgarIdUsuario(idUsuario);
+                finalizarEjecucion_8.otorgarIdCliente(idCliente);
                 finalizarEjecucion_8.setVisible(true);
             }
 
@@ -834,8 +912,11 @@ public class ListaDeClientes extends javax.swing.JFrame {
         fondo.add(btn_agregar_cliente_nuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 90, 180, 30));
 
         jScrollPane1.setBorder(null);
+        jScrollPane1.setToolTipText("");
+        jScrollPane1.setDoubleBuffered(true);
 
         jPanel2.setBackground(new java.awt.Color(239, 233, 233));
+        jPanel2.setDoubleBuffered(false);
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txt_parar_1.setFont(new java.awt.Font("Microsoft New Tai Lue", 1, 15)); // NOI18N
@@ -1925,7 +2006,7 @@ public class ListaDeClientes extends javax.swing.JFrame {
     private void iniciarHiloCronometro_1() {
         if (iniciarHilo_1 == true) {
             System.out.println("Inicia el hilo");
-            Cronometro_1 miCronometro_1 = new Cronometro_1(txt_tiempo_1, btn_iniciar_pausar_1, txt_iniciar_pausar_1, box_horas_1, box_minutos_1, txt_tiempo_agregado_1, txt_tiempo_total_1);
+            Cronometro_1 miCronometro_1 = new Cronometro_1(id_cliente_1,txt_tiempo_1, btn_iniciar_pausar_1, txt_iniciar_pausar_1, box_horas_1, box_minutos_1, txt_tiempo_agregado_1, txt_tiempo_total_1);
             miCronometro_1.start();
         }
 
@@ -1934,7 +2015,7 @@ public class ListaDeClientes extends javax.swing.JFrame {
     private void iniciarHiloCronometro_2() {
         if (iniciarHilo_2 == true) {
             System.out.println("Inicia el hilo");
-            Cronometro_2 miCronometro_2 = new Cronometro_2(txt_tiempo_2, btn_iniciar_pausar_2, txt_iniciar_pausar_2, box_horas_2, box_minutos_2, txt_tiempo_agregado_2, txt_tiempo_total_2);
+            Cronometro_2 miCronometro_2 = new Cronometro_2(id_cliente_2, txt_tiempo_2, btn_iniciar_pausar_2, txt_iniciar_pausar_2, box_horas_2, box_minutos_2, txt_tiempo_agregado_2, txt_tiempo_total_2);
             miCronometro_2.start();
         }
 
@@ -1943,7 +2024,7 @@ public class ListaDeClientes extends javax.swing.JFrame {
     private void iniciarHiloCronometro_3() {
         if (iniciarHilo_3 == true) {
             System.out.println("Inicia el hilo");
-            Cronometro_3 miCronometro_3 = new Cronometro_3(txt_tiempo_3, btn_iniciar_pausar_3, txt_iniciar_pausar_3, box_horas_3, box_minutos_3, txt_tiempo_agregado_3, txt_tiempo_total_3);
+            Cronometro_3 miCronometro_3 = new Cronometro_3(id_cliente_3, txt_tiempo_3, btn_iniciar_pausar_3, txt_iniciar_pausar_3, box_horas_3, box_minutos_3, txt_tiempo_agregado_3, txt_tiempo_total_3);
             miCronometro_3.start();
         }
     }
@@ -1951,7 +2032,7 @@ public class ListaDeClientes extends javax.swing.JFrame {
     private void iniciarHiloCronometro_4() {
         if (iniciarHilo_4 == true) {
             System.out.println("Inicia el hilo");
-            Cronometro_4 miCronometro_4 = new Cronometro_4(txt_tiempo_4, btn_iniciar_pausar_4, txt_iniciar_pausar_4, box_horas_4, box_minutos_4, txt_tiempo_agregado_4, txt_tiempo_total_4);
+            Cronometro_4 miCronometro_4 = new Cronometro_4(id_cliente_4, txt_tiempo_4, btn_iniciar_pausar_4, txt_iniciar_pausar_4, box_horas_4, box_minutos_4, txt_tiempo_agregado_4, txt_tiempo_total_4);
             miCronometro_4.start();
         }
     }
@@ -1959,7 +2040,7 @@ public class ListaDeClientes extends javax.swing.JFrame {
     private void iniciarHiloCronometro_5() {
         if (iniciarHilo_5 == true) {
             System.out.println("Inicia el hilo");
-            Cronometro_5 miCronometro_5 = new Cronometro_5(txt_tiempo_5, btn_iniciar_pausar_5, txt_iniciar_pausar_5, box_horas_5, box_minutos_5, txt_tiempo_agregado_5, txt_tiempo_total_5);
+            Cronometro_5 miCronometro_5 = new Cronometro_5(id_cliente_5, txt_tiempo_5, btn_iniciar_pausar_5, txt_iniciar_pausar_5, box_horas_5, box_minutos_5, txt_tiempo_agregado_5, txt_tiempo_total_5);
             miCronometro_5.start();
         }
     }
@@ -1967,7 +2048,7 @@ public class ListaDeClientes extends javax.swing.JFrame {
     private void iniciarHiloCronometro_6() {
         if (iniciarHilo_6 == true) {
             System.out.println("Inicia el hilo");
-            Cronometro_6 miCronometro_6 = new Cronometro_6(txt_tiempo_6, btn_iniciar_pausar_6, txt_iniciar_pausar_6, box_horas_6, box_minutos_6, txt_tiempo_agregado_6, txt_tiempo_total_6);
+            Cronometro_6 miCronometro_6 = new Cronometro_6(id_cliente_6, txt_tiempo_6, btn_iniciar_pausar_6, txt_iniciar_pausar_6, box_horas_6, box_minutos_6, txt_tiempo_agregado_6, txt_tiempo_total_6);
             miCronometro_6.start();
         }
     }
@@ -1975,7 +2056,7 @@ public class ListaDeClientes extends javax.swing.JFrame {
     private void iniciarHiloCronometro_7() {
         if (iniciarHilo_7 == true) {
             System.out.println("Inicia el hilo");
-            Cronometro_7 miCronometro_7 = new Cronometro_7(txt_tiempo_7, btn_iniciar_pausar_7, txt_iniciar_pausar_7, box_horas_7, box_minutos_7, txt_tiempo_agregado_7, txt_tiempo_total_7);
+            Cronometro_7 miCronometro_7 = new Cronometro_7(id_cliente_7, txt_tiempo_7, btn_iniciar_pausar_7, txt_iniciar_pausar_7, box_horas_7, box_minutos_7, txt_tiempo_agregado_7, txt_tiempo_total_7);
             miCronometro_7.start();
         }
     }
@@ -1983,7 +2064,7 @@ public class ListaDeClientes extends javax.swing.JFrame {
     private void iniciarHiloCronometro_8() {
         if (iniciarHilo_8 == true) {
             System.out.println("Inicia el hilo");
-            Cronometro_8 miCronometro_8 = new Cronometro_8(txt_tiempo_8, btn_iniciar_pausar_8, txt_iniciar_pausar_8, box_horas_8, box_minutos_8, txt_tiempo_agregado_8, txt_tiempo_total_8);
+            Cronometro_8 miCronometro_8 = new Cronometro_8(id_cliente_8, txt_tiempo_8, btn_iniciar_pausar_8, txt_iniciar_pausar_8, box_horas_8, box_minutos_8, txt_tiempo_agregado_8, txt_tiempo_total_8);
             miCronometro_8.start();
         }
     }
@@ -1994,7 +2075,7 @@ public class ListaDeClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_agregar_tiempo_1MouseClicked
 
     private void btn_parar_1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_parar_1MouseClicked
-        procesoBotonParar(hora_1, minuto_1, segundo_1, 1, txt_tiempo_1, btn_iniciar_pausar_1, txt_iniciar_pausar_1, box_horas_1, box_minutos_1, txt_tiempo_agregado_1, txt_tiempo_total_1);
+        procesoBotonParar(hora_1, minuto_1, segundo_1, id_usuario, id_cliente_1, 1, txt_tiempo_1, btn_iniciar_pausar_1, txt_iniciar_pausar_1, box_horas_1, box_minutos_1, txt_tiempo_agregado_1, txt_tiempo_total_1);
     }//GEN-LAST:event_btn_parar_1MouseClicked
 
     private void box_horas_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_horas_1ActionPerformed
@@ -2043,10 +2124,15 @@ public class ListaDeClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_box_minutos_1ActionPerformed
 
     private void box_clientes_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_clientes_1ActionPerformed
-        item_clientes_1 = (String) box_clientes_1.getModel().getSelectedItem();
-        System.out.println(item_clientes_1);
-    }//GEN-LAST:event_box_clientes_1ActionPerformed
 
+        id_cliente_1 = box_clientes_1.getItemAt(box_clientes_1.getSelectedIndex()).getId();
+        System.out.println("Id: " + id_cliente_1);
+    }//GEN-LAST:event_box_clientes_1ActionPerformed
+    
+    public int getIdCliente_1(){
+        return id_cliente_1;
+    } 
+            
     private void btn_agregar_cliente_nuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_agregar_cliente_nuevoMouseClicked
         agregarCliente1.setVisible(true);
 
@@ -2062,7 +2148,7 @@ public class ListaDeClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_agregar_tiempo_2MouseClicked
 
     private void btn_parar_2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_parar_2MouseClicked
-        procesoBotonParar(hora_2, minuto_2, segundo_2, 2, txt_tiempo_2, btn_iniciar_pausar_2, txt_iniciar_pausar_2, box_horas_2, box_minutos_2, txt_tiempo_agregado_2, txt_tiempo_total_2);
+        procesoBotonParar(hora_2, minuto_2, segundo_2, id_usuario, id_cliente_2,2, txt_tiempo_2, btn_iniciar_pausar_2, txt_iniciar_pausar_2, box_horas_2, box_minutos_2, txt_tiempo_agregado_2, txt_tiempo_total_2);
     }//GEN-LAST:event_btn_parar_2MouseClicked
 
     private void btn_iniciar_pausar_2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_iniciar_pausar_2MouseClicked
@@ -2114,8 +2200,11 @@ public class ListaDeClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_box_horas_2ActionPerformed
 
     private void box_clientes_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_clientes_2ActionPerformed
-        item_clientes_2 = (String) box_clientes_2.getModel().getSelectedItem();
-        System.out.println(item_clientes_2);
+//        item_clientes_2 = (String) box_clientes_2.getModel().getSelectedItem();
+//        System.out.println(item_clientes_2);
+        System.out.println(box_clientes_2.getModel().getSelectedItem());
+        id_cliente_2 = box_clientes_2.getItemAt(box_clientes_2.getSelectedIndex()).getId();
+        System.out.println("Id: " + id_cliente_2);
     }//GEN-LAST:event_box_clientes_2ActionPerformed
 
     private void btn_on_off_2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_on_off_2MouseClicked
@@ -2128,7 +2217,7 @@ public class ListaDeClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_agregar_tiempo_3MouseClicked
 
     private void btn_parar_3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_parar_3MouseClicked
-        procesoBotonParar(hora_3, minuto_3, segundo_3, 3, txt_tiempo_3, btn_iniciar_pausar_3, txt_iniciar_pausar_3, box_horas_3, box_minutos_3, txt_tiempo_agregado_3, txt_tiempo_total_3);
+        procesoBotonParar(hora_3, minuto_3, segundo_3, id_usuario, id_cliente_3, 3, txt_tiempo_3, btn_iniciar_pausar_3, txt_iniciar_pausar_3, box_horas_3, box_minutos_3, txt_tiempo_agregado_3, txt_tiempo_total_3);
     }//GEN-LAST:event_btn_parar_3MouseClicked
 
     private void btn_iniciar_pausar_3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_iniciar_pausar_3MouseClicked
@@ -2180,8 +2269,11 @@ public class ListaDeClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_box_horas_3ActionPerformed
 
     private void box_clientes_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_clientes_3ActionPerformed
-        item_clientes_3 = (String) box_clientes_3.getModel().getSelectedItem();
-        System.out.println(item_clientes_3);
+//        item_clientes_3 = (String) box_clientes_3.getModel().getSelectedItem();
+//        System.out.println(item_clientes_3);
+        System.out.println(box_clientes_3.getModel().getSelectedItem());
+        id_cliente_3 = box_clientes_3.getItemAt(box_clientes_3.getSelectedIndex()).getId();
+        System.out.println("Id: " + id_cliente_3);
     }//GEN-LAST:event_box_clientes_3ActionPerformed
 
     private void btn_on_off_3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_on_off_3MouseClicked
@@ -2194,7 +2286,7 @@ public class ListaDeClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_agregar_tiempo_4MouseClicked
 
     private void btn_parar_4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_parar_4MouseClicked
-        procesoBotonParar(hora_4, minuto_4, segundo_4, 4, txt_tiempo_4, btn_iniciar_pausar_4, txt_iniciar_pausar_4, box_horas_4, box_minutos_4, txt_tiempo_agregado_4, txt_tiempo_total_4);
+        procesoBotonParar(hora_4, minuto_4, segundo_4, id_usuario, id_cliente_4, 4, txt_tiempo_4, btn_iniciar_pausar_4, txt_iniciar_pausar_4, box_horas_4, box_minutos_4, txt_tiempo_agregado_4, txt_tiempo_total_4);
     }//GEN-LAST:event_btn_parar_4MouseClicked
 
     private void btn_iniciar_pausar_4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_iniciar_pausar_4MouseClicked
@@ -2245,10 +2337,6 @@ public class ListaDeClientes extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_box_horas_4ActionPerformed
 
-    private void box_clientes_4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_clientes_4ActionPerformed
-        item_clientes_4 = (String) box_clientes_4.getModel().getSelectedItem();
-        System.out.println(item_clientes_4);    }//GEN-LAST:event_box_clientes_4ActionPerformed
-
     private void btn_on_off_4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_on_off_4MouseClicked
         procesoBotonOn_Off(btn_on_off_4, contenedor_4, box_clientes_4, box_horas_4, box_minutos_4, txt_ingresar_tiempo_4, btn_iniciar_pausar_4, txt_iniciar_pausar_4, btn_parar_4, txt_parar_4, txt_H_M_S_4, txt_tiempo_4, btn_agregar_tiempo_4, txt_agregar_tiempo_4, hora_4, minuto_4, segundo_4);
     }//GEN-LAST:event_btn_on_off_4MouseClicked
@@ -2259,7 +2347,7 @@ public class ListaDeClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_agregar_tiempo_5MouseClicked
 
     private void btn_parar_5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_parar_5MouseClicked
-        procesoBotonParar(hora_5, minuto_5, segundo_5, 5, txt_tiempo_5, btn_iniciar_pausar_5, txt_iniciar_pausar_5, box_horas_5, box_minutos_5, txt_tiempo_agregado_5, txt_tiempo_total_5);
+        procesoBotonParar(hora_5, minuto_5, segundo_5, id_usuario, id_cliente_5, 5, txt_tiempo_5, btn_iniciar_pausar_5, txt_iniciar_pausar_5, box_horas_5, box_minutos_5, txt_tiempo_agregado_5, txt_tiempo_total_5);
     }//GEN-LAST:event_btn_parar_5MouseClicked
 
     private void btn_iniciar_pausar_5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_iniciar_pausar_5MouseClicked
@@ -2311,8 +2399,11 @@ public class ListaDeClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_box_horas_5ActionPerformed
 
     private void box_clientes_5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_clientes_5ActionPerformed
-        item_clientes_5 = (String) box_clientes_5.getModel().getSelectedItem();
-        System.out.println(item_clientes_5);
+//        item_clientes_5 = (String) box_clientes_5.getModel().getSelectedItem();
+//        System.out.println(item_clientes_5);
+        System.out.println(box_clientes_5.getModel().getSelectedItem());
+        id_cliente_5 = box_clientes_5.getItemAt(box_clientes_5.getSelectedIndex()).getId();
+        System.out.println("Id: " + id_cliente_5);
     }//GEN-LAST:event_box_clientes_5ActionPerformed
 
     private void btn_on_off_5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_on_off_5MouseClicked
@@ -2326,7 +2417,7 @@ public class ListaDeClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_agregar_tiempo_6MouseClicked
 
     private void btn_parar_6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_parar_6MouseClicked
-        procesoBotonParar(hora_6, minuto_6, segundo_6, 6, txt_tiempo_6, btn_iniciar_pausar_6, txt_iniciar_pausar_6, box_horas_6, box_minutos_6, txt_tiempo_agregado_6, txt_tiempo_total_6);
+        procesoBotonParar(hora_6, minuto_6, segundo_6, id_usuario, id_cliente_6, 6, txt_tiempo_6, btn_iniciar_pausar_6, txt_iniciar_pausar_6, box_horas_6, box_minutos_6, txt_tiempo_agregado_6, txt_tiempo_total_6);
     }//GEN-LAST:event_btn_parar_6MouseClicked
 
     private void btn_iniciar_pausar_6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_iniciar_pausar_6MouseClicked
@@ -2378,8 +2469,11 @@ public class ListaDeClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_box_horas_6ActionPerformed
 
     private void box_clientes_6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_clientes_6ActionPerformed
-        item_clientes_6 = (String) box_clientes_6.getModel().getSelectedItem();
-        System.out.println(item_clientes_6);
+//        item_clientes_6 = (String) box_clientes_6.getModel().getSelectedItem();
+//        System.out.println(item_clientes_6);
+        System.out.println(box_clientes_6.getModel().getSelectedItem());
+        id_cliente_6 = box_clientes_6.getItemAt(box_clientes_6.getSelectedIndex()).getId();
+        System.out.println("Id: " + id_cliente_6);
     }//GEN-LAST:event_box_clientes_6ActionPerformed
 
     private void btn_on_off_6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_on_off_6MouseClicked
@@ -2392,7 +2486,7 @@ public class ListaDeClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_agregar_tiempo_7MouseClicked
 
     private void btn_parar_7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_parar_7MouseClicked
-        procesoBotonParar(hora_7, minuto_7, segundo_7, 7, txt_tiempo_7, btn_iniciar_pausar_7, txt_iniciar_pausar_7, box_horas_7, box_minutos_7, txt_tiempo_agregado_7, txt_tiempo_total_7);
+        procesoBotonParar(hora_7, minuto_7, segundo_7, id_usuario, id_cliente_7, 7, txt_tiempo_7, btn_iniciar_pausar_7, txt_iniciar_pausar_7, box_horas_7, box_minutos_7, txt_tiempo_agregado_7, txt_tiempo_total_7);
     }//GEN-LAST:event_btn_parar_7MouseClicked
 
     private void btn_iniciar_pausar_7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_iniciar_pausar_7MouseClicked
@@ -2443,8 +2537,11 @@ public class ListaDeClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_box_horas_7ActionPerformed
 
     private void box_clientes_7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_clientes_7ActionPerformed
-        item_clientes_7 = (String) box_clientes_7.getModel().getSelectedItem();
-        System.out.println(item_clientes_7);
+//        item_clientes_7 = (String) box_clientes_7.getModel().getSelectedItem();
+//        System.out.println(item_clientes_7);
+        System.out.println(box_clientes_7.getModel().getSelectedItem());
+        id_cliente_7 = box_clientes_7.getItemAt(box_clientes_7.getSelectedIndex()).getId();
+        System.out.println("Id: " + id_cliente_7);
     }//GEN-LAST:event_box_clientes_7ActionPerformed
 
     private void btn_on_off_7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_on_off_7MouseClicked
@@ -2457,9 +2554,9 @@ public class ListaDeClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_agregar_tiempo_8MouseClicked
 
     private void btn_parar_8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_parar_8MouseClicked
-        procesoBotonParar(hora_8, minuto_8, segundo_8, 8, txt_tiempo_8, btn_iniciar_pausar_8, txt_iniciar_pausar_8, box_horas_8, box_minutos_8, txt_tiempo_agregado_8, txt_tiempo_total_8);
+        procesoBotonParar(hora_8, minuto_8, segundo_8, id_usuario, id_cliente_8, 8, txt_tiempo_8, btn_iniciar_pausar_8, txt_iniciar_pausar_8, box_horas_8, box_minutos_8, txt_tiempo_agregado_8, txt_tiempo_total_8);
     }//GEN-LAST:event_btn_parar_8MouseClicked
-    
+
     private void btn_iniciar_pausar_8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_iniciar_pausar_8MouseClicked
         procesoBotonIniciarPausar(8, box_clientes_8, box_horas_8, box_minutos_8, var_btn_iniciar_pausar_8, btn_iniciar_pausar_8, txt_iniciar_pausar_8, corriendo_8, pausar_8, btn_on_off_8);
     }//GEN-LAST:event_btn_iniciar_pausar_8MouseClicked
@@ -2509,8 +2606,11 @@ public class ListaDeClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_box_horas_8ActionPerformed
 
     private void box_clientes_8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_clientes_8ActionPerformed
-        item_clientes_8 = (String) box_clientes_8.getModel().getSelectedItem();
-        System.out.println(item_clientes_8);
+//        item_clientes_8 = (String) box_clientes_8.getModel().getSelectedItem();
+//        System.out.println(item_clientes_8);
+        System.out.println(box_clientes_8.getModel().getSelectedItem());
+        id_cliente_8 = box_clientes_8.getItemAt(box_clientes_8.getSelectedIndex()).getId();
+        System.out.println("Id: " + id_cliente_8);
     }//GEN-LAST:event_box_clientes_8ActionPerformed
 
     private void btn_on_off_8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_on_off_8MouseClicked
@@ -2540,6 +2640,12 @@ public class ListaDeClientes extends javax.swing.JFrame {
         recargarBoxClientes(box_clientes_8);
 
     }//GEN-LAST:event_btn_recargarMouseClicked
+
+    private void box_clientes_4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_clientes_4ActionPerformed
+        System.out.println(box_clientes_4.getModel().getSelectedItem());
+        id_cliente_4 = box_clientes_4.getItemAt(box_clientes_4.getSelectedIndex()).getId();
+        System.out.println("Id: " + id_cliente_4);
+    }//GEN-LAST:event_box_clientes_4ActionPerformed
 
     public void recargarBoxClientes(JComboBox box_clientes) {
         if (box_clientes.getModel().getSelectedItem().equals("Seleccionar cliente")) {
@@ -2683,14 +2789,14 @@ public class ListaDeClientes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> box_clientes_1;
-    private javax.swing.JComboBox<String> box_clientes_2;
-    private javax.swing.JComboBox<String> box_clientes_3;
-    private javax.swing.JComboBox<String> box_clientes_4;
-    private javax.swing.JComboBox<String> box_clientes_5;
-    private javax.swing.JComboBox<String> box_clientes_6;
-    private javax.swing.JComboBox<String> box_clientes_7;
-    private javax.swing.JComboBox<String> box_clientes_8;
+    private javax.swing.JComboBox<Clientes> box_clientes_1;
+    private javax.swing.JComboBox<Clientes> box_clientes_2;
+    private javax.swing.JComboBox<Clientes> box_clientes_3;
+    private javax.swing.JComboBox<Clientes> box_clientes_4;
+    private javax.swing.JComboBox<Clientes> box_clientes_5;
+    private javax.swing.JComboBox<Clientes> box_clientes_6;
+    private javax.swing.JComboBox<Clientes> box_clientes_7;
+    private javax.swing.JComboBox<Clientes> box_clientes_8;
     private javax.swing.JComboBox<String> box_horas_1;
     private javax.swing.JComboBox<String> box_horas_2;
     private javax.swing.JComboBox<String> box_horas_3;

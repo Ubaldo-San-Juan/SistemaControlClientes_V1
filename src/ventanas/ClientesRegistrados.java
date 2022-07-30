@@ -2,7 +2,7 @@ package ventanas;
 
 import chart.ModelChart;
 import controladores.ControladorClientes;
-import controladores.Fecha;
+import controladores.ControladorFecha;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -183,7 +183,7 @@ public class ClientesRegistrados extends javax.swing.JFrame {
     }
 
     public void agregarFechaALabel() {
-        txt_fecha.setText(new Fecha().obtenerFecha());
+        txt_fecha.setText(new ControladorFecha().obtenerFecha());
     }
 
     public JPanel getFondo() {

@@ -1,5 +1,6 @@
 package controladores;
 
+import com.sun.javafx.scene.layout.region.Margins;
 import conexion.Conector;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,6 +12,7 @@ import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import jdk.nashorn.internal.runtime.regexp.joni.EncodingHelper;
 import ventanas.ActualizarContrasenia;
 import ventanas.IniciarSesion;
 import ventanas.ListaDeClientes;
@@ -35,13 +37,17 @@ public class ControladorClientes {
             
             Statement st = cn.createStatement();
             
-            ResultSet rst = st.executeQuery("SELECT nombre FROM clientes");
+            ResultSet rst = st.executeQuery("SELECT id_cliente, nombre FROM clientes");
             
             while(rst.next()){
                 
-                String nombreCliente = rst.getString(1);  
+                String idCliente = rst.getString(1);
+                String nombreCliente = rst.getString(2);
+                String agregarAModelo = idCliente + ") "+ nombreCliente;
                 System.out.println("Nombre de cliente: " + nombreCliente);
-                modelo.addElement(nombreCliente);
+//                modelo.addElement(agregarAModelo);
+                modelo.addElement(new Clientes(Integer.parseInt(idCliente), nombreCliente));
+                
             }
 
             conexion.desconectar();

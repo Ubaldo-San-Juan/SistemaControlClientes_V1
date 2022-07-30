@@ -20,7 +20,9 @@ public class Cronometro_4 extends Thread {
     JToggleButton boton_iniciar_pausar;
     JComboBox box_horas, box_minutos;
     JLabel txt_tiempo_agregado, txt_tiempo_total;
-    public Cronometro_4(JLabel cronometro, JToggleButton btn_iniciar_pausar, JLabel txt_iniciar_pausar, JComboBox box_horas, JComboBox box_minutos, JLabel txt_tiempo_agregado, JLabel txt_tiempo_total) {
+    int idCliente = 0;
+    public Cronometro_4(int idCliente, JLabel cronometro, JToggleButton btn_iniciar_pausar, JLabel txt_iniciar_pausar, JComboBox box_horas, JComboBox box_minutos, JLabel txt_tiempo_agregado, JLabel txt_tiempo_total) {
+        this.idCliente = idCliente;
         this.etiqueta = cronometro;
         this.boton_iniciar_pausar = btn_iniciar_pausar;
         this.txt_iniciar_pausar = txt_iniciar_pausar;
@@ -39,11 +41,11 @@ public class Cronometro_4 extends Thread {
 
                     if (ListaDeClientes.milesima_4 == 1000) {
                         ListaDeClientes.milesima_4 = 0;
-                        ListaDeClientes.segundo_4 += 1;
+                        ListaDeClientes.segundo_4 += 30;
 
                         if (ListaDeClientes.segundo_4 == 60) {
                             ListaDeClientes.segundo_4 = 0;
-                            ListaDeClientes.minuto_4 += 1;
+                            ListaDeClientes.minuto_4 += 10;
 
                             if (ListaDeClientes.minuto_4 == 60) {
                                 ListaDeClientes.minuto_4 = 0;
@@ -76,8 +78,7 @@ public class Cronometro_4 extends Thread {
 
                                 JOptionPane.showMessageDialog(null, "Se acabó el tiempo");
                                 ListaDeClientes cobro_4 = new ListaDeClientes();
-                                cobro_4.cobrar_4();
-                                
+                                cobro_4.cobrar_4(ListaDeClientes.id_usuario, idCliente);
                                 ListaDeClientes.iniciarHilo_4 = false;
                                 etiqueta.setText("00 : 00 : 00");
                                 ListaDeClientes.corriendo_4 = false;

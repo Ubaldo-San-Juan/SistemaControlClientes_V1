@@ -41,7 +41,7 @@ import ventanas.ListaDeClientes;
  * @author Ubaldo
  */
 public class Principal extends javax.swing.JFrame {
-
+    public static int idUsuario = 0;
     public static String usuarioDeLaSesion = "";
     public static String primerCaracterUsuario = "";
     public static String nombreDelUsuario = "";
@@ -59,7 +59,7 @@ public class Principal extends javax.swing.JFrame {
         this.setResizable(false);
 
         showPanel(panel01.getFondo());
-
+        
         this.fondo_btn_lista_clientes.setSelected(true);
         this.setTitle("Control de clientes");
 
@@ -380,6 +380,7 @@ public class Principal extends javax.swing.JFrame {
         perfil1.txt_perfil_usuario.setText(primerCaracterUsuario);
         perfil1.txt_valor_nombre.setText(nombreDelUsuario);
         perfil1.txt_valor_usuario.setText(usuarioDeLaSesion);
+        perfil1.setIdUsuario(idUsuario);
         perfil1.setVisible(true);
 
         if (perfil1.isShowing()) {
